@@ -1,0 +1,9 @@
+1	u:URL	t:Document 1	H:Some free text about the document if you want. T1low
+2	u:URL	t:Document 2	H:Some free text about the document if you want.
+3	u:URL	t:Document 3	H:Some free text mtthigh meth:T1high about the document if you want.
+4	u:URL	t:Document 4	H:Some free text mtthigh meth:T1high about the document if you want.
+5	u:URL	t:Document 5	H:Some free text mtthigh meth:T1high about the document if you want.
+6	u:URL	t:Document 6	H:Some free text mtthigh about meth:T1high the document if you want.
+7	u:URL	t:Document 7	H:Some free text mtthigh about meth:T1high the document if you want.
+8	u:URL	t:Document 8	H:Some mttlow free text about the document if you want. T1low
+9	u:URL	t:Document 9	H:Some mttlow free text about the document if you want. T1low

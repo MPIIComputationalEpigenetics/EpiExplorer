@@ -1,0 +1,4246 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><HTML><HEAD>
+<TITLE>ENCODE Controlled Vocabulary</TITLE>
+	<META http-equiv="Content-Script-Type" content="text/javascript">
+<STYLE TYPE="text/css"> <!-- A {text-decoration: none} --></STYLE>
+</HEAD>
+
+<BODY>
+<script type='text/javascript'>
+document.write("<center><div id='warnBox' style='display:none; background-color:Beige; border: 3px ridge DarkRed; width:640px; padding:10px; margin:10px; text-align:left;'><CENTER><B id='warnHead' style='color:DarkRed;'></B></CENTER><UL id='warnList'></UL><CENTER><button id='warnOK' onclick='hideWarnBox();return false;'></button></CENTER></div></center>");
+function showWarnBox() {document.getElementById('warnOK').innerHTML='&nbsp;OK&nbsp;';var warnBox=document.getElementById('warnBox');warnBox.style.display=''; warnBox.style.width='65%';document.getElementById('warnHead').innerHTML='Warning/Error(s):';window.scrollTo(0, 0);}
+function hideWarnBox() {var warnBox=document.getElementById('warnBox');warnBox.style.display='none';warnBox.innerHTML='';var endOfPage = document.body.innerHTML.substr(document.body.innerHTML.length-20);if(endOfPage.lastIndexOf('-- ERROR --') > 0) { history.back(); }}
+window.onunload = function(){}; // Trick to avoid FF back button issue.
+</script>
+<TR>
+<div style='max-width:900px;'><B><em>Cell, tissue or DNA sample</em></B>:&nbsp;Cell line or tissue used as the source of experimental material.</div>
+</TR>
+<LINK rel='STYLESHEET' href='/style/HGStyle-v264.css' TYPE='text/css' />
+<noscript><div class='noscript'><div class='noscript-inner'><p><b>JavaScript is disabled in your web browser</b></p><p>You must have JavaScript enabled in your web browser to use the Genome Browser</p></div></div></noscript>
+<script type='text/javascript' SRC='/js/jquery-v264.js'></script>
+<script type='text/javascript' SRC='/js/utils-v264.js'></script>
+<TABLE class='sortable' border=1 CELLSPACING=0 style='border: 2px outset #006600; background-color:#FFFEE8;'>
+<THEAD><TR valign='bottom' style='background:#D9E4F8;'>
+<!-- Cell Line table: contains links to protocol file and vendor description page --><TH class='sortable sort1'>cell</TH><TH class='sortable sort2'>Tier</TH><TH class='sortable sort3'>Description</TH><TH class='sortable sort4'>Lineage</TH><TH class='sortable sort5'>Tissue</TH><TH class='sortable sort6'>Karyotype</TH><TH class='sortable sort7'>Sex</TH><TH class='sortable sort8'>Documents</TH><TH class='sortable sort9'>Vendor ID</TH><TH class='sortable sort10'>Term ID</TH><TH class='sortable sort11'><em>Label</em></TH></TR></THEAD><TBODY>
+<TR>
+  <TD>8988T</TD>
+  <TD>3</TD>
+  <TD>pancreas adenocarcinoma (PA-TU-8988T), "established in 1985 from the liver metastasis of a primary pancreatic adenocarcinoma from a 64-year-old woman" - DSMZ</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/8988T_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dsmz.de/human_and_animal_cell_lines/info.php?dsmz_nr=162&term=162&highlight=>DSMZ ACC 162</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001521>BTO:0001521 (non-specific)</A></TD>
+  <TD>8988T</TD>
+</TR>
+<TR>
+  <TD>A549</TD>
+  <TD>2</TD>
+  <TD>epithelial cell line derived from a lung carcinoma tissue. (PMID: 175022), "This line was initiated in 1972 by D.J. Giard, et al. through explant culture of lung carcinomatous tissue from a 58-year-old caucasian male." - ATCC, newly promoted to tier 2: not in 2011 analysis</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/A549_protocol.pdf>Myers</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/A549_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/A549_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-185&Template=cellBiology>ATCC CCL-185</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000018>BTO:0000018</A></TD>
+  <TD>A549</TD>
+</TR>
+<TR>
+  <TD>Adult_CD4_naive</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from human blood and enriched for naive populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AdultCD4naive_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Adult_CD4_naive</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Adult_CD4_naive</TD>
+</TR>
+<TR>
+  <TD>Adult_CD4_Th0</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from human blood and enriched for Th0 populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AdultCD4Th0_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Adult_CD4_Th0</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Adult_CD4_Th0</TD>
+</TR>
+<TR>
+  <TD>Adult_CD4_Th1</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from human blood and enriched for Th1 populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AdultCD4Th1_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Adult_CD4_Th1</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Adult_CD4_Th1</TD>
+</TR>
+<TR>
+  <TD>AG04449</TD>
+  <TD>3</TD>
+  <TD>fetal buttock/thigh fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AG04449_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG04449>Coriell AG04449</A></TD>
+  <TD></TD>
+  <TD>AG04449</TD>
+</TR>
+<TR>
+  <TD>AG04450</TD>
+  <TD>3</TD>
+  <TD>fetal lung fibroblast</TD>
+  <TD>endoderm</TD>
+  <TD>lung</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AG04450_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG04450>Coriell AG04450</A></TD>
+  <TD></TD>
+  <TD>AG04450</TD>
+</TR>
+<TR>
+  <TD>AG09309</TD>
+  <TD>3</TD>
+  <TD>adult toe fibroblast from apparently healthy 21 year old, "7% of the cells examined showing random chromosome loss/gain" -Coriell</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AG09309_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG09309>Coriell AG09309</A></TD>
+  <TD></TD>
+  <TD>AG09309</TD>
+</TR>
+<TR>
+  <TD>AG09319</TD>
+  <TD>3</TD>
+  <TD>gum tissue fibroblasts from apparently heathly 24 year old</TD>
+  <TD>&nbsp;</TD>
+  <TD>gingival</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AG09319_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG09319>Coriell AG09319</A></TD>
+  <TD></TD>
+  <TD>AG09319</TD>
+</TR>
+<TR>
+  <TD>AG10803</TD>
+  <TD>3</TD>
+  <TD>abdominal skin fibroblasts from apparently heathly 22 year old, "8% of the cells examined showing random chromosome loss, 2% showing random chromosome gain, and 2% showing 69,XYY" -Coriell</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AG10803_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG10803>Coriell AG10803</A></TD>
+  <TD></TD>
+  <TD>AG10803</TD>
+</TR>
+<TR>
+  <TD>AoAF</TD>
+  <TD>3</TD>
+  <TD>aortic adventitial fibroblast cells</TD>
+  <TD>mesoderm</TD>
+  <TD>heart</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AoAF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-7014, CC-7014T75</A></TD>
+  <TD></TD>
+  <TD>AoAF</TD>
+</TR>
+<TR>
+  <TD>AoSMC</TD>
+  <TD>3</TD>
+  <TD>aortic smooth muscle cells</TD>
+  <TD>mesoderm</TD>
+  <TD>heart</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/AoSMC_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2571</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001685>BTO:0001685</A></TD>
+  <TD>AoSMC</TD>
+</TR>
+<TR>
+  <TD>BC_Adipose_UHN00001</TD>
+  <TD>3</TD>
+  <TD>adipose tissue, donor UHN0001, age 35, African American, DNA extract</TD>
+  <TD>&nbsp;</TD>
+  <TD>adipose tissue</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234003_A701166</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001487>BTO:0001487</A></TD>
+  <TD>BC_Adipose_UHN00001</TD>
+</TR>
+<TR>
+  <TD>BC_Adrenal_Gland_H12803N</TD>
+  <TD>3</TD>
+  <TD>adrenal gland, donor H12803N, age 88, caucasian, DNA extract</TD>
+  <TD>ectoderm, mesoderm</TD>
+  <TD>adrenal gland</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D1234004_B103117</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000047>BTO:0000047</A></TD>
+  <TD>BC_Adrenal_Gland_H12803N</TD>
+</TR>
+<TR>
+  <TD>BC_Bladder_01-11002</TD>
+  <TD>3</TD>
+  <TD>urinary bladder, donor 01-11002, age 83, caucasian, DNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>urinary bladder</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234010-05_B402059</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001418>BTO:0001418</A></TD>
+  <TD>BC_Bladder_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Brain_H11058N</TD>
+  <TD>3</TD>
+  <TD>brain, donor H11058N, age 66, Asian, DNA extract</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234035_A810101</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000142>BTO:0000142</A></TD>
+  <TD>BC_Brain_H11058N</TD>
+</TR>
+<TR>
+  <TD>BC_Breast_02-03015</TD>
+  <TD>3</TD>
+  <TD>breast, donor 02-03015, age 21, caucasian, DNA extract</TD>
+  <TD>ectoderm</TD>
+  <TD>breast</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234086_A710031</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000149>BTO:0000149</A></TD>
+  <TD>BC_Breast_02-03015</TD>
+</TR>
+<TR>
+  <TD>BC_Colon_01-11002</TD>
+  <TD>3</TD>
+  <TD>colon, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>colon</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234090-05_A903056</A><BR>
+      BioChain BioChain_CP-S10-R1234090-20_B402074</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000269>BTO:0000269</A></TD>
+  <TD>BC_Colon_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Colon_H12817N</TD>
+  <TD>3</TD>
+  <TD>colon, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>colon</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234090-05_B111123</A><BR>
+      BioChain BioChain_CP-S10-R1234090-20_B111053</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000269>BTO:0000269</A></TD>
+  <TD>BC_Colon_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Esophagus_01-11002</TD>
+  <TD>3</TD>
+  <TD>esophagus, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>esophagus</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234106-05_A803198</A><BR>
+      BioChain BioChain_CP-S10-R1234106-20_B402075</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000959>BTO:0000959</A></TD>
+  <TD>BC_Esophagus_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Esophagus_H12817N</TD>
+  <TD>3</TD>
+  <TD>esophagus, donor H12817N, age 71, caucasian, DNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>esophagus</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234106-05_B302113</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000959>BTO:0000959</A></TD>
+  <TD>BC_Esophagus_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Jejunum_H12817N</TD>
+  <TD>3</TD>
+  <TD>jejunum, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>jejunum</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234230-05_B402068</A><BR>
+      BioChain BioChain_CP-S10-R1234230-20_A911037</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000657>BTO:0000657</A></TD>
+  <TD>BC_Jejunum_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Kidney_01-11002</TD>
+  <TD>3</TD>
+  <TD>kidney, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234142-05_B402060</A><BR>
+      BioChain BioChain_CP-S10-R1234142-20_A808055</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000671>BTO:0000671</A></TD>
+  <TD>BC_Kidney_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Kidney_H12817N</TD>
+  <TD>3</TD>
+  <TD>kidney, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234142-05_B402061</A><BR>
+      BioChain BioChain_CP-S10-R1234142-20_B111054</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000671>BTO:0000671</A></TD>
+  <TD>BC_Kidney_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Left_Ventricle_N41</TD>
+  <TD>3</TD>
+  <TD>left ventricle, donor N41, age 26, Asian, DNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>left ventricle</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D1234138_A705026</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001629>BTO:0001629</A></TD>
+  <TD>BC_Left_Ventricle_N41</TD>
+</TR>
+<TR>
+  <TD>BC_Leukocyte_UHN00204</TD>
+  <TD>3</TD>
+  <TD>peripheral blood mononuclear cell, donor UHN00204, age 54, caucasian, DNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234148_A612197</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001025>BTO:0001025</A></TD>
+  <TD>BC_Leukocyte_UHN00204</TD>
+</TR>
+<TR>
+  <TD>BC_Liver_01-11002</TD>
+  <TD>3</TD>
+  <TD>liver, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234149-05_B209118</A><BR>
+      BioChain BioChain_CP-S10-R1234149-20_B304045</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000759>BTO:0000759</A></TD>
+  <TD>BC_Liver_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Lung_01-11002</TD>
+  <TD>3</TD>
+  <TD>lung, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>lung</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234152-05_A610240</A><BR>
+      BioChain BioChain_CP-S10-R1234152-20_A906114</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000763>BTO:0000763</A></TD>
+  <TD>BC_Lung_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Lung_H12817N</TD>
+  <TD>3</TD>
+  <TD>lung, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>lung</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234152-05_B402062</A><BR>
+      BioChain BioChain_CP-S10-R1234152-20_B207133</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000763>BTO:0000763</A></TD>
+  <TD>BC_Lung_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Pancreas_H12817N</TD>
+  <TD>3</TD>
+  <TD>pancreas, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>pancreas</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234188-05_B402063</A><BR>
+      BioChain BioChain_CP-S10-R1234188-20_B402076</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000988>BTO:0000988</A></TD>
+  <TD>BC_Pancreas_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Penis_H12817N</TD>
+  <TD>3</TD>
+  <TD>penis, donor H12817N, age 71, caucasian, DNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>penis</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234194-05_B402064</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000405>BTO:0000405</A></TD>
+  <TD>BC_Penis_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Pericardium_H12529N</TD>
+  <TD>3</TD>
+  <TD>pericardium, donor H12529N, age 70, caucasian, DNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>pericardium</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D1234133_A712271</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000717>BTO:0000717</A></TD>
+  <TD>BC_Pericardium_H12529N</TD>
+</TR>
+<TR>
+  <TD>BC_Placenta_UHN00189</TD>
+  <TD>3</TD>
+  <TD>placenta, donor UHN00189, age 29</TD>
+  <TD>extraembryonic mesoderm, trophectoderm</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234200_A603104</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001078>BTO:0001078</A></TD>
+  <TD>BC_Placenta_UHN00189</TD>
+</TR>
+<TR>
+  <TD>BC_Prostate_Gland_H12817N</TD>
+  <TD>3</TD>
+  <TD>prostate gland, donor H12817N, age 71, caucasian, DNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>prostate gland</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-D1234201-05_B101058</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001129>BTO:0001129</A></TD>
+  <TD>BC_Prostate_Gland_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Rectum_N29</TD>
+  <TD>3</TD>
+  <TD>rectum, donor N29, age 29, Asian, DNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>rectum</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234206_A712205</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001158>BTO:0001158</A></TD>
+  <TD>BC_Rectum_N29</TD>
+</TR>
+<TR>
+  <TD>BC_Skeletal_Muscle_01-11002</TD>
+  <TD>3</TD>
+  <TD>skeletal muscle, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>skeletal muscle</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234171-05_A610262</A><BR>
+      BioChain BioChain_CP-S10-R1234171-20_A808148</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001103>BTO:0001103</A></TD>
+  <TD>BC_Skeletal_Muscle_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Skeletal_Muscle_H12817N</TD>
+  <TD>3</TD>
+  <TD>skeletal muscle, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>skeletal muscle</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234171-05_B402065</A><BR>
+      BioChain BioChain_CP-S10-R1234230-20_A911037</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001103>BTO:0001103</A></TD>
+  <TD>BC_Skeletal_Muscle_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Skin_01-11002</TD>
+  <TD>3</TD>
+  <TD>skin, donor 01-11002, age 83, caucasian, DNA extract</TD>
+  <TD>ectoderm, mesoderm</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234218-05_B402066</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001253>BTO:0001253</A></TD>
+  <TD>BC_Skin_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Small_Intestine_01-11002</TD>
+  <TD>3</TD>
+  <TD>small intestine, donor 01-11002, age 83, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>small intestine</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234226-05_B402067</A><BR>
+      BioChain BioChain_CP-S10-R1234226-20_A612138</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000651>BTO:0000651</A></TD>
+  <TD>BC_Small_Intestine_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Spleen_H12817N</TD>
+  <TD>3</TD>
+  <TD>spleen, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>spleen</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234246-05_B402069</A><BR>
+      BioChain BioChain_CP-S10-R1234246-20_B304070</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001281>BTO:0001281</A></TD>
+  <TD>BC_Spleen_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Stomach_01-11002</TD>
+  <TD>3</TD>
+  <TD>stomach, donor 01-11002, age 83, caucasian, DNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>stomach</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S12-D1234248-05_A808008</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001307>BTO:0001307</A></TD>
+  <TD>BC_Stomach_01-11002</TD>
+</TR>
+<TR>
+  <TD>BC_Stomach_H12817N</TD>
+  <TD>3</TD>
+  <TD>stomach, donor H12817N, age 71, caucasian, DNA and RNA extract</TD>
+  <TD>endoderm</TD>
+  <TD>stomach</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_CP-S13-D1234248-05_B402070</A><BR>
+      BioChain BioChain_CP-S10-R1234248-20_B402077</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001307>BTO:0001307</A></TD>
+  <TD>BC_Stomach_H12817N</TD>
+</TR>
+<TR>
+  <TD>BC_Testis_N30</TD>
+  <TD>3</TD>
+  <TD>testis, donor N30, age 41, Asian, DNA extract</TD>
+  <TD>mesoderm</TD>
+  <TD>testis</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234260_A711169</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001363>BTO:0001363</A></TD>
+  <TD>BC_Testis_N30</TD>
+</TR>
+<TR>
+  <TD>BC_Uterus_BN0765</TD>
+  <TD>3</TD>
+  <TD>uterus, donor BN0765, age 44, Asian, DNA extract</TD>
+  <TD>&nbsp;</TD>
+  <TD>uterus</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myers_BioChain_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.biochain.com/biochain/homepage.htm>BioChain BioChain_D4234274_A810099</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001424>BTO:0001424</A></TD>
+  <TD>BC_Uterus_BN0765</TD>
+</TR>
+<TR>
+  <TD>BE2_C</TD>
+  <TD>3</TD>
+  <TD>neuroblastoma, BE-C is a clone of the SK-N-BE neuroblastoma cell line (see ATCC CRL-2271) that was established in November of 1972 from a bone marrow biopsy taken from a 2-year-old individual with disseminated neuroblastoma after repeated courses of chemotherapy and radiotherapy.</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BE2-C_Stam_protocol.pdf>Stam</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BE2-C_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2268&Template=cellBiology>ATCC CRL-2268</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000932>BTO:0000932 (non-specific)</A></TD>
+  <TD>BE2_C</TD>
+</TR>
+<TR>
+  <TD>BG02ES</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC), BG02, treatment: H9 conditioned medium</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://stemcells.nih.gov/research/registry/BresaGen.asp>BresaGen, Inc. BG02 (hESBGN.02)</A></TD>
+  <TD></TD>
+  <TD>BG02ES</TD>
+</TR>
+<TR>
+  <TD>BG02ES-EBD</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC), BG02, embryoid body-derived</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://stemcells.nih.gov/research/registry/BresaGen.asp>BresaGen, Inc. BG02 (hESBGN.02)</A></TD>
+  <TD></TD>
+  <TD>BG02ES-EBD</TD>
+</TR>
+<TR>
+  <TD>BJ</TD>
+  <TD>3</TD>
+  <TD>skin fibroblast, "The line was established from skin taken from normal foreskin." - ATCC.  (PMID: 9916803)</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BJ_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2522&Template=cellBiology>ATCC CRL-2522</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001255>BTO:0001255</A></TD>
+  <TD>BJ</TD>
+</TR>
+<TR>
+  <TD>Caco-2</TD>
+  <TD>3</TD>
+  <TD>colorectal adenocarcinoma. (PMID: 1939345)</TD>
+  <TD>endoderm</TD>
+  <TD>colon</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-37&Template=cellBiology>ATCC HTB-37</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000195>BTO:0000195</A></TD>
+  <TD>Caco-2</TD>
+</TR>
+<TR>
+  <TD>CD20+</TD>
+  <TD>3</TD>
+  <TD>B cells from donors RO01778 and RO01794.</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CD20+_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://labs.fhcrc.org/heimfeld/index.html>Heimfeld Lab, FHCRC CD20+</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000776&termName=B-lymphocyte>BTO:0000776</A></TD>
+  <TD>CD20+</TD>
+</TR>
+<TR>
+  <TD>CD20+_RO01746</TD>
+  <TD>3</TD>
+  <TD>B cells, caucasian, draw number 2</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CD20+_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://depts.washington.edu/medgen/faculty/Rajinder_Kaul.shtml>Rajinder Kaul, UW CD20+_RO01746</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000776&termName=B-lymphocyte>BTO:0000776</A></TD>
+  <TD>CD20+_RO01746</TD>
+</TR>
+<TR>
+  <TD>CD20+_RO01778</TD>
+  <TD>3</TD>
+  <TD>B cells, caucasian, draw number 1</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CD20+_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://depts.washington.edu/medgen/faculty/Rajinder_Kaul.shtml>Rajinder Kaul, UW CD20+_RO01778</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000776&termName=B-lymphocyte>BTO:0000776</A></TD>
+  <TD>CD20+_RO01778</TD>
+</TR>
+<TR>
+  <TD>CD20+_RO01794</TD>
+  <TD>3</TD>
+  <TD>B cells, African American, draw number 1</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CD20+_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://depts.washington.edu/medgen/faculty/Rajinder_Kaul.shtml>Rajinder Kaul, UW CD20+_RO01794</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000776&termName=B-lymphocyte>BTO:0000776</A></TD>
+  <TD>CD20+_RO01794</TD>
+</TR>
+<TR>
+  <TD>CD34+_Mobilized</TD>
+  <TD>3</TD>
+  <TD>hematopoietic progenitor cells- mobilized, from donor RO01679.</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CD34+Mobilized_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://labs.fhcrc.org/heimfeld/index.html>Heimfeld Lab, FHCRC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000725>BTO:0000725</A></TD>
+  <TD>CD34+_Mobilized</TD>
+</TR>
+<TR>
+  <TD>Chorion</TD>
+  <TD>3</TD>
+  <TD>chorion cells (outermost of two fetal membranes), fetal membranes were collected from women who underwent planned cesarean delivery at term, before labor and without rupture of membranes.</TD>
+  <TD>extraembryonic mesoderm, trophectoderm</TD>
+  <TD>fetal membrane</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Chorion_and_decidua_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dukehealth.org/physicians/amy_p_murtha>Dr. Amy Murtha at Duke University (Durham, NC).</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000252>BTO:0000252</A></TD>
+  <TD>Chorion</TD>
+</TR>
+<TR>
+  <TD>CLL</TD>
+  <TD>3</TD>
+  <TD>chronic lymphocytic leukemia cell, T-cell lymphocyte</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CLL_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dfhcc.harvard.edu/membership/profile/member/669/0/>Dr. Jennifer Brown, Department of Medicine, Harvard Medical School. CLL</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001546>BTO:0001546</A></TD>
+  <TD>CLL</TD>
+</TR>
+<TR>
+  <TD>CMK</TD>
+  <TD>3</TD>
+  <TD>acute megakaryocytic leukemia cells, "established from the peripheral blood of a 10-month-old boy with Down's syndrome and acute megakaryocytic leukemia (AML M7) at relapse in 1985" - DSMZ. (PMID: 3016165)</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CMK_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dsmz.de/human_and_animal_cell_lines/info.php?dsmz_nr=392&from=cell_line_index&select=search_for_term&term=CMK&preselect=human;hamster;mouse;rat;insect;other&firstload=0>DSMZ ACC-392</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004962&termName=acute%20megakaryocytic%20leukemia%20cell>BTO:0004962</A></TD>
+  <TD>CMK</TD>
+</TR>
+<TR>
+  <TD>Colo829</TD>
+  <TD>3</TD>
+  <TD>malignant melanoma</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Colo829_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1974&Template=cellBiology>ATCC CRL-1974</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000849&termName=melanoma%20cell%20line>BTO:0000849</A></TD>
+  <TD>Colo829</TD>
+</TR>
+<TR>
+  <TD>Cord_CD4_naive</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from cord blood and enriched for naive populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CordCD4naive_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Cord_CD4_naive</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Cord_CD4_naive</TD>
+</TR>
+<TR>
+  <TD>Cord_CD4_Th0</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from cord blood and enriched for Th0 populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CordCD4Th0_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Cord_CD4_Th0</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Cord_CD4_Th0</TD>
+</TR>
+<TR>
+  <TD>Cord_CD4_Th1</TD>
+  <TD>3</TD>
+  <TD>CD4+ cells isolated from cord blood and enriched for Th1 populations</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>blood</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/CordCD4Th1_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR>David Randolph at University of Alabama, Birmingham Cord_CD4_Th1</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000782&termName=T-lymphocyte>BTO:3A0000782</A></TD>
+  <TD>Cord_CD4_Th1</TD>
+</TR>
+<TR>
+  <TD>Decidua</TD>
+  <TD>3</TD>
+  <TD>decidua cells (part of the mucous membrane lining uterus), Fetal membranes were collected from women who underwent planned cesarean delivery at term, before labor and without rupture of membranes</TD>
+  <TD>decidua</TD>
+  <TD>cervix</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Chorion_and_decidua_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dukehealth.org/physicians/amy_p_murtha>Dr. Amy Murtha at Duke University (Durham, NC).</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001360>BTO:0001360</A></TD>
+  <TD>Decidua</TD>
+</TR>
+<TR>
+  <TD>Dnd41</TD>
+  <TD>3</TD>
+  <TD>T cell leukemia with Notch mutation</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Dnd41_Bernstein_protocol.pdf>Bernstein</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dsmz.de/index.htm>DSMZ Dnd41</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002104>BTO:0002104</A></TD>
+  <TD>Dnd41</TD>
+</TR>
+<TR>
+  <TD>ECC-1</TD>
+  <TD>3</TD>
+  <TD>epithelial cell line derived from an endometrium adenocarcinoma, fetal membranes were collected from women who underwent planned cesarean delivery at term, before labor and without rupture of membranes</TD>
+  <TD>epithelia</TD>
+  <TD>luminal epithelium</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/ECC1_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2923&Template=cellBiology>ATCC CRL-2923</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000194>BTO:0000194</A></TD>
+  <TD>ECC-1</TD>
+</TR>
+<TR>
+  <TD>Fibrobl</TD>
+  <TD>3</TD>
+  <TD>child fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/fibroblast_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG08470&PgId=166>Coriell AG08470</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000452>BTO:0000452</A></TD>
+  <TD>Fibrobl</TD>
+</TR>
+<TR>
+  <TD>FibroP</TD>
+  <TD>3</TD>
+  <TD>fibroblasts taken from individuals with Parkinson's disease, AG20443, AG08395 and AG08396 were pooled for this sample</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/FibroP_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://genetics.case.edu/page.php?page_id=5&LN=Tesar&FN=Paul>Paul Tesar (Case Western) FibroP</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000452>BTO:0000452</A></TD>
+  <TD>FibroP</TD>
+</TR>
+<TR>
+  <TD>FibroP_AG08395</TD>
+  <TD>3</TD>
+  <TD>fibroblasts taken from individuals with Parkinson's disease</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/FibroP_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG08395&PgId=166>Coriell AG08395</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000452>BTO:0000452</A></TD>
+  <TD>FibroP_AG08395</TD>
+</TR>
+<TR>
+  <TD>FibroP_AG08396</TD>
+  <TD>3</TD>
+  <TD>fibroblasts taken from individuals with Parkinson's disease</TD>
+  <TD>&nbsp;</TD>
+  <TD>lung fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/FibroP_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG08396&PgId=166>Coriell AG08396</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000452>BTO:0000452</A></TD>
+  <TD>FibroP_AG08396</TD>
+</TR>
+<TR>
+  <TD>FibroP_AG20443</TD>
+  <TD>3</TD>
+  <TD>fibroblasts taken from individuals with Parkinson's disease</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/FibroP_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=AG20443&PgId=166>Coriell AG20443</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000452>BTO:0000452</A></TD>
+  <TD>FibroP_AG20443</TD>
+</TR>
+<TR>
+  <TD>Gliobla</TD>
+  <TD>3</TD>
+  <TD>glioblastoma, these cells (aka H54 and D54) come from a surgical resection from a patient with glioblastoma multiforme (WHO Grade IV). D54 is a commonly studied glioblastoma cell line (Bao et al., 2006) that has been thoroughly described by S Bigner (1981). (PMID: 7252524)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/D54_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.cancer.duke.edu/btc/modules/facultystaff1/index.php?id=85>Duke University Medical Center, requests for D54 cells should be directed to Darrell Bigner</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000527>BTO:0000527</A></TD>
+  <TD>Gliobla</TD>
+</TR>
+<TR>
+  <TD>GM04503</TD>
+  <TD>3</TD>
+  <TD>adult twin pair fibroblasts, monozygotic twin of GM04504</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM04503D_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM04503&PgId=166>Coriell GM04503D</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001253>BTO:0001253</A></TD>
+  <TD>GM04503</TD>
+</TR>
+<TR>
+  <TD>GM04504</TD>
+  <TD>3</TD>
+  <TD>adult twin pair fibroblasts, monozygotic twin of GM04503, 13% of the cells examined show random chromosome loss</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM04504A_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM04504&PgId=166>Coriell GM04504A</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001253>BTO:0001253</A></TD>
+  <TD>GM04504</TD>
+</TR>
+<TR>
+  <TD>GM06990</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, CEPH/Utah, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM06990&PgId=166>Coriell GM06990</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM06990</TD>
+</TR>
+<TR>
+  <TD>GM10847</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, CEPH/Utah, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM10847>Coriell GM10847</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM10847</TD>
+</TR>
+<TR>
+  <TD>GM12801</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12801_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12801&PgId=166>Coriell GM12801</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12801</TD>
+</TR>
+<TR>
+  <TD>GM12812</TD>
+  <TD>3</TD>
+  <TD>B-Lymphocyte, Lymphoblastoid, International HapMap Project, CEPH/Utah, Treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12812_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12812&PgId=166>Coriell GM12812</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062</A></TD>
+  <TD>GM12812</TD>
+</TR>
+<TR>
+  <TD>GM12813</TD>
+  <TD>3</TD>
+  <TD>B-Lymphocyte, Lymphoblastoid, International HapMap Project, CEPH/Utah, Treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12813_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12813&PgId=166>Coriell GM12813</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062</A></TD>
+  <TD>GM12813</TD>
+</TR>
+<TR>
+  <TD>GM12864</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12864_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12864&PgId=166>Coriell GM12864</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12864</TD>
+</TR>
+<TR>
+  <TD>GM12865</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12865_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/sections/Search/Sample_Detail.aspx?Ref=GM12865&PgId=166>Coriell GM12865</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12865</TD>
+</TR>
+<TR>
+  <TD>GM12866</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12866_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12866&PgId=166>Coriell GM12866</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12866</TD>
+</TR>
+<TR>
+  <TD>GM12867</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12867_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12867&PgId=166>Coriell GM12867</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12867</TD>
+</TR>
+<TR>
+  <TD>GM12868</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12868_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12868&PgId=166>Coriell GM12868</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12868</TD>
+</TR>
+<TR>
+  <TD>GM12869</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12869_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12869&PgId=166>Coriell GM12869</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12869</TD>
+</TR>
+<TR>
+  <TD>GM12870</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12870_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12870&PgId=166>Coriell GM12870</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12870</TD>
+</TR>
+<TR>
+  <TD>GM12871</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed.</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12871_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12871&PgId=166>Coriell GM12871</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12871</TD>
+</TR>
+<TR>
+  <TD>GM12872</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12872_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12872&PgId=166>Coriell GM12872</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12872</TD>
+</TR>
+<TR>
+  <TD>GM12873</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12873_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12873&PgId=166>Coriell GM12873</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12873</TD>
+</TR>
+<TR>
+  <TD>GM12874</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12874_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12874&PgId=166>Coriell GM12874</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12874</TD>
+</TR>
+<TR>
+  <TD>GM12875</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1459, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12875_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12875&PgId=166>Coriell GM12875</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12875</TD>
+</TR>
+<TR>
+  <TD>GM12878</TD>
+  <TD>1</TD>
+  <TD>lymphoblastoid, International HapMap Project - CEPH/Utah - European Caucasion, Epstein-Barr Virus</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12878_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12878&PgId=166>Coriell GM12878</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002026>BTO:0002026 (non-specific)</A></TD>
+  <TD>GM12878</TD>
+</TR>
+<TR>
+  <TD>GM12878-XiMat</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, cloned for maternal X inactivation, International HapMap Project, CEPH/Utah, Epstein-Barr Virus</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12878-XiMat_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.genome.duke.edu/people/faculty/willard/>Hunt Willard at Duke University GM12878-XiMat</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002026>BTO:0002026 (non-specific)</A></TD>
+  <TD>GM12878-XiMat</TD>
+</TR>
+<TR>
+  <TD>GM12891</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1463, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12891_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12891>Coriell GM12891</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12891</TD>
+</TR>
+<TR>
+  <TD>GM12892</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, CEPH/Utah pedigree 1463, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM12892_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM12892>Coriell GM12892</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM12892</TD>
+</TR>
+<TR>
+  <TD>GM15510</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid NIGMS Human Genetic Cell Repository, DNA Polymorphism Discovery Resource Collection, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM15510>Coriell GM15510</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM15510</TD>
+</TR>
+<TR>
+  <TD>GM18505</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM18505>Coriell GM18505</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM18505</TD>
+</TR>
+<TR>
+  <TD>GM18507</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM18507_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM18507>Coriell GM18507</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM18507</TD>
+</TR>
+<TR>
+  <TD>GM18526</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Han Chinese in Beijing, China, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM18526>Coriell GM18526</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM18526</TD>
+</TR>
+<TR>
+  <TD>GM18951</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Japanese in Tokyo, Japan, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM18951>Coriell GM18951</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM18951</TD>
+</TR>
+<TR>
+  <TD>GM19099</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM19099>Coriell GM19099</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM19099</TD>
+</TR>
+<TR>
+  <TD>GM19193</TD>
+  <TD>3</TD>
+  <TD>lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM-generalized_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM19193>Coriell GM19193</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM19193</TD>
+</TR>
+<TR>
+  <TD>GM19238</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM19238_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM19238>Coriell GM19238</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM19238</TD>
+</TR>
+<TR>
+  <TD>GM19239</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM19239_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM19239>Coriell GM19239</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM19239</TD>
+</TR>
+<TR>
+  <TD>GM19240</TD>
+  <TD>3</TD>
+  <TD>B-lymphocyte, lymphoblastoid, International HapMap Project, Yoruba in Ibadan, Nigera, treatment: Epstein-Barr Virus transformed</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/GM19240_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://ccr.coriell.org/Sections/Search/Sample_Detail.aspx?Ref=GM19240>Coriell GM19240</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002062&termName=B-lymphoblastoid%20cell%20line>BTO:0002062 (non-specific)</A></TD>
+  <TD>GM19240</TD>
+</TR>
+<TR>
+  <TD>H1-hESC</TD>
+  <TD>1</TD>
+  <TD>embryonic stem cells</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/H1_ES_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.cellulardynamics.com/>Cellular Dynamics</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=CL&termId=CL0000007&termName=early%20embryonic%20cell>CL:0000007</A></TD>
+  <TD>H1-hESC</TD>
+</TR>
+<TR>
+  <TD>H7-hESC</TD>
+  <TD>3</TD>
+  <TD>undifferentiated embryonic stem cells</TD>
+  <TD>inner cell mass</TD>
+  <TD>&nbsp;</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/H7-hESC_StamAndCrawford_protocol.pdf>StamAndCrawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA07 (H7)</A></TD>
+  <TD></TD>
+  <TD>H7-hESC</TD>
+</TR>
+<TR>
+  <TD>H9ES</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC) H9</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES</TD>
+</TR>
+<TR>
+  <TD>H9ES-AFP+</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC), H9-derived, treatment: H9 AFP+</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-AFP+</TD>
+</TR>
+<TR>
+  <TD>H9ES-AFP-</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC), H9-derived, treatment: H9 AFP-</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-AFP-</TD>
+</TR>
+<TR>
+  <TD>H9ES-CM</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC) H9, treatment: H9 conditioned medium</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-CM</TD>
+</TR>
+<TR>
+  <TD>H9ES-E</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC) H9, endoderm</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-E</TD>
+</TR>
+<TR>
+  <TD>H9ES-EB</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC) H9, embryoid bodies</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-EB</TD>
+</TR>
+<TR>
+  <TD>H9ES-EBD</TD>
+  <TD>3</TD>
+  <TD>embryonic stem cell (hESC) H9, embryoid body-derived</TD>
+  <TD>inner cell mass</TD>
+  <TD>embryonic stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/BG02ES_and_H9ES_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.wicell.org/index.php>WiCell WA09 (H9)</A></TD>
+  <TD></TD>
+  <TD>H9ES-EBD</TD>
+</TR>
+<TR>
+  <TD>HA-h</TD>
+  <TD>3</TD>
+  <TD>astrocytes-hippocampal</TD>
+  <TD>ectoderm</TD>
+  <TD>brain hippocampus</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAh_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1830>ScienCell 1830</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000099&termName=astrocyte>BTO:0000099</A></TD>
+  <TD>HA-h</TD>
+</TR>
+<TR>
+  <TD>HA-sp</TD>
+  <TD>3</TD>
+  <TD>astrocytes spinal cord</TD>
+  <TD>ectoderm</TD>
+  <TD>spinal cord</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HA-sp_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1820>ScienCell 1820</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000099>BTO:0000099</A></TD>
+  <TD>HA-sp</TD>
+</TR>
+<TR>
+  <TD>HAc</TD>
+  <TD>3</TD>
+  <TD>astrocytes-cerebellar</TD>
+  <TD>ectoderm</TD>
+  <TD>cerebellar</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAc_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1810>ScienCell 1810</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000099&termName=astrocyte>BTO:0000099</A></TD>
+  <TD>HAc</TD>
+</TR>
+<TR>
+  <TD>HAEpiC</TD>
+  <TD>3</TD>
+  <TD>amniotic epithelial cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=7100>ScienCell 7100</A></TD>
+  <TD></TD>
+  <TD>HAEpiC</TD>
+</TR>
+<TR>
+  <TD>HAL</TD>
+  <TD>3</TD>
+  <TD>adult liver, genomic DNA purified from surgically excised adult human liver</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAL_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.asterand.com/Asterand/>Asterand, Inc. HAL</A></TD>
+  <TD></TD>
+  <TD>HAL</TD>
+</TR>
+<TR>
+  <TD>HAoAF</TD>
+  <TD>3</TD>
+  <TD>Aortic Adventitial Fibroblasts from two individuals, HAoAF_6090101.11 and HAoAF_6111301.9 from tunica adventitia</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoAF6090101.11_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoAF6111301.9_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/human-aortic-adventitial-fibroblasts-haoaf/?sword_list%5B%5D=HAoAF>PromoCell HAoAF</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000135>BTO:0000135</A></TD>
+  <TD>HAoAF</TD>
+</TR>
+<TR>
+  <TD>HAoAF_6090101.11</TD>
+  <TD>3</TD>
+  <TD>Aortic Adventitial Fibroblasts from tunica adventitia</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoAF6090101.11_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/human-aortic-adventitial-fibroblasts-haoaf/?sword_list%5B%5D=HAoAF>PromoCell C-14037</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000135>BTO:0000135</A></TD>
+  <TD>HAoAF_6090101.11</TD>
+</TR>
+<TR>
+  <TD>HAoAF_6111301.9</TD>
+  <TD>3</TD>
+  <TD>Aortic Adventitial Fibroblasts from tunica adventitia</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoAF6111301.9_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/human-aortic-adventitial-fibroblasts-haoaf/?sword_list%5B%5D=HAoAF>PromoCell C-14037</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000135>BTO:0000135</A></TD>
+  <TD>HAoAF_6111301.9</TD>
+</TR>
+<TR>
+  <TD>HAoEC</TD>
+  <TD>3</TD>
+  <TD>Aortic Endothelial Cells (thoracic) from two individuals, HAoEC_7071706.1 and HAoEC_8061102.1</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoEC7071706.1_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoEC8061102.1_Gingeras_protocol.pdf>protocol</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-aortic-endothelial-cells-haoec/?sword_list%5B%5D=HAoEC>PromoCell HAoEC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000394>BTO:0000394</A></TD>
+  <TD>HAoEC</TD>
+</TR>
+<TR>
+  <TD>HAoEC_7071706.1</TD>
+  <TD>3</TD>
+  <TD>Aortic Endothelial Cells</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoEC7071706.1_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-aortic-endothelial-cells-haoec/?sword_list%5B%5D=HAoEC>PromoCell C-14023</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000394>BTO:0000394</A></TD>
+  <TD>HAoEC_7071706.1</TD>
+</TR>
+<TR>
+  <TD>HAoEC_8061102.1</TD>
+  <TD>3</TD>
+  <TD>Aortic Endothelial Cells from throracic</TD>
+  <TD>missing</TD>
+  <TD>aorta</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HAoEC8061102.1_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-aortic-endothelial-cells-haoec/?sword_list%5B%5D=HAoEC>PromoCell C-14023</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000394>BTO:0000394</A></TD>
+  <TD>HAoEC_8061102.1</TD>
+</TR>
+<TR>
+  <TD>HBMEC</TD>
+  <TD>3</TD>
+  <TD>brain microvascular endothelial cells</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HBMEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1000>ScienCell 1000</A></TD>
+  <TD></TD>
+  <TD>HBMEC</TD>
+</TR>
+<TR>
+  <TD>HBVP</TD>
+  <TD>3</TD>
+  <TD>brain vascular pericytes</TD>
+  <TD>&nbsp;</TD>
+  <TD>brain</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HBVP_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1200>ScienCell 1200</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002441>BTO:0002441</A></TD>
+  <TD>HBVP</TD>
+</TR>
+<TR>
+  <TD>HBVSMC</TD>
+  <TD>3</TD>
+  <TD>brain vascular smooth muscle cells.</TD>
+  <TD>&nbsp;</TD>
+  <TD>brain</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HBVSMC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1100>ScienCell 1100</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002488>BTO:0002488</A></TD>
+  <TD>HBVSMC</TD>
+</TR>
+<TR>
+  <TD>HCF</TD>
+  <TD>3</TD>
+  <TD>cardiac fibroblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>heart</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6300>ScienCell 6300</A></TD>
+  <TD></TD>
+  <TD>HCF</TD>
+</TR>
+<TR>
+  <TD>HCFaa</TD>
+  <TD>3</TD>
+  <TD>cardiac fibroblasts- adult atrial</TD>
+  <TD>mesoderm</TD>
+  <TD>heart</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCFaa_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6320>ScienCell 6320</A></TD>
+  <TD></TD>
+  <TD>HCFaa</TD>
+</TR>
+<TR>
+  <TD>HCH</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Chondrocytes from two individuals, HCH_8100808.2 and HCH_0011308.2P from knee joint</TD>
+  <TD>missing</TD>
+  <TD>cartilage</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCH8100808.2_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCH0011308.2P_Gingeras_protocol.pdf>protocol</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/chondrocytes/?sword_list%5B%5D=HCH>PromoCell HCH</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000249>BTO:0000249</A></TD>
+  <TD>HCH</TD>
+</TR>
+<TR>
+  <TD>HCH_0011308.2P</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Chondrocytes from knee joint</TD>
+  <TD>missing</TD>
+  <TD>cartilage</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCH0011308.2P_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/chondrocytes/?sword_list%5B%5D=HCH>PromoCell C-14070</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000249>BTO:0000249</A></TD>
+  <TD>HCH_0011308.2P</TD>
+</TR>
+<TR>
+  <TD>HCH_8100808.2</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Chondrocytes from knee joint</TD>
+  <TD>missing</TD>
+  <TD>cartilage</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCH8100808.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/chondrocytes/?sword_list%5B%5D=HCH>PromoCell C-14070</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000249>BTO:0000249</A></TD>
+  <TD>HCH_8100808.2</TD>
+</TR>
+<TR>
+  <TD>HCM</TD>
+  <TD>3</TD>
+  <TD>cardiac myocytes</TD>
+  <TD>mesoderm</TD>
+  <TD>heart</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCM_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6200>ScienCell 6200</A></TD>
+  <TD></TD>
+  <TD>HCM</TD>
+</TR>
+<TR>
+  <TD>HConF</TD>
+  <TD>3</TD>
+  <TD>conjunctival fibroblast</TD>
+  <TD>ectoderm</TD>
+  <TD>eye</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HConF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6570>ScienCell 6570</A></TD>
+  <TD></TD>
+  <TD>HConF</TD>
+</TR>
+<TR>
+  <TD>HCPEpiC</TD>
+  <TD>3</TD>
+  <TD>choroid plexus epithelial cells</TD>
+  <TD>ectoderm</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCPEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=1310>ScienCell 1310</A></TD>
+  <TD></TD>
+  <TD>HCPEpiC</TD>
+</TR>
+<TR>
+  <TD>HCT-116</TD>
+  <TD>3</TD>
+  <TD>colorectal carcinoma (PMID: 7214343)</TD>
+  <TD>endoderm</TD>
+  <TD>colon</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCT-116_protocol.pdf>ENCODE</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HCT116_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-247&Template=cellBiology>ATCC CCL-247</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002254>BTO:0002254</A></TD>
+  <TD>HCT-116</TD>
+</TR>
+<TR>
+  <TD>HEEpiC</TD>
+  <TD>3</TD>
+  <TD>esophageal epithelial cells</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HEEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=2700>ScienCell 2700</A></TD>
+  <TD></TD>
+  <TD>HEEpiC</TD>
+</TR>
+<TR>
+  <TD>HEK293</TD>
+  <TD>3</TD>
+  <TD>embryonic kidney, (PMID: 11967234)</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HEK293b_Snyder_protocol.pdf>Snyder</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HEK293b_Snyder_protocol.pdf>Snyder</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1573&Template=cellBiology>ATCC CRL-1573</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000007>BTO:0000007</A></TD>
+  <TD>HEK293</TD>
+</TR>
+<TR>
+  <TD>HEK293-T-REx</TD>
+  <TD>3</TD>
+  <TD>embryonic kidney cells transformed with Adenovirus 5 DNA stably expressing tetracycline repressor, HEK293 (ATCC number CRL-1573) is the parental cell line, hypotriploid, XXX</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/T-REx-HEK293_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://products.invitrogen.com/ivgn/product/R71007>Invitrogen r71007</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000007>BTO:0000007</A></TD>
+  <TD>HEK293-T-REx</TD>
+</TR>
+<TR>
+  <TD>HEK293T</TD>
+  <TD>3</TD>
+  <TD>embryonic kidney that expresses SV40 large T antigen, HEK293 (ATCC number CRL-1573) is the parental cell line</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HEK293T_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=https://www.openbiosystems.com/>Thermo Scientific Open Biosystems HCL4517</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000007>BTO:0000007</A></TD>
+  <TD>HEK293T</TD>
+</TR>
+<TR>
+  <TD>HeLa-S3</TD>
+  <TD>2</TD>
+  <TD>cervical carcinoma</TD>
+  <TD>ectoderm</TD>
+  <TD>cervix</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HeLa-S3_protocol.pdf>ENCODE</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HeLa-S3_IFN_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-2.2&Template=cellBiology>ATCC CCL-2.2</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000568>BTO:0000568</A></TD>
+  <TD>HeLa-S3</TD>
+</TR>
+<TR>
+  <TD>Hepatocytes</TD>
+  <TD>3</TD>
+  <TD>primary hepatocytes, liver perfused by enzymes to generate single cell suspension</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Hepatocytes_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.zen-bio.com/>zen-bio (missing)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000575>BTO:0000575</A></TD>
+  <TD>Hepatocytes</TD>
+</TR>
+<TR>
+  <TD>HepG2</TD>
+  <TD>2</TD>
+  <TD>liver carcinoma</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HepG2_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HB-8065&Template=cellBiology>ATCC HB-8065</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000559>BTO:0000559</A></TD>
+  <TD>HepG2</TD>
+</TR>
+<TR>
+  <TD>HFDPC</TD>
+  <TD>3</TD>
+  <TD>Follicle Dermal Papilla Cells from two individuals, HFDPC_0100503.2 and HFDPC_0102703.3 from lateral scalp (brown, blond)</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFDPC0100503.2_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFDPC0102703.3_Gingeras_protocol.pdf>protocol</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/follicle-dermal-papilla-cells/?sword_list%5B%5D=HFDPC>PromoCell HFDPC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001849>BTO:0001849</A></TD>
+  <TD>HFDPC</TD>
+</TR>
+<TR>
+  <TD>HFDPC_0100503.2</TD>
+  <TD>3</TD>
+  <TD>Follicle Dermal Papilla Cells from lateral scalp (brown)</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFDPC0100503.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/follicle-dermal-papilla-cells/?sword_list%5B%5D=HFDPC>PromoCell C-14005</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001849>BTO:0001849</A></TD>
+  <TD>HFDPC_0100503.2</TD>
+</TR>
+<TR>
+  <TD>HFDPC_0102703.3</TD>
+  <TD>3</TD>
+  <TD>Follicle Dermal Papilla Cells from lateral scalp (blond)</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFDPC0102703.3_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/follicle-dermal-papilla-cells/?sword_list%5B%5D=HFDPC>PromoCell C-14005</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001849>BTO:0001849</A></TD>
+  <TD>HFDPC_0102703.3</TD>
+</TR>
+<TR>
+  <TD>HFF</TD>
+  <TD>3</TD>
+  <TD>foreskin fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>foreskin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://myprofile.cos.com/torokstorb>Dr. Torok-Storb, FHCRC HFF</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002245>BTO:0002245</A></TD>
+  <TD>HFF</TD>
+</TR>
+<TR>
+  <TD>HFF-Myc</TD>
+  <TD>3</TD>
+  <TD>foreskin fibroblast cells expressing canine cMyc</TD>
+  <TD>fibroblast</TD>
+  <TD>foreskin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFFMyc_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://myprofile.cos.com/torokstorb>Dr. Torok-Storb, FHCRC HFF-Myc</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002245>BTO:0002245</A></TD>
+  <TD>HFF-Myc</TD>
+</TR>
+<TR>
+  <TD>HFL11W</TD>
+  <TD>3</TD>
+  <TD>fetal liver 11 weeks, consented fetal liver samples were isolated from legally aborted fetuses at 11 weeks gestation</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFL11W_and_HFL24W_Myers_protocols.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.hudsonalpha.org/myers-lab>Unknown HFL11W</A></TD>
+  <TD></TD>
+  <TD>HFL11W</TD>
+</TR>
+<TR>
+  <TD>HFL24W</TD>
+  <TD>3</TD>
+  <TD>fetal liver 24 weeks, consented fetal liver samples were isolated from legally aborted fetuses at 24 weeks gestation</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HFL11W_and_HFL24W_Myers_protocols.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.hudsonalpha.org/myers-lab>Unknown HFL24W</A></TD>
+  <TD></TD>
+  <TD>HFL24W</TD>
+</TR>
+<TR>
+  <TD>HGF</TD>
+  <TD>3</TD>
+  <TD>gingival fibroblasts</TD>
+  <TD>&nbsp;</TD>
+  <TD>gingiva</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HGF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=2620>ScienCell 2620</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000519>BTO:0000519 (non-specific)</A></TD>
+  <TD>HGF</TD>
+</TR>
+<TR>
+  <TD>HHSEC</TD>
+  <TD>3</TD>
+  <TD>hepatic sinusoidal endothelial cells</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HHSEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=5000>ScienCell 5000</A></TD>
+  <TD></TD>
+  <TD>HHSEC</TD>
+</TR>
+<TR>
+  <TD>HIPEpiC</TD>
+  <TD>3</TD>
+  <TD>iris pigment epithelial cells</TD>
+  <TD>ectoderm</TD>
+  <TD>eye</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HIPEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6560>ScienCell 6560</A></TD>
+  <TD></TD>
+  <TD>HIPEpiC</TD>
+</TR>
+<TR>
+  <TD>HL-60</TD>
+  <TD>3</TD>
+  <TD>promyelocytic leukemia cells, (PMID: 276884)</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HL-60_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-240&Template=cellBiology>ATCC CCL-240</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000738>BTO:0000738</A></TD>
+  <TD>HL-60</TD>
+</TR>
+<TR>
+  <TD>HMEC</TD>
+  <TD>3</TD>
+  <TD>mammary epithelial cells</TD>
+  <TD>ectoderm</TD>
+  <TD>breast</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMEC_Bernstein_protocol.pdf>Bernstein</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMEC_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2551</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002178>BTO:0002178</A></TD>
+  <TD>HMEC</TD>
+</TR>
+<TR>
+  <TD>HMEpC</TD>
+  <TD>3</TD>
+  <TD>Mammary Epithelial Cells (placeholder, waiting on second lot/donor from PromoCell)</TD>
+  <TD>missing</TD>
+  <TD>mammary gland</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMEpC_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/epithelial-cells/human-mammary-epithelial-cells-hmepc/?sword_list%5B%5D=HMEpC>PromoCell HMEpC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002178>BTO:0002178</A></TD>
+  <TD>HMEpC</TD>
+</TR>
+<TR>
+  <TD>HMEpC_6022801.3</TD>
+  <TD>3</TD>
+  <TD>Mammary Epithelial Cells</TD>
+  <TD>missing</TD>
+  <TD>mammary gland</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMEpC6022801.3_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/epithelial-cells/human-mammary-epithelial-cells-hmepc/?sword_list%5B%5D=HMEpC>PromoCell C-14066</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002178>BTO:0002178</A></TD>
+  <TD>HMEpC_6022801.3</TD>
+</TR>
+<TR>
+  <TD>HMF</TD>
+  <TD>3</TD>
+  <TD>mammary fibroblasts</TD>
+  <TD>&nbsp;</TD>
+  <TD>mammary</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=7630>ScienCell 7630</A></TD>
+  <TD></TD>
+  <TD>HMF</TD>
+</TR>
+<TR>
+  <TD>hMNC-CB</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells (umbilical cord blood-single donor) from two individuals, hMNC-CB_9111701.6 and hMNC-CB_8072802.6</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCCB9111701.6_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCCB9111701.6_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-cord-blood-hmnc-cb/?sword_list%5B%5D=hMNC-CB>PromoCell hMNC-CB</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004054>BTO:0004054</A></TD>
+  <TD>hMNC-CB</TD>
+</TR>
+<TR>
+  <TD>hMNC-CB_8072802.6</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells, umbilical cord blood-single donor</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCCB8072802.6_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-cord-blood-hmnc-cb/?sword_list%5B%5D=hMNC-CB>PromoCell C-14096</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004054>BTO:0004054</A></TD>
+  <TD>hMNC-CB_8072802.6</TD>
+</TR>
+<TR>
+  <TD>hMNC-CB_9111701.6</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells, umbilical cord blood-single donor</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCCB9111701.6_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-cord-blood-hmnc-cb/?sword_list%5B%5D=hMNC-CB>PromoCell C-14096</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004054>BTO:0004054</A></TD>
+  <TD>hMNC-CB_9111701.6</TD>
+</TR>
+<TR>
+  <TD>hMNC-PB</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells (peripheral blood-single donor) from two individuals, hMNC-PB_0022330.9 and hMNC-PB_0082430.9</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCPB0022330.9_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCPB0082430.9_Gingeras_protocol.pdf>protocol</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-peripheral-blood-hmnc-pb/?sword_list%5B%5D=hMNC-PB>PromoCell hMNC-PB</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001025>BTO:0001025</A></TD>
+  <TD>hMNC-PB</TD>
+</TR>
+<TR>
+  <TD>hMNC-PB_0022330.9</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells, peripheral blood-single donor</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCPB0022330.9_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-peripheral-blood-hmnc-pb/?sword_list%5B%5D=hMNC-PB>PromoCell C-14098</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001025>BTO:0001025</A></TD>
+  <TD>hMNC-PB_0022330.9</TD>
+</TR>
+<TR>
+  <TD>hMNC-PB_0082430.9</TD>
+  <TD>3</TD>
+  <TD>Mononuclear Cells, peripheral blood-single donor</TD>
+  <TD>missing</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMNCPB0082430.9_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mononuclear-cells/human-mononuclear-cells-from-peripheral-blood-hmnc-pb/?sword_list%5B%5D=hMNC-PB>PromoCell C-14098</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001025>BTO:0001025</A></TD>
+  <TD>hMNC-PB_0082430.9</TD>
+</TR>
+<TR>
+  <TD>hMSC-AT</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from two individuals, hMSC-AT_9061601.12 and hMSC-AT_0102604.12 from subcutaneous abdomen adipose tissue</TD>
+  <TD>missing</TD>
+  <TD>adipose</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCAT0102604.12_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCAT9061601.12_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-adipose-tissue-hmsc-at/?sword_list%5B%5D=hMSC-AT>PromoCell hMSC-AT</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-AT</TD>
+</TR>
+<TR>
+  <TD>hMSC-AT_0102604.12</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from subcutaneous abdomen adipose tissue</TD>
+  <TD>missing</TD>
+  <TD>adipose</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCAT0102604.12_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-adipose-tissue-hmsc-at/?sword_list%5B%5D=hMSC-AT>PromoCell C-14092</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-AT_0102604.12</TD>
+</TR>
+<TR>
+  <TD>hMSC-AT_9061601.12</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from abdomen</TD>
+  <TD>missing</TD>
+  <TD>subcutaneous adipose tissue</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCAT9061601.12_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-adipose-tissue-hmsc-at/?sword_list%5B%5D=hMSC-AT>PromoCell C-14092</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-AT_9061601.12</TD>
+</TR>
+<TR>
+  <TD>hMSC-BM</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from two individuals, hMSC-BM_0050602.11 and hMSC-BM_0051105.11 from femoral head</TD>
+  <TD>missing</TD>
+  <TD>bone marrow</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCBM0050602.11_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCBM0051105.11_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-bone-marrow-hmsc-bm>PromoCell hMSC-BM</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-BM</TD>
+</TR>
+<TR>
+  <TD>hMSC-BM_0050602.11</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from femoral head</TD>
+  <TD>missing</TD>
+  <TD>bone marrow</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCBM0050602.11_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-bone-marrow-hmsc-bm>PromoCell C-14090</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-BM_0050602.11</TD>
+</TR>
+<TR>
+  <TD>hMSC-BM_0051105.11</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from femoral head</TD>
+  <TD>missing</TD>
+  <TD>bone marrow</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCBM0051105.11_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-bone-marrow-hmsc-bm>PromoCell C-14090</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-BM_0051105.11</TD>
+</TR>
+<TR>
+  <TD>hMSC-UC</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from two individuals, hMSC-UC_0081101.7 and hMSC-UC_0052501.7 from matrix (Wharton's Jelly)</TD>
+  <TD>missing</TD>
+  <TD>umbilical cord</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCUC0081101.7_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCUC0052501.7_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-umbilical-cord-matrix-hmsc-uc/?sword_list%5B%5D=hMSC-UC>PromoCell hMSC-UC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-UC</TD>
+</TR>
+<TR>
+  <TD>hMSC-UC_0052501.7</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from matrix (Wharton's Jelly)</TD>
+  <TD>missing</TD>
+  <TD>umbilical cord</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCUC0052501.7_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-umbilical-cord-matrix-hmsc-uc/?sword_list%5B%5D=hMSC-UC>PromoCell C-14091</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-UC_0052501.7</TD>
+</TR>
+<TR>
+  <TD>hMSC-UC_0081101.7</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Mesenchymal Stem Cells from matrix (Wharton's Jelly)</TD>
+  <TD>missing</TD>
+  <TD>umbilical cord</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/hMSCUC0081101.7_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-stem-and-blood-cells/mesenchymal-stem-cells/human-mesenchymal-stem-cells-from-umbilical-cord-matrix-hmsc-uc/?sword_list%5B%5D=hMSC-UC>PromoCell C-14091</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003298>BTO:0003298</A></TD>
+  <TD>hMSC-UC_0081101.7</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dAd</TD>
+  <TD>3</TD>
+  <TD>adult dermal microvascular endothelial cells.</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVECdAd_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com>Lonza CC-2543,CC-3202</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO:0001854>BTO:0001854</A></TD>
+  <TD>HMVEC-dAd</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dBl-Ad</TD>
+  <TD>3</TD>
+  <TD>adult blood microvascular endothelial cells, dermal-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-dBl-Ad_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2811, CC-2811T75</A></TD>
+  <TD></TD>
+  <TD>HMVEC-dBl-Ad</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dBl-Neo</TD>
+  <TD>3</TD>
+  <TD>neonatal blood microvascular endothelial cells, dermal-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-dBl-Neo_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2813, CC-2813T75</A></TD>
+  <TD></TD>
+  <TD>HMVEC-dBl-Neo</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dLy-Ad</TD>
+  <TD>3</TD>
+  <TD>adult lymphatic microvascular endothelial cells, dermal-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-dLy-Ad_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2810, CC-2810T75</A></TD>
+  <TD></TD>
+  <TD>HMVEC-dLy-Ad</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dLy-Neo</TD>
+  <TD>3</TD>
+  <TD>neonatal lymphatic microvascular endothelial cells, dermal-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-dLy-Neo_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2812, CC-2812T25</A></TD>
+  <TD></TD>
+  <TD>HMVEC-dLy-Neo</TD>
+</TR>
+<TR>
+  <TD>HMVEC-dNeo</TD>
+  <TD>3</TD>
+  <TD>neonatal microvascular endothelial cells (single donor), dermal-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-dNeo_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2505, CC-2505T225</A></TD>
+  <TD></TD>
+  <TD>HMVEC-dNeo</TD>
+</TR>
+<TR>
+  <TD>HMVEC-LBl</TD>
+  <TD>3</TD>
+  <TD>blood microvascular endothelial cells, lung-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-Lbl_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2815, CC-2815T75</A></TD>
+  <TD></TD>
+  <TD>HMVEC-LBl</TD>
+</TR>
+<TR>
+  <TD>HMVEC-LLy</TD>
+  <TD>3</TD>
+  <TD>lymphatic microvascular endothelial cells, lung-derived</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HMVEC-LLy_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2814, CC-2814T25</A></TD>
+  <TD></TD>
+  <TD>HMVEC-LLy</TD>
+</TR>
+<TR>
+  <TD>HNPCEpiC</TD>
+  <TD>3</TD>
+  <TD>non-pigment ciliary epithelial cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HNPCEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6580>ScienCell 6580</A></TD>
+  <TD></TD>
+  <TD>HNPCEpiC</TD>
+</TR>
+<TR>
+  <TD>HOB</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Osteoblasts from two individuals, HOB_0090202.1 and HOB_0091301 from femoral head</TD>
+  <TD>missing</TD>
+  <TD>cancellous bone</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HOB0090202.1_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HOB0091301_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/osteoblasts/?sword_list%5B%5D=HOB>PromoCell HOB</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004324>BTO:0004324</A></TD>
+  <TD>HOB</TD>
+</TR>
+<TR>
+  <TD>HOB_0090202.1</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Osteoblasts from femoral head</TD>
+  <TD>missing</TD>
+  <TD>cancellous bone</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HOB0090202.1_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/osteoblasts/?sword_list%5B%5D=HOB>PromoCell C-14071</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004324>BTO:0004324</A></TD>
+  <TD>HOB_0090202.1</TD>
+</TR>
+<TR>
+  <TD>HOB_0091301</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Osteoblasts from femoral head</TD>
+  <TD>missing</TD>
+  <TD>cancellous bone</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HOB0091301_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/osteoblasts/?sword_list%5B%5D=HOB>PromoCell C-14071</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004324>BTO:0004324</A></TD>
+  <TD>HOB_0091301</TD>
+</TR>
+<TR>
+  <TD>HPAEC</TD>
+  <TD>3</TD>
+  <TD>pulmonary artery endothelial cells.</TD>
+  <TD>&nbsp;</TD>
+  <TD>heart</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPAEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com>Lonza CC-2530,CC-3162</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001141>BTO:0001141</A></TD>
+  <TD>HPAEC</TD>
+</TR>
+<TR>
+  <TD>HPAEpiC</TD>
+  <TD>3</TD>
+  <TD>pulmonary alevolar epithelial cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPAEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=3200>ScienCell 3200</A></TD>
+  <TD></TD>
+  <TD>HPAEpiC</TD>
+</TR>
+<TR>
+  <TD>HPAF</TD>
+  <TD>3</TD>
+  <TD>pulmonary artery fibroblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPAF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=3120>ScienCell 3120</A></TD>
+  <TD></TD>
+  <TD>HPAF</TD>
+</TR>
+<TR>
+  <TD>HPC-PL</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Pericytes from HPC-PL_0032601.13 and HPC-PL_0101504.13</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPCPL0032601.13_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPCPL0101504.13_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/pericytes/>PromoCell pericytes</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPC-PL</TD>
+</TR>
+<TR>
+  <TD>HPC-PL_0032601.13</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Pericytes</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPCPL0032601.13_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/pericytes/>PromoCell C-14095</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPC-PL_0032601.13</TD>
+</TR>
+<TR>
+  <TD>HPC-PL_0101504.13</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated Pericytes</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPCPL0101504.13_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-stem-and-blood-cells/pericytes/>PromoCell C-14095</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPC-PL_0101504.13</TD>
+</TR>
+<TR>
+  <TD>HPDE6-E6E7</TD>
+  <TD>3</TD>
+  <TD>pancreatic duct cells immortalized with E6E7 gene of HPV</TD>
+  <TD>endoderm</TD>
+  <TD>pancreatic duct</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPDE6-E6E7_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.uhnresearch.ca/researchers/profile.php?lookup=6118>Dr. Ming-Sound Tsao, Ontario Cancer Institute HPDE6-E6E7</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002362>BTO:0002362</A></TD>
+  <TD>HPDE6-E6E7</TD>
+</TR>
+<TR>
+  <TD>HPdLF</TD>
+  <TD>3</TD>
+  <TD>periodontal ligament fibroblasts</TD>
+  <TD>&nbsp;</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPdLF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-7049</A></TD>
+  <TD></TD>
+  <TD>HPdLF</TD>
+</TR>
+<TR>
+  <TD>HPF</TD>
+  <TD>3</TD>
+  <TD>pulmonary fibroblasts isolated from lung tissue</TD>
+  <TD>&nbsp;</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=3300>ScienCell 3300</A></TD>
+  <TD></TD>
+  <TD>HPF</TD>
+</TR>
+<TR>
+  <TD>HPIEpC</TD>
+  <TD>3</TD>
+  <TD>Placental Epithelial Cells amniotic membrane</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPIEpC9012801.2_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPIEpC9041503.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-primary-cells/epithelial-cells/human-placental-epithelial-cells-hplepc/>PromoCell human-placental-epithelial-cells-hplepc</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPIEpC</TD>
+</TR>
+<TR>
+  <TD>HPIEpC_9012801.2</TD>
+  <TD>3</TD>
+  <TD>Placental Epithelial Cells amniotic membrane</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPIEpC9012801.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-primary-cells/epithelial-cells/human-placental-epithelial-cells-hplepc/>PromoCell C-14069</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPIEpC_9012801.2</TD>
+</TR>
+<TR>
+  <TD>HPIEpC_9041503.2</TD>
+  <TD>3</TD>
+  <TD>Placental Epithelial Cells amniotic membrane</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HPIEpC9041503.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/products/human-primary-cells/epithelial-cells/human-placental-epithelial-cells-hplepc/>PromoCell C-14069</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HPIEpC_9041503.2</TD>
+</TR>
+<TR>
+  <TD>HRCEpiC</TD>
+  <TD>3</TD>
+  <TD>renal cortical epithelial cells</TD>
+  <TD>mesoderm</TD>
+  <TD>epithelium</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HRCEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2554</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000059>BTO:0000059 (non-specific)</A></TD>
+  <TD>HRCEpiC</TD>
+</TR>
+<TR>
+  <TD>HRE</TD>
+  <TD>3</TD>
+  <TD>renal epithelial cells</TD>
+  <TD>mesoderm</TD>
+  <TD>epithelium</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HRE_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2556</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000059>BTO:0000059 (non-specific)</A></TD>
+  <TD>HRE</TD>
+</TR>
+<TR>
+  <TD>HRGEC</TD>
+  <TD>3</TD>
+  <TD>renal glomerular endothelial cells</TD>
+  <TD>mesoderm</TD>
+  <TD>kidney</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HRGEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=4000>ScienCell 4000</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001176>BTO:0001176</A></TD>
+  <TD>HRGEC</TD>
+</TR>
+<TR>
+  <TD>HRPEpiC</TD>
+  <TD>3</TD>
+  <TD>retinal pigment epithelial cells</TD>
+  <TD>ectoderm</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HRPEpiC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=6540>ScienCell 6540</A></TD>
+  <TD></TD>
+  <TD>HRPEpiC</TD>
+</TR>
+<TR>
+  <TD>HSaVEC</TD>
+  <TD>3</TD>
+  <TD>Saphenous Vein Endothelial Cells from two individuals, HSaVEC_9100101.15 and HSaVEC_0022202.16 from thigh</TD>
+  <TD>missing</TD>
+  <TD>saphenous vein</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSaVEC9100101.15_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSaVEC0022202.16_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-saphenous-vein-endothelial-cells-hsavec/?sword_list%5B%5D=HSaVEC>PromoCell HSaVEC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003275>BTO:0003275</A></TD>
+  <TD>HSaVEC</TD>
+</TR>
+<TR>
+  <TD>HSaVEC_0022202.16</TD>
+  <TD>3</TD>
+  <TD>Saphenous Vein Endothelial Cells from thigh</TD>
+  <TD>missing</TD>
+  <TD>saphenous vein</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSaVEC0022202.16_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-saphenous-vein-endothelial-cells-hsavec/?sword_list%5B%5D=HSaVEC>PromoCell C-14025</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003275>BTO:0003275</A></TD>
+  <TD>HSaVEC_0022202.16</TD>
+</TR>
+<TR>
+  <TD>HSaVEC_9100101.15</TD>
+  <TD>3</TD>
+  <TD>Saphenous Vein Endothelial Cells from thigh</TD>
+  <TD>missing</TD>
+  <TD>saphenous vein</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSaVEC9100101.15_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/endothelial-cells-large-vessels/human-saphenous-vein-endothelial-cells-hsavec/?sword_list%5B%5D=HSaVEC>PromoCell C-14025</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003275>BTO:0003275</A></TD>
+  <TD>HSaVEC_9100101.15</TD>
+</TR>
+<TR>
+  <TD>HSMM</TD>
+  <TD>3</TD>
+  <TD>skeletal muscle myoblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>muscle</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_Bernstein_protocol.pdf>Bernstein</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_HSMMtube_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Refer to the protocol documents for differing sources CC-2580</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000256>BTO:0000256 (non-specific)</A></TD>
+  <TD>HSMM</TD>
+</TR>
+<TR>
+  <TD>HSMM_emb</TD>
+  <TD>3</TD>
+  <TD>embryonic myoblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>muscle</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMMemb_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://depts.washington.edu/biowww/faculty/hauschka-steve/>Duke/UNC/UT/EBI ENCODE group fetal myoblast cell strain (H246 and H275) from Dr Stephen Hauschka- U. of Washington 1980</A></TD>
+  <TD></TD>
+  <TD>HSMM_emb</TD>
+</TR>
+<TR>
+  <TD>HSMM_FSHD</TD>
+  <TD>3</TD>
+  <TD>primary myoblast from Facioscapulohumeral Muscular Dystrophy (FSHD) patients</TD>
+  <TD>&nbsp;</TD>
+  <TD>muscle</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_HSMMtube_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD>Duke/UNC/UT/EBI ENCODE group Muscle needle biopsies</TD>
+  <TD></TD>
+  <TD>HSMM_FSHD</TD>
+</TR>
+<TR>
+  <TD>HSMMtube</TD>
+  <TD>3</TD>
+  <TD>skeletal muscle myotubes differentiated from the HSMM cell line</TD>
+  <TD>mesoderm</TD>
+  <TD>muscle</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMMtube_Bernstein_protocol.pdf>Bernstein</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_HSMMtube_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza See HSMM</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001760>BTO:0001760 (non-specific)</A></TD>
+  <TD>HSMMtube</TD>
+</TR>
+<TR>
+  <TD>HSMMtube_emb</TD>
+  <TD>3</TD>
+  <TD>embryonic myotube</TD>
+  <TD>&nbsp;</TD>
+  <TD>muscle</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMMtubeemb_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://depts.washington.edu/biowww/faculty/hauschka-steve/>Duke/UNC/UT/EBI ENCODE group fetal myoblast cell strain (H246 and H275) from Dr Stephen Hauschka- U. of Washington 1980</A></TD>
+  <TD></TD>
+  <TD>HSMMtube_emb</TD>
+</TR>
+<TR>
+  <TD>HSMMtube_FSHD</TD>
+  <TD>3</TD>
+  <TD>myotube from Facioscapulohumeral Muscular Dystrophy (FSHD) patient</TD>
+  <TD>&nbsp;</TD>
+  <TD>muscle</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HSMM_HSMMtube_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD>Duke/UNC/UT/EBI ENCODE group Muscle needle biopsies</TD>
+  <TD></TD>
+  <TD>HSMMtube_FSHD</TD>
+</TR>
+<TR>
+  <TD>HT-1080</TD>
+  <TD>3</TD>
+  <TD>epithelial cell line derived from a fibrosarcoma, (PMID: 4132053), pseudo-diploid male with a modal chromosome number of 46, numerous chromosome abnormalities</TD>
+  <TD>mesoderm</TD>
+  <TD>epithelium</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD>&nbsp;<em>missing</em>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-121&Template=cellBiology>ATCC CCL-121</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001282>BTO:0001282</A></TD>
+  <TD>HT-1080</TD>
+</TR>
+<TR>
+  <TD>HTR8svn</TD>
+  <TD>3</TD>
+  <TD>trophoblast (HTR-8/SVneo) cell line, a thin layer of ectoderm that forms the wall of many mammalian blastulas and functions in the nutrition and implantation of the embryo</TD>
+  <TD>ectoderm</TD>
+  <TD>blastula</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HTR8svn_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://anatomy.queensu.ca/faculty/graham.cfm>Charles H. Graham, Department of Anatomy & Cell Biology, Queen's University at Kingston, Kingston, Ontario, Canada HTR8svn</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001079>BTO:0001079</A></TD>
+  <TD>HTR8svn</TD>
+</TR>
+<TR>
+  <TD>Huh-7</TD>
+  <TD>3</TD>
+  <TD>hepatocellular carcinoma</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Huh-7_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dukehealth.org/physicians/ravi_r_jhaveri>Ravi Jhaveri, Duke University Huh-7</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001950>BTO:0001950</A></TD>
+  <TD>Huh-7</TD>
+</TR>
+<TR>
+  <TD>Huh-7.5</TD>
+  <TD>3</TD>
+  <TD>hepatocellular carcinoma, hepatocytes selected for high levels of hepatitis C replication</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Huh-7.5_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dukehealth.org/physicians/ravi_r_jhaveri>Ravi Jhaveri, Duke University Huh-7.5</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001950>BTO:0001950</A></TD>
+  <TD>Huh-7.5</TD>
+</TR>
+<TR>
+  <TD>HUVEC</TD>
+  <TD>2</TD>
+  <TD>umbilical vein endothelial cells</TD>
+  <TD>mesoderm</TD>
+  <TD>endothelium</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HUVEC_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2517</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001949>BTO:0001949</A></TD>
+  <TD>HUVEC</TD>
+</TR>
+<TR>
+  <TD>HVMF</TD>
+  <TD>3</TD>
+  <TD>villous mesenchymal fibroblast cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>connective</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HVMF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=7130>ScienCell 7130</A></TD>
+  <TD></TD>
+  <TD>HVMF</TD>
+</TR>
+<TR>
+  <TD>HVMF_6091203.3</TD>
+  <TD>3</TD>
+  <TD>Villous Mesenchymal Fibroblasts from villous tissue</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HVMF6091203.3_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/human-villous-mesenchymal-fibroblasts-hvmf/?sword_list%5B%5D=HVMF>PromoCell C-14034</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HVMF_6091203.3</TD>
+</TR>
+<TR>
+  <TD>HVMF_6100401.3</TD>
+  <TD>3</TD>
+  <TD>Villous Mesenchymal Fibroblasts from villous tissue</TD>
+  <TD>missing</TD>
+  <TD>placenta</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HVMF6100401.3_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/human-villous-mesenchymal-fibroblasts-hvmf/?sword_list%5B%5D=HVMF>PromoCell C-14034</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001975>BTO:0001975</A></TD>
+  <TD>HVMF_6100401.3</TD>
+</TR>
+<TR>
+  <TD>HWP</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated White Preadipocytes from two individuals, HWP_0092205 and HWP_8120201.5, subcutaneous adipose tissue from abdomen / upper arm</TD>
+  <TD>missing</TD>
+  <TD>adipose</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HWP0092205_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/preadipocytes/?sword_list%5B%5D=HWP>PromoCell HWP</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004042>BTO:0004042</A></TD>
+  <TD>HWP</TD>
+</TR>
+<TR>
+  <TD>HWP_0092205</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated White Preadipocytes from abdomen</TD>
+  <TD>missing</TD>
+  <TD>subcutaneous adipose tissue</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HWP0092205_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HWP8120201.5_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/preadipocytes/?sword_list%5B%5D=HWP>PromoCell C-14072</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004042>BTO:0004042</A></TD>
+  <TD>HWP_0092205</TD>
+</TR>
+<TR>
+  <TD>HWP_8120201.5</TD>
+  <TD>3</TD>
+  <TD>Undifferentiated White Preadipocytes from upper arm</TD>
+  <TD>missing</TD>
+  <TD>subcutaneous adipose tissue</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/HWP8120201.5_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/preadipocytes/?sword_list%5B%5D=HWP>PromoCell C-14072</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0004042>BTO:0004042</A></TD>
+  <TD>HWP_8120201.5</TD>
+</TR>
+<TR>
+  <TD>IMR90</TD>
+  <TD>2</TD>
+  <TD>fetal lung fibroblasts, newly promoted to tier 2: not in 2011 analysis</TD>
+  <TD>endoderm</TD>
+  <TD>lung</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/IMR90_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-186&Template=cellBiology>ATCC CCL-186</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001229&termName=IMR-90%20cell>BTO:0001229</A></TD>
+  <TD>IMR90</TD>
+</TR>
+<TR>
+  <TD>iPS</TD>
+  <TD>3</TD>
+  <TD>induced pluripotent stem cell derived from skin fibroblast</TD>
+  <TD>induced pluripotent stem cell derived from skin fibroblast</TD>
+  <TD>induced pluripotent stem cell</TD>
+  <TD>&nbsp;</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/iPS_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://intra.ninds.nih.gov/lab.asp?org_id=25>Josh Chenoweth, Laboratory of Molecular Biology, National Institutes of Health, NINDS iPS</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000001>BTO:0000001 (nonspecific)</A></TD>
+  <TD>iPS</TD>
+</TR>
+<TR>
+  <TD>iPS_CWRU1</TD>
+  <TD>3</TD>
+  <TD>iPS cells derived from MSC658 fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>induced pluripotent cell (iPS)</TD>
+  <TD>iPS</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/iPS_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://genetics.case.edu/page.php?page_id=5&LN=Tesar&FN=Paul>Paul Tesar at Case Western University iPS_CWRU1</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000001>BTO:0000001</A></TD>
+  <TD>iPS_CWRU1</TD>
+</TR>
+<TR>
+  <TD>iPS_NIHi11</TD>
+  <TD>3</TD>
+  <TD>iPS cells derived from AG20443 fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>induced pluripotent cell (iPS)</TD>
+  <TD>iPS</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/iPS_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ninds.nih.gov/research/labs/25.htm>Josh Chenoweth, Laboratory of Molecular Biology, National Institutes of Health, NINDS iPS_NIHi11</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000001>BTO:0000001</A></TD>
+  <TD>iPS_NIHi11</TD>
+</TR>
+<TR>
+  <TD>iPS_NIHi7</TD>
+  <TD>3</TD>
+  <TD>iPS cells derived from AG08395 fibroblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>induced pluripotent cell (iPS)</TD>
+  <TD>iPS</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/iPS_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ninds.nih.gov/research/labs/25.htm>Josh Chenoweth, Laboratory of Molecular Biology, National Institutes of Health, NINDS iPS_NIHi7</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000001>BTO:0000001</A></TD>
+  <TD>iPS_NIHi7</TD>
+</TR>
+<TR>
+  <TD>Ishikawa</TD>
+  <TD>3</TD>
+  <TD>endometrial adenocarcinoma</TD>
+  <TD>&nbsp;</TD>
+  <TD>uterus</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Ishikawa_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sigmaaldrich.com/catalog/ProductDetail.do?D7=0&N5=SEARCH_CONCAT_PNO%7CBRAND_KEY&N4=99040201%7CSIGMA&N25=0&QS=ON&F=SPEC>SIGMA-ALDRICH 99040201</A></TD>
+  <TD></TD>
+  <TD>Ishikawa</TD>
+</TR>
+<TR>
+  <TD>Jurkat</TD>
+  <TD>3</TD>
+  <TD>T lymphoblastoid derived from an acute T cell leukemia, "The Jurkat cell line was established from the peripheral blood of a 14 year old boy by Schneider et al., and was originally designated JM." - ATCC. (PMID: 68013)</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Jurkat_protocol.pdf>Myers</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Jurkat_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=TIB-152&Template=cellBiology>ATCC TIB-152</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001948>BTO:0001948</A></TD>
+  <TD>Jurkat</TD>
+</TR>
+<TR>
+  <TD>K562</TD>
+  <TD>1</TD>
+  <TD>leukemia, "The continuous cell line K-562 was established by Lozzio and Lozzio from the pleural effusion of a 53-year-old female with chronic myelogenous leukemia in terminal blast crises." - ATCC</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/K562_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-243&Template=cellBiology>ATCC CCL-243</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000664>BTO:0000664</A></TD>
+  <TD>K562</TD>
+</TR>
+<TR>
+  <TD>LHCN-M2</TD>
+  <TD>3</TD>
+  <TD>skeletal myoblasts derived from satellite cells from the pectoralis major muscle of a 41 year old caucasian heart transplant donor, immortalized with lox-hygro-hTERT ("LH"), and Cdk4-neo ("CN"), Zhu et al. (2007) in Aging Cell, vol. 6, pp 515-523.</TD>
+  <TD>mesoderm</TD>
+  <TD>skeletal muscle myoblast</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/LHCNM2_Wold_protocol.pdf>Wold</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.utsouthwestern.edu/findfac/professional/0,,18156,00.html>Woodring Wright, M.D., Ph.D. (None)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/?termId=BTO:0000023>BTO:0000023</A></TD>
+  <TD>LHCN-M2</TD>
+</TR>
+<TR>
+  <TD>LHSR</TD>
+  <TD>3</TD>
+  <TD>prostate epithelial cells (PrEC), multiple human donors, all of whom are HIV-1, Hepatitis B and Hepatitis C negative, treatment: to create LHSR, cells were infected with amphotropic retroviruses encoding the SV40 large T antigen (L), the telomerase catalytic subunit hTERT (H), the SV40 small T antigen (S) and an oncogenic allele of H-ras (R).</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/LHSR_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://physicians.dana-farber.org/directory/profile.asp?dbase=main&setsize=10&display=Y&nxtfmt=pc&pgt=William+C.+Hahn,+MD,+PhD&gs=r&picture_id=0000378&lookup=Y&pict_id=0000378>William Hahn at the Dana Farber Cancer Institute, Boston, MA</A></TD>
+  <TD></TD>
+  <TD>LHSR</TD>
+</TR>
+<TR>
+  <TD>LNCaP</TD>
+  <TD>3</TD>
+  <TD>prostate adenocarcinoma, "LNCaP clone FGC was isolated in 1977 by J.S. Horoszewicz, et al., from a needle aspiration biopsy of the left supraclavicular lymph node of a 50-year-old caucasian male (blood type B+) with confirmed diagnosis of metastatic prostate carcinoma." - ATCC. (Horoszewicz et al. LNCaP Model of Human Prostatic Carcinoma. Cancer Research 43, 1809-1818, April 1983.)</TD>
+  <TD>endoderm</TD>
+  <TD>prostate</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/LNCaP_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/LNCaP_protocol.pdf>Farnham</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/LNCaP_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1740&Template=cellBiology>ATCC CRL-1740</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002021>BTO:0002021</A></TD>
+  <TD>LNCaP</TD>
+</TR>
+<TR>
+  <TD>Loucy</TD>
+  <TD>3</TD>
+  <TD>T cell leukemia</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Loucy_Bernstein_protocol.pdf>Bernstein</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dsmz.de/index.htm>DSMZ Loucy</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/?termId=BTO%3A0002104>BTO:0002104</A></TD>
+  <TD>Loucy</TD>
+</TR>
+<TR>
+  <TD>M059J</TD>
+  <TD>3</TD>
+  <TD>malignant glioblastoma, glioma, lack DNA-dependent protein kinase activity, deficient in repair of DNA double strand breaks, the cells are negative for glial fibrillary acidic protein (GFAP), tumor specimen taken from a 33 year old</TD>
+  <TD>&nbsp;</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/M059J_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2366&Template=cellBiology>ATCC CRL-2366</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000527>BTO:0000527</A></TD>
+  <TD>M059J</TD>
+</TR>
+<TR>
+  <TD>MCF-7</TD>
+  <TD>2</TD>
+  <TD>mammary gland, adenocarcinoma. (PMID: 4357757), newly promoted to tier 2: not in 2011 analysis</TD>
+  <TD>ectoderm</TD>
+  <TD>breast</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MCF-7_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MCF-7_Farnham_protocol.pdf>Farnham</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-22&Template=cellBiology>ATCC HTB-22</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000093>BTO:0000093</A></TD>
+  <TD>MCF-7</TD>
+</TR>
+<TR>
+  <TD>MCF10A-Er-Src</TD>
+  <TD>3</TD>
+  <TD>mammary gland, non-tumorigenic epithelial, inducible cell line, derived from the MCF-10A parental cells and contain ER-Src, a derivative of the Src kinase oncoprotein (v-Src) that is fused to the ligand-binding domain of the estrogen receptor (ER)</TD>
+  <TD>ectoderm</TD>
+  <TD>breast</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MCF-10A_Struhl_protocol.pdf>Struhl</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=https://struhl.med.harvard.edu/>Struhl laboratory MCF10A-Er-Src</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001939>BTO:0001939</A></TD>
+  <TD>MCF10A-Er-Src</TD>
+</TR>
+<TR>
+  <TD>MDA-MB-231</TD>
+  <TD>3</TD>
+  <TD>breast adenocarcinoma, epithelial cell line, derived from metastatic site: pleural effusion. (PMID: 730202)</TD>
+  <TD>ectoderm</TD>
+  <TD>breast</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MDA-MB-231_Struhl_protocol.pdf>Struhl</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-26&Template=cellBiology>ATCC HTB-26</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000815>BTO:0000815</A></TD>
+  <TD>MDA-MB-231</TD>
+</TR>
+<TR>
+  <TD>Medullo</TD>
+  <TD>3</TD>
+  <TD>medulloblastoma (aka D721), surgical resection from a patient with medulloblastoma as described by Darrell Bigner (1997)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/D721_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://cmb.duke.edu/faculty/bigner.html>Darrell Bigner, Duke University Medical Center</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001359>BTO:0001359</A></TD>
+  <TD>Medullo</TD>
+</TR>
+<TR>
+  <TD>Medullo_D341</TD>
+  <TD>3</TD>
+  <TD>Medulloblastoma cell line of neuron or neuron precurosr origin</TD>
+  <TD>&nbsp;</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MedulloD341_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.cancer.duke.edu/btc/modules/facultystaff1/index.php?id=85>Darrell Bigner at Duke University Medullo_D341</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001757&termName=medulloblastoma%20cell>BTO:0001757</A></TD>
+  <TD>Medullo_D341</TD>
+</TR>
+<TR>
+  <TD>Mel_2183</TD>
+  <TD>3</TD>
+  <TD>Melanoma Cell line</TD>
+  <TD>&nbsp;</TD>
+  <TD>Melanoma cell line derived from melanoma metastasis</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Mel2183_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.genome.gov/19519015>Dr. Yardena Samuels Mel_2183</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000849&termName=melanoma%20cell%20line>BTO:0000849</A></TD>
+  <TD>Mel_2183</TD>
+</TR>
+<TR>
+  <TD>Melano</TD>
+  <TD>3</TD>
+  <TD>epidermal melanocytes</TD>
+  <TD>ectoderm</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Melano_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.sciencellonline.com/site/productDetails.php?keyword=2200>ScienCell 2200</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>Melano</TD>
+</TR>
+<TR>
+  <TD>Monocytes-CD14+_RO01746</TD>
+  <TD>2</TD>
+  <TD>Monocytes-CD14+ are CD14-positive cells from human leukapheresis production, from donor RO 01746 (draw 1 ID is RO 01746, draw 2 ID is RO 01826), newly promoted to tier 2: not in 2011 analysis</TD>
+  <TD>mesoderm</TD>
+  <TD>monocytes</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/MonoCD14_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://labs.fhcrc.org/heimfeld/contact.html>S. Heimfeld Laboratory, FHCRC Monocytes-CD14+_RO01746</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000876>BTO:0000876</A></TD>
+  <TD>Monocytes-CD14+_RO01746</TD>
+</TR>
+<TR>
+  <TD>Myometr</TD>
+  <TD>3</TD>
+  <TD>myometrial cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>myometrium</TD>
+  <TD>&nbsp;</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Myometr_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.mwrif.org/188/condon-jeyasuria-lab>Dr. Jennifer Condon of Magee Women's Research Institute (Pittsburg, PA)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000907>BTO:0000907</A></TD>
+  <TD>Myometr</TD>
+</TR>
+<TR>
+  <TD>NB4</TD>
+  <TD>3</TD>
+  <TD>acute promyelocytic leukemia cell line. (PMID: 1995093)</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NB4_protocol.pdf>ENCODE</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NB4_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD>Refer to protocol documents for differing sources, UW: DSMZ (Deutsche Sammlung von Mikroorganismen und Zellkulturen) ACC-207 http://www.dsmz.de/ or Yale (Stanford): National Cell Culture Center http://www.nccc.com/ NB4</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002489>BTO:0002489</A></TD>
+  <TD>NB4</TD>
+</TR>
+<TR>
+  <TD>NH-A</TD>
+  <TD>3</TD>
+  <TD>astrocytes (also called Astrocy)</TD>
+  <TD>ectoderm</TD>
+  <TD>nervous</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NH-A_Bernstein_protocol.pdf>Bernstein</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/>Stam</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NH-A_Stam_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2565</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000099>BTO:0000099</A></TD>
+  <TD>NH-A</TD>
+</TR>
+<TR>
+  <TD>NHBE</TD>
+  <TD>3</TD>
+  <TD>bronchial epithelial cells</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHBE_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2541</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002022>BTO:0002022</A></TD>
+  <TD>NHBE</TD>
+</TR>
+<TR>
+  <TD>NHBE_RA</TD>
+  <TD>3</TD>
+  <TD>bronchial epithelial cells with retinoic acid</TD>
+  <TD>&nbsp;</TD>
+  <TD>bronchial epithelium</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHBERA_Stam_protocol.pdf>UW Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com>Lonza CC-2540, CC3170</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001845>BTO:0001845</A></TD>
+  <TD>NHBE_RA</TD>
+</TR>
+<TR>
+  <TD>NHDF</TD>
+  <TD>3</TD>
+  <TD>Dermal Fibroblasts from temple / breast</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF0060801.3_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF7071701.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/normal-human-dermal-fibroblasts-nhdf/?sword_list%5B%5D=NHDF>PromoCell NHDF</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003185>BTO:0003185</A></TD>
+  <TD>NHDF</TD>
+</TR>
+<TR>
+  <TD>NHDF-Ad</TD>
+  <TD>3</TD>
+  <TD>adult dermal fibroblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF-Ad_Stam_protocol.pdf>Stam</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF-Ad_Bernstein_protocol.pdf>Bernstein</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2511, CC-2511T225</A></TD>
+  <TD></TD>
+  <TD>NHDF-Ad</TD>
+</TR>
+<TR>
+  <TD>NHDF-neo</TD>
+  <TD>3</TD>
+  <TD>neonatal dermal fibroblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF-neo_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2509</A></TD>
+  <TD></TD>
+  <TD>NHDF-neo</TD>
+</TR>
+<TR>
+  <TD>NHDF_0060801.3</TD>
+  <TD>3</TD>
+  <TD>Dermal Fibroblasts from temple</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF0060801.3_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/normal-human-dermal-fibroblasts-nhdf/?sword_list%5B%5D=NHDF>PromoCell C-14031</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003185>BTO:0003185</A></TD>
+  <TD>NHDF_0060801.3</TD>
+</TR>
+<TR>
+  <TD>NHDF_7071701.2</TD>
+  <TD>3</TD>
+  <TD>Dermal Fibroblasts from breast</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHDF7071701.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/fibroblasts/normal-human-dermal-fibroblasts-nhdf/?sword_list%5B%5D=NHDF>PromoCell C-14031</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0003185>BTO:0003185</A></TD>
+  <TD>NHDF_7071701.2</TD>
+</TR>
+<TR>
+  <TD>NHEK</TD>
+  <TD>3</TD>
+  <TD>epidermal keratinocytes</TD>
+  <TD>ectoderm</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Keratinocyte_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com>Lonza CC-2501</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000375>BTO:0000375</A></TD>
+  <TD>NHEK</TD>
+</TR>
+<TR>
+  <TD>NHEM.f_M2</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (foreskin) from two individuals, NHEM.f_M2_5071302.2 and NHEM.f_M2_6022001 from foreskin</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEM.fM25071302.2_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEM.fM26022001_Gingeras_protocol.pdf>protocol</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell NHEM</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM.f_M2</TD>
+</TR>
+<TR>
+  <TD>NHEM.f_M2_5071302.2</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (foreskin)</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEM.fM25071302.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell C-14042</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM.f_M2_5071302.2</TD>
+</TR>
+<TR>
+  <TD>NHEM.f_M2_6022001</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (foreskin)</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEM.fM26022001_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell C-14042</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM.f_M2_6022001</TD>
+</TR>
+<TR>
+  <TD>NHEM_M2</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (adult) from two individuals, NHEM_M2_7011001.2 and NHEM_M2_7012303 from cheek / temple</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEMM27011001.2_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEMM27012303_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell NHEM</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM_M2</TD>
+</TR>
+<TR>
+  <TD>NHEM_M2_7011001.2</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (adult) from cheek</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEMM27011001.2_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell C-14043</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM_M2_7011001.2</TD>
+</TR>
+<TR>
+  <TD>NHEM_M2_7012303</TD>
+  <TD>3</TD>
+  <TD>Epidermal Melanocytes (adult) from temple</TD>
+  <TD>missing</TD>
+  <TD>skin</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHEMM27012303_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/melanocytes/?sword_list%5B%5D=NHEM>PromoCell C-14043</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000847>BTO:0000847</A></TD>
+  <TD>NHEM_M2_7012303</TD>
+</TR>
+<TR>
+  <TD>NHLF</TD>
+  <TD>3</TD>
+  <TD>lung fibroblasts</TD>
+  <TD>endoderm</TD>
+  <TD>lung</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHLF_Bernstein_protocol.pdf>Bernstein</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NHLF_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2512</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000161>BTO:0000161 (non-specific)</A></TD>
+  <TD>NHLF</TD>
+</TR>
+<TR>
+  <TD>NT2-D1</TD>
+  <TD>3</TD>
+  <TD>malignant pluripotent embryonal carcinoma (NTera-2), "The NTERA-2 cl.D1 cell line is a pluripotent human testicular embryonal carcinoma cell line derived by cloning the NTERA-2 cell line." - ATCC. (PMID: 6694356)</TD>
+  <TD>inner cell mass</TD>
+  <TD>testis</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/NT2-D1_protocol.pdf>ENCODE</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1973&Template=cellBiology>ATCC CRL-1973</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000946>BTO:0000946</A></TD>
+  <TD>NT2-D1</TD>
+</TR>
+<TR>
+  <TD>Osteobl</TD>
+  <TD>3</TD>
+  <TD>osteoblasts (NHOst)</TD>
+  <TD>mesoderm</TD>
+  <TD>bone</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Osteoblast_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Osteoblast_Bernstein_protocol.pdf>Bernstein</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2538</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001593>BTO:0001593</A></TD>
+  <TD><I>Osteoblasts</I></TD>
+</TR>
+<TR>
+  <TD>ovcar-3</TD>
+  <TD>3</TD>
+  <TD>ovarian adenocarcinoma, "the NIH: OVCAR-3 line was established in 1982 by T.C. Hamilton, et al. from the malignant ascites of a patient with progressive adenocarcinoma of the ovary." - ATCC. (PMID: 6604576)</TD>
+  <TD>mesoderm</TD>
+  <TD>ovary</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-161&Template=cellBiology>ATCC HTB-161</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000812>BTO:0000812</A></TD>
+  <TD>ovcar-3</TD>
+</TR>
+<TR>
+  <TD>PANC-1</TD>
+  <TD>3</TD>
+  <TD>pancreatic carcinoma, (PMID: 1140870) PANC-1 was established from a pancreatic carcinoma, which was extracted via pancreatico-duodenectomy specimen from a 56-year-old Caucasian individual. Malignancy of this cell line was verified via in vitro and in vivo assays.</TD>
+  <TD>endoderm</TD>
+  <TD>pancreas</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PANC-1_Myers_protocol.pdf>Myers</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PANC-1_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1469&Template=cellBiology>ATCC CRL-1469</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000304>BTO:0000304</A></TD>
+  <TD>PANC-1</TD>
+</TR>
+<TR>
+  <TD>PanIsletD</TD>
+  <TD>3</TD>
+  <TD>dedifferentiated human pancreatic islets from the National Disease Research Interchange (NDRI), same source as PanIslets</TD>
+  <TD>endoderm</TD>
+  <TD>pancreas</TD>
+  <TD>&nbsp;</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PanIsletD_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ndriresource.org/NDRI_Initiatives/Pancreatic_Islets/31/>National Disease Research Interchange PanIsletD</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000991>BTO:0000991 (non-specific)</A></TD>
+  <TD>PanIsletD</TD>
+</TR>
+<TR>
+  <TD>PanIslets</TD>
+  <TD>3</TD>
+  <TD>pancreatic islets from 2 donors, the sources of these primary cells are cadavers from National Disease Research Interchange (NDRI) and another sample isolated as in Bucher, P. et al., Assessment of a novel two-component enzyme preparation for human islet isolation and transplantation. Transplantation 79, 917 (2005)</TD>
+  <TD>endoderm</TD>
+  <TD>pancreas</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PanIslets_Crawford_protocol.pdf>Crawford</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PanIslets_Lieb_protocol.pdf>Lieb</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ndriresource.org/NDRI_Initiatives/Pancreatic_Islets/31/>Refer to publication or NDRI PanIslets</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000991>BTO:0000991 (non-specific)</A></TD>
+  <TD>PanIslets</TD>
+</TR>
+<TR>
+  <TD>PBDE</TD>
+  <TD>3</TD>
+  <TD>peripheral blood-derived erythroblasts</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PBDE_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://pibbs.usc.edu/faculty/profile/?fid=205>Farnham lab PBDE</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000574>BTO:0000574 (non-specific)</A></TD>
+  <TD>PBDE</TD>
+</TR>
+<TR>
+  <TD>PBDEFetal</TD>
+  <TD>3</TD>
+  <TD>peripheral blood-derived erythroblasts from 16-19 week human fetal liver</TD>
+  <TD>mesoderm</TD>
+  <TD>liver</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/FetalPBDE_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.einstein.yu.edu/cellbiology/Lab/Bouhassira/default.htm>Bouhassira Lab FetalPBDE</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO:0000553>BTO:0000553</A></TD>
+  <TD>PBDEFetal</TD>
+</TR>
+<TR>
+  <TD>PBMC</TD>
+  <TD>3</TD>
+  <TD>peripheral blood mononuclear cells</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PBMC_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.genecards.org/cgi-bin/carddisp.pl?gene=POLR3G>PBMC cells provided by E. Bresnick, UW Madison PBMC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001025>BTO:0001025</A></TD>
+  <TD>PBMC</TD>
+</TR>
+<TR>
+  <TD>PFSK-1</TD>
+  <TD>3</TD>
+  <TD>neuroectodermal cell line derived from a cerebral brain tumor, (PMID: 1316433)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PFSK-1_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2060&Template=cellBiology>ATCC CRL-2060</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000690>BTO:0000690 (non-specific)</A></TD>
+  <TD>PFSK-1</TD>
+</TR>
+<TR>
+  <TD>pHTE</TD>
+  <TD>3</TD>
+  <TD>primary tracheal epithelial cells</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/pHTE_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=https://www.case.edu/cgi-bin/directory/pb_lookup.cgi?search_text=calvin+cotton&submit.x=0&submit.y=0&submit=Search&search_method=regular&page_num=1>Dr. Cal Cotton at Case Western Reserve University</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001120>BTO:0001120 (non-specific)</A></TD>
+  <TD>pHTE</TD>
+</TR>
+<TR>
+  <TD>PrEC</TD>
+  <TD>3</TD>
+  <TD>prostate epithelial cell line</TD>
+  <TD>epithelial</TD>
+  <TD>prostate</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/PrEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2555</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002398>BTO:0002398</A></TD>
+  <TD>PrEC</TD>
+</TR>
+<TR>
+  <TD>ProgFib</TD>
+  <TD>3</TD>
+  <TD>fibroblasts, Hutchinson-Gilford progeria syndrome (cell line HGPS, HGADFN167, progeria research foundation)</TD>
+  <TD>&nbsp;</TD>
+  <TD>skin</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/progeria_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.progeriaresearch.org/>Progeria Research Foundation HGADFN167</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001255>BTO:0001255 (non-specific)</A></TD>
+  <TD>ProgFib</TD>
+</TR>
+<TR>
+  <TD>prostate</TD>
+  <TD>3</TD>
+  <TD>prostate tissue purchased for CSHL project</TD>
+  <TD>endoderm</TD>
+  <TD>prostate</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Prostate_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/>ATCC (see protocol documents)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001129>BTO:0001129</A></TD>
+  <TD>prostate</TD>
+</TR>
+<TR>
+  <TD>Raji</TD>
+  <TD>3</TD>
+  <TD>B lymphocyte, "The Raji line of lymphoblast-like cells was established by R.J.V. Pulvertaft in 1963 from a Burkitt's lymphoma of the left maxilla of an 11-year-old Black male." - ATCC. (PMID: 14086209)</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Raji_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CCL-86&Template=cellBiology>ATCC CCl-86</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001154&termName=RAJI%20cell>BTO:0001154</A></TD>
+  <TD>Raji</TD>
+</TR>
+<TR>
+  <TD>RPTEC</TD>
+  <TD>3</TD>
+  <TD>renal proximal tubule epithelial cells</TD>
+  <TD>&nbsp;</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/RPTEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2553, CC-2553T225</A></TD>
+  <TD></TD>
+  <TD>RPTEC</TD>
+</TR>
+<TR>
+  <TD>RWPE1</TD>
+  <TD>3</TD>
+  <TD>prostate epithelial</TD>
+  <TD>&nbsp;</TD>
+  <TD>prostate</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/RWPE_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-11609&Template=cellBiology>ATCC CRL-11609</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002397>BTO:0002397</A></TD>
+  <TD>RWPE1</TD>
+</TR>
+<TR>
+  <TD>SAEC</TD>
+  <TD>3</TD>
+  <TD>small airway epithelial cells</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>normal</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SAEC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2547</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002022>BTO:0002022 (non-specific)</A></TD>
+  <TD>SAEC</TD>
+</TR>
+<TR>
+  <TD>SH-SY5Y</TD>
+  <TD>3</TD>
+  <TD>neuroblastoma clonal subline of the neuroepithelioma cell line SK-N-SH from the 1970 bone marrow biopsy of a 4-year-old girl with metastatic neuroblastoma, trisomy of 1q</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SH-SY5Y_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-2266&Template=cellBiology>ATCC CC-2266</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/?termId=BTO%3A0000793>BTO:0000793</A></TD>
+  <TD>SH-SY5Y</TD>
+</TR>
+<TR>
+  <TD>SK-N-MC</TD>
+  <TD>3</TD>
+  <TD>neuroepithelioma cell line derived from a metastatic supra-orbital human brain tumor, "SK-N-MC was isolated in September of l971 and was found to have moderate dopamine - beta - hydroxylase activity as well as formaldehyde induced fluorescence indicative of intracellular catecholamines." - ATCC. (Biedler, et al. Morphology and Growth, Tumorigenicity, and Cytogenetics of Human Neuroblastoma Cells in Continuous Culture. Cancer Research 33, 2643-2652, November 1973.)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SK-N-MC_protocol.pdf>Myers</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SK-N-MC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-10&Template=cellBiology>ATCC HTB-10</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002372>BTO:0002372 (non-specific)</A></TD>
+  <TD>SK-N-MC</TD>
+</TR>
+<TR>
+  <TD>SK-N-SH</TD>
+  <TD>2</TD>
+  <TD>neuroblastoma, newly promoted to tier 2: not in 2011 analysis, the SK-N-SH line was established from a neuroblastoma in a 4 year old individual.</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SK-N-SH_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-11&Template=cellBiology>ATCC HTB-11</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000932>BTO:0000932 (non-specific)</A></TD>
+  <TD>SK-N-SH</TD>
+</TR>
+<TR>
+  <TD>SK-N-SH_RA</TD>
+  <TD>3</TD>
+  <TD>neuroblastoma cell line, treatment: differentiated with retinoic acid, (Biedler, et al. Morphology and Growth, Tumorigenicity, and Cytogenetics of Human Neuroblastoma Cells in Continuous Culture. Cancer Research 33, 2643-2652, November 1973.)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-11&Template=cellBiology>ATCC HTB-11</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002372>BTO:0002372 (non-specific)</A></TD>
+  <TD>SK-N-SH_RA</TD>
+</TR>
+<TR>
+  <TD>SkMC</TD>
+  <TD>3</TD>
+  <TD>Skeletal Striated Muscle Cells from two individuals, SkMC_9011302 SkMC_8121902.17 from M. pectoralis / Mm. intercostales</TD>
+  <TD>missing</TD>
+  <TD>muscle</TD>
+  <TD>normal</TD>
+  <TD>B</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SkMC9011302_Gingeras_protocol.pdf>Gingeras</A>
+<BR> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SkMC8121902.17_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/skeletal-muscle-cells/?sword_list%5B%5D=SkMC>PromoCell SkMC</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002916>BTO:0002916</A></TD>
+  <TD>SkMC</TD>
+</TR>
+<TR>
+  <TD>SKMC</TD>
+  <TD>3</TD>
+  <TD>skeletal muscle cells</TD>
+  <TD>mesoderm</TD>
+  <TD>muscle</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SkMC_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.lonza.com/>Lonza CC-2561</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001801>BTO:0001801 (non-specific)</A></TD>
+  <TD>SKMC</TD>
+</TR>
+<TR>
+  <TD>SkMC_8121902.17</TD>
+  <TD>3</TD>
+  <TD>Skeletal Muscle Cells from Mm. intercostales</TD>
+  <TD>missing</TD>
+  <TD>striated muscle</TD>
+  <TD>normal</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SkMC8121902.17_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/skeletal-muscle-cells/?sword_list%5B%5D=SkMC>PromoCell C-14060</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002916>BTO:0002916</A></TD>
+  <TD>SkMC_8121902.17</TD>
+</TR>
+<TR>
+  <TD>SkMC_9011302</TD>
+  <TD>3</TD>
+  <TD>Skeletal Muscle Cells from M. pectoralis</TD>
+  <TD>missing</TD>
+  <TD>striated muscle</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/SkMC9011302_Gingeras_protocol.pdf>Gingeras</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.promocell.com/nc/products/human-primary-cells/skeletal-muscle-cells/?sword_list%5B%5D=SkMC>PromoCell C-14060</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002916>BTO:0002916</A></TD>
+  <TD>SkMC_9011302</TD>
+</TR>
+<TR>
+  <TD>Stellate</TD>
+  <TD>3</TD>
+  <TD>hepatic stellate cells, liver that was perfused with collagenase and sellected for hepatic stellate cells by density gradient</TD>
+  <TD>endoderm</TD>
+  <TD>liver</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stellate_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.dukehealth.org/physicians/steve_s_choi>Steve Choi, Duke University Stellate</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002316>BTO:0002316</A></TD>
+  <TD>Stellate</TD>
+</TR>
+<TR>
+  <TD>T-47D</TD>
+  <TD>3</TD>
+  <TD>epithelial cell line derived from a mammary ductal carcinoma.</TD>
+  <TD>&nbsp;</TD>
+  <TD>duct</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/T47D_StamandMyers_protocol.pdf>Stam and Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-133&Template=cellBiology>ATCC HTB-133</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001248>BTO:0001248</A></TD>
+  <TD>T-47D</TD>
+</TR>
+<TR>
+  <TD>T98G</TD>
+  <TD>3</TD>
+  <TD>fibroblast cell line derived from a glioblastoma multiforme. (PMID: 222778)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD>  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=CRL-1690&Template=cellBiology>ATCC CRL-1690</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001583>BTO:0001583</A></TD>
+  <TD>T98G</TD>
+</TR>
+<TR>
+  <TD>TBEC</TD>
+  <TD>3</TD>
+  <TD>trachea and bronchial epithelial cells, passage 2 primary, non-immortalized cells, donor was 21 years old</TD>
+  <TD>endoderm</TD>
+  <TD>epithelium</TD>
+  <TD>&nbsp;</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/TBEC_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ndriresource.org/>National Disease Research Interchange-provided fresh lung tissue, designated DD009C in-house. (see description)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001389>BTO:0001389 (non-specific)</A></TD>
+  <TD>TBEC</TD>
+</TR>
+<TR>
+  <TD>Th1</TD>
+  <TD>3</TD>
+  <TD>primary Th1 T cells</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Stam_15_protocols.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.gs.washington.edu/faculty/stamj.htm>Stam lab None (primary pheresis of single normal subject)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001678>BTO:0001678</A></TD>
+  <TD>Th1</TD>
+</TR>
+<TR>
+  <TD>Th2</TD>
+  <TD>3</TD>
+  <TD>primary Th2 T cells</TD>
+  <TD>mesoderm</TD>
+  <TD>blood</TD>
+  <TD>&nbsp;</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Th2_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.gs.washington.edu/faculty/stamj.htm>Stam lab None (primary pheresis of single normal subject)</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001679>BTO:0001679</A></TD>
+  <TD>Th2</TD>
+</TR>
+<TR>
+  <TD>U2OS</TD>
+  <TD>3</TD>
+  <TD>osteosarcoma from the tibia of a 15 year old, J. Ponten and E. Saksela derived this line (originally 2T) in 1964 from a moderately differentiated sarcoma, viruses were not detected during co-cultivation with WI-38 cells or in CF tests against SV40, RSV or adenoviruses, mycoplasma contamination was detected and eliminated in 1972, (PMID: 6081590)</TD>
+  <TD>mesoderm</TD>
+  <TD>bone</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/U2OS_Farnham_protocol.pdf>Farnham</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-96&Template=cellBiology>ATCC HTB-96</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0000970>BTO:0000970</A></TD>
+  <TD>U2OS</TD>
+</TR>
+<TR>
+  <TD>U87</TD>
+  <TD>3</TD>
+  <TD>glioblastoma, astrocytoma, (PMID: 4332744)</TD>
+  <TD>ectoderm</TD>
+  <TD>brain</TD>
+  <TD>cancer</TD>
+  <TD>U</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/U-87_Myers_protocol.pdf>Myers</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-14&Template=cellBiology>ATCC HTB-14</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0002036>BTO:0002036</A></TD>
+  <TD>U87</TD>
+</TR>
+<TR>
+  <TD>UCH-1</TD>
+  <TD>3</TD>
+  <TD>chordoma cell line</TD>
+  <TD>ectoderm</TD>
+  <TD>chordoma</TD>
+  <TD>cancer</TD>
+  <TD>M</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/UCH1_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.chordomafoundation.org/research/>Chordoma Research Foundation</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001768&termName=notochord>BTO:0001768</A></TD>
+  <TD>UCH-1</TD>
+</TR>
+<TR>
+  <TD>Urothelia</TD>
+  <TD>3</TD>
+  <TD>primary ureter cell culture of urothelial cells derived from a 12 year-old girl and immortalized by transfection with a temperature-sensitive SV-40 large T antigen gene</TD>
+  <TD>&nbsp;</TD>
+  <TD>urothelium</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/Urothelia_Crawford_protocol.pdf>Crawford</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://pathology.med.und.nodak.edu/dept_home/MaryAnn.cfm>lab of Dr. D Sens (University of N. Dakota) Urothelia</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A001245>BTO:0001245</A></TD>
+  <TD>Urothelia</TD>
+</TR>
+<TR>
+  <TD>WERI-Rb-1</TD>
+  <TD>3</TD>
+  <TD>retinoblastoma (PMID: 844036)</TD>
+  <TD>ectoderm</TD>
+  <TD>eye</TD>
+  <TD>cancer</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/WERI-Rb-1_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www.atcc.org/ATCCAdvancedCatalogSearch/ProductDetails/tabid/452/Default.aspx?ATCCNum=HTB-169&Template=cellBiology>ATCC HTB-169</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001178>BTO:0001178 (non-specific)</A></TD>
+  <TD>WERI-Rb-1</TD>
+</TR>
+<TR>
+  <TD>WI-38</TD>
+  <TD>3</TD>
+  <TD>embryonic lung fibroblast cells, hTERT immortalized, includes Raf1 construct</TD>
+  <TD>endoderm</TD>
+  <TD>embryonic lung</TD>
+  <TD>normal</TD>
+  <TD>F</TD>
+  <TD> <A TARGET=_BLANK HREF=/ENCODE/protocols/cell/human/WI38_Stam_protocol.pdf>Stam</A>
+  &nbsp;</TD>
+  <TD><A TARGET=_BLANK HREF=http://www-dsv.cea.fr/dsv/instituts/institut-de-biologie-et-de-technologies-de-saclay-ibitec-s/unites/service-de-biologie-integrative-et-genetique-moleculaire-sbigem/laboratoire-stress-oxydants-et-cancer-lsoc/equipe-mecanismes-de-stabilite-genomique-c.-mann>Dr. Carl Mann, SBIGeM WI-38</A></TD>
+  <TD><A TARGET=_BLANK HREF=http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=BTO&termId=BTO%3A0001958>BTO:0001958</A></TD>
+  <TD>WI-38</TD>
+</TR>
+</TBODY></TABLE><BR>
+<script type='text/javascript'>{$(document).ready(function() {sortTable.initialize($('table.sortable')[0],true,true);});}</script>
+Total = 297
+
+</BODY>
+</HTML>

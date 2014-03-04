@@ -1,0 +1,573 @@
+@charset "utf-8";
+/* CSS Document */
+
+a:link    { color: #A00000; text-decoration: underline; }
+a:active  { color: #A00000; text-decoration: underline; }
+a:hover   { background-color: #FFD299; color: #000000; text-decoration: underline; }
+a:visited { color: #400000; text-decoration: underline; }
+
+body {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: small;
+	height: 100%;
+	margin: 0px;
+	width: 100%;
+}
+img {
+	border:0px;
+}
+
+.container {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	overflow: auto;
+	top: 0;
+	width: 100%;
+}
+.uploadcontainer{
+	height: 100%;
+	left: 0;
+	position: absolute;
+	overflow: auto;
+	top: 0;
+	width: 95%;
+}
+.leftside {
+	background-color: #FFFFD0;
+	border-right-width: thin;
+	border-right-style: solid;
+	float: left;
+	height: 100%;
+	left: 0;
+//	max-width:400px;
+	overflow: auto;
+	position: absolute;
+	top: 0;
+	width: 30%;
+}
+.rightside {	
+	overflow-y:visible;
+	overflow-x:visible;
+	position: absolute;
+	float: left;	
+	width: 70%;
+	left: 30%;
+	top: 0;
+}
+.opmenuTD {
+	//width:33%;
+	width:12%;
+}
+.opmenuTD div{
+	display:none;
+}
+.opmenuTD img{
+	margin:10px 0px 10px 0px;
+}
+.opmenuTD:hover{
+	background-color: #FFD299;
+	cursor: pointer;
+	border-radius: 20px; 
+	-moz-border-radius: 20px; 
+	-webkit-border-radius: 20px;
+}
+.opmenuTD:hover{
+	text-decoration: none;
+}
+
+.opmenuTD:hover img{
+	vertical-align:middle;
+}
+//.opmenuTD:hover div{
+//	display:inline;	
+//	color: #000000;
+//	text-align: center;
+//}
+div.opmenuTDText{
+	text-align:center;	
+	color:#FFFFD0;
+}
+tr.reloadUserDatasetTD{
+	display:none;
+}
+
+
+.header {
+	border-bottom: 1px solid #B0B0B0;
+	height: 32px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+img.menuicon {
+	vertical-align:middle;
+	height:22px;
+	width:22px;
+}
+img.menusubicon {
+	vertical-align:middle;
+	height:18px;
+	width:18px;
+}
+
+#currentLinkLocation {
+	float: right;
+	padding-right: 10px;
+	text-align: right;
+	width: 100%;
+}
+
+.query {
+	min-height: 50px;
+	position: relative;
+}
+.regions {
+	margin-bottom: 1.2em;
+	top: 90px;
+}
+
+.queryResults {
+	min-height: 50px;
+	overflow: auto;
+	position: relative;
+}
+.menujq {
+	height: 45px;
+	position: relative;
+	top: 0px;
+	visibility: visible;
+	width: 100%;
+	z-index: 25;
+}
+.logo {
+	height: 70px;
+	visibility: visible;
+	max-height: 70px;
+	max-width: 361px;
+}
+.logo img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;	
+	top: 0px;
+}
+
+
+
+.footer{
+	padding-top:5px;
+	padding-bottom:5px;	
+	text-align:center;
+	font: italic 10px Verdana;
+	color:#777777;
+	
+}
+#currentStatus{
+	padding-left: 20px;
+}
+.visualization {
+	position: relative;
+	//visibility: visible;
+	padding-left: 20px;
+	margin-top: 26px;
+	//padding-bottom: 20px;
+	padding-right: 20px;
+}
+
+#rangeFeaturePlot {
+	//margin-bottom: 10px;
+}
+.infoboxMain {
+	position: relative;
+	visibility: visible;
+	height: 30%;
+	padding-left: 20px;
+	padding-top: 0px;
+	display:none;
+}
+canvas.canvasChartElement {
+	display:none;
+}
+.boxheader {
+	color:#fff;
+	font-size: 120%;
+	font-weight: bold;
+	background-color: #172322;
+	height: 42px;
+	width: 100%;
+	padding-top: 3px;
+	padding-bottom: 0px;
+	position: relative;
+	visibility: visible;
+	text-align: center;
+	font-family: Verdana, Arial, sans-serif;
+	margin-top: 11px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+	cursor: default;
+}
+.hiddenstuff {
+	display: none;
+}
+
+
+.regionsTableClass {
+	border-collapse: collapse;
+//	border-right: 6px solid transparent;
+	padding-right: 6px;
+	position: relative;
+	width: 100%;
+}
+tr.regionsButton {
+	border-bottom: 3px solid transparent;
+}
+tr.regionsButton:hover {
+	background-color: #F9CA98;
+//	border-bottom: 2px solid #5B5B4B;
+	border-bottom: 3px solid #FF9728;
+}
+//td.regionsetSelectButton{
+//	border-radius: 20px; 
+//	-moz-border-radius: 20px; 
+//	-webkit-border-radius: 20px;
+//}
+td.regionsetSelectButton img.selectDatasetIcon, td.regionsetInfoButton img.selectDatasetIcon {
+	width:22px;
+	height:22px;	
+	margin-left:auto;	
+	margin-right:auto;		
+}
+td.regionsetSelectButton div.selectDatasetText,td.regionsetInfoButton div.selectDatasetText,td.compareDatasetButton div.selectDatasetText{	
+		
+	color:#FFFFD0;
+	line-height:20px;	
+	display:block;
+}
+td.removeUserDataset img.removeDatasetIcon {
+	width:22px;
+	height:22px;	
+	margin-left:auto;	
+	margin-right:auto;
+}
+td.compareDatasetButton img.compareDatasetIcon {
+	width:22px;
+	height:22px;	
+	margin-left:auto;	
+	margin-right:auto;
+}
+td.compareDatasetButton:hover{
+	background-color: #F7E7D7;
+}
+td.compareDatasetButton img{
+	margin-top:auto;
+	margin-bottom:auto;
+	margin-left:auto;
+	margin-right:auto;
+	width:25px;
+	height:25px;
+}
+tr.regionsButton td{
+	vertical-align:top;
+}
+tr.regionsButton:hover div.selectDatasetText {	
+	color:#000000;	
+}
+td.removeUserDataset:hover{
+	background-color: #F7E7D7;
+}
+td.removeUserDataset img{
+	margin-top:auto;
+	margin-bottom:auto;
+	margin-left:auto;
+	margin-right:auto;
+	width:25px;
+	height:25px;
+}
+th {
+	border: 0;
+	padding: 2px 5px 2px 5px;
+	vertical-align: middle;
+}
+td {
+//	border: 0;
+	padding: 2px 5px 2px 5px;
+	vertical-align: middle;
+}
+.infoboxMain table tr td{
+	padding-top:0px;
+	padding-left:0px;
+	padding-bottom:0px;
+}
+#rangeFeaturePlotTable td{
+	padding-left:0px;
+}
+/*td.regionsetInfoButton {
+	border: 1px solid #FA9627;
+}*/
+
+//tr.regionsButton:hover td.regionsetSelectButton:hover{
+//	background-color: #F7E7D7;
+//}
+tr.regionsButton:hover td.regionsetInfoButton:hover{
+	background-color: #F7E7D7;
+}
+
+#referenceListing {
+	margin-top: 0.8em;
+	border-top: 1px dotted #ADAD8E;
+	padding-top: 0.4em;
+	display:none;
+}
+table.openedFeatureResults {
+	width:100%;
+}
+span.referencePrefixRaw{
+	display:none;
+}
+
+span.queryPrefixRaw, span.queryPrefixRawOR{
+	display:none;
+}
+
+.featureBox {
+	margin: 3px;
+}
+//.features h4 {
+//	background: transparent none repeat scroll 0 0;
+//	font-size: 110%;
+//}
+//.activeSearchBox {
+//	background: #ffffc8 none repeat scroll 0 0;
+//}
+//.regionUser {
+//	background: #00DD00 none repeat scroll 0 0;
+//	background: #66FF99 none repeat scroll 0 0;
+//}
+
+.queryPrefixTitle .queryRegionsRaw {
+	width:335px;
+	visibility: visible;
+}
+.pretty-hover {
+//	background-color: #F9CA98;
+  background-color: #FF9728;
+  cursor: pointer;
+}
+.cgsbutton {
+	background-color: #FA9627;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	overflow: visible;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin: 0px;
+}
+.queryPrexix, .queryRegions {
+	//display: marker;
+	//display: table-row;
+	//clear: left;
+	//margin-right:5px;
+	
+}
+table.regionsListingTable{
+	width:100%;
+}
+table.regionsListingTable tr{
+	margin-right:5px;
+	margin-left:5px;	
+}
+table.regionsListingTable tr td{
+	min-width:16px;
+	min-height:16px;	
+}
+span.ui-icon {
+	padding-left:0px;
+	padding-right:0px;
+	width:16px;
+	height:16px;
+	display:table-cell;
+	float:right;
+}
+span.referencelistingRefinementX{
+	margin-right:5px;
+	float:right;
+}
+.progress_image_feature, .progress_image_hits {
+	height: 16px;
+	width: 16px;
+}
+.CGSicon {
+	height: 14px;
+	width: 14px;
+	max-height: 14px;
+	max-width: 14px;
+}
+
+.progress_image_feature_plot {
+	height: 48px;
+	width: 48px;
+}
+#openedFeatureTable {
+	width: 100%;
+}
+#openedFeatureTable tr, #openedFeatureTable td, #openedFeatureTable th {
+	border: 0;
+	margin: 0;
+}
+
+.searchByTerm {
+	margin-left: 200px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#rangeFeaturePlotTable{
+	margin-right:10px;
+}
+#exportLinksDiv{
+	
+}
+#userDatasetID {
+	width: 90%;
+	float: left; 
+	margin: 0px 00px 0px 0px;
+	padding: 10px 10px 10px 10px;
+	background: #ededed url(extras/bar-bg.png) repeat-x;
+	border: 3px solid #c7c7c7;
+	border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px;
+	font: italic 14px Verdana; color: #898989;
+	font-family: Verdana, Arial, sans-serif;
+	outline: none; /*Remove Chrome and Safari glows on focus*/
+}
+#userDatasetID.active {
+	background: #ebf3fc url(extras/bar-bg-active.png) repeat-x;
+	border: 3px solid #abd2ff;
+}
+.activateUserDataset{	
+	width: 20px; 
+	height: 20px; 
+	float: left;
+	background: url(extras/new_logo_symbol_black_25.png) center no-repeat;	
+	margin: 10px 0 10px -43px; 
+	text-indent: -9999px;
+	padding: 0 0 0 20px; /*IE fix*/
+	cursor: pointer;
+}
+.activateUserDataset:hover {	
+	background-image: url(extras/new_logo_symbol_25.png);	
+}
+#rangeFeaturePlotTableCloud{
+	max-height:600px;
+	overflow: auto;
+}
+//tr.toPNGButton{
+//	display:none;
+//}
+
+hr.dottedline {
+//	display: none;
+//	background-color: transparent;
+//	color: transparent;
+//	height: 2px;
+	background-color: #5B5B4B;
+	border-top: 1px solid #82826A;
+	border-bottom: 1px solid #FFFFF0;
+	border-left: 0;
+	border-right: 0;
+	color: #5B5B4B;
+	height: 3px;
+	margin: 1em 2px 1em 2px;
+}
+hr.dottedlineTransparent {
+//	display: none;
+	background-color: transparent;
+	color: transparent;
+	height: 2px;
+//	background-color: #5B5B4B;
+//	border-top: 1px solid #82826A;
+//	border-bottom: 1px solid #FFFFF0;
+//	border-left: 0;
+//	border-right: 0;
+//	color: #5B5B4B;
+//	height: 3px;
+//	margin: 1em 2px 1em 2px;
+}
+hr.menuSeparator {
+	background-color: #5B5B4B;
+	border-top: 2px solid #82826A;
+	border-bottom: 4px solid #FFFFF0;
+	border-left: 0;
+	border-right: 0;
+	height: 8px;
+	margin: 0.5em 0em 0.5em 0em;
+}
+
+.ui-icon-closethick, .ui-icon-play, .ui-icon-tag, .ui-icon-cancel,
+.ui-icon-zoomin, .ui-icon-plusthick, .ui-icon-minusthick,
+.ui-icon-arrowthickstop-1-s, .ui-icon-newwin,
+.ui-icon-arrowthick-2-e-w, .ui-icon-arrowreturnthick-1-n {
+	cursor: pointer;
+}
+.tutorialMode, div.infoboxDetail{
+	color:#777777;
+}
+div.infoboxDetail p{
+	margin-top:0px;
+	margin-bottom:0px;
+}
+div.infoboxDetail p.infoboxDescription{
+	margin-top:7px;
+	margin-bottom:0px;
+}
+div.infoboxDetail .infoboxTitle{
+	margin-top:26px;
+	margin-bottom:0px;
+}
+div.infoboxDetail p h3{
+	margin-top:0px;
+	margin-bottom:0px;
+}
+div.infoboxMain {
+	width:910px;
+	//margin-top:26px;
+}
+
+.ui-icon-search, .ui-icon-plusthick, .ui-icon-minusthick, .ui-icon-circle-check {
+	margin: 0em 0.2em 0em 0em;
+}
+
+.contentFrame{
+	//padding-left:20px;
+	padding-right:20px;
+	height:95%;
+	width:100%;
+	//overflow: auto;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+
+
+.content {
+	position: relative;
+	height: 95%;	
+	width: 100%;
+	float: left;
+	overflow: auto;	
+}
+
+.rightside {	
+	overflow-y:visible;
+	overflow-x:visible;
+	position: absolute;
+	float: left;	
+	width: 70%;
+	left: 30%;
+	top: 0;
+}
+div.editableNameBox:hover
+{
+border-width:4px;
+border-style:double;
+}

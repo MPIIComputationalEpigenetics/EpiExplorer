@@ -1,0 +1,237 @@
+<html>
+<head>
+	<script type="text/javascript" src="../jQuery/js/jquery-1.4.2.min.js"></script>
+	<link href="../testIndex.css" rel="stylesheet" type="text/css" />		
+	<script type="text/javascript" src="../jQuery/js/jquery-ui-1.8.5.custom.min.js"></script>		
+	<link type="text/css" href="../jQuery/css/custom-theme/jquery-ui-1.8.5.custom.css" rel="stylesheet" />	
+	<script type="text/javascript">
+	$(function() {
+		/*function selectCast(){
+			//Hide other Bs
+			$('td.castItem b').hide();
+			$('td.castItem a').show();
+			//switch the current one to visible more
+			$(this).hide()
+			$(this).siblings("b").show()
+			//Chage the cast source
+			$('#castFrame').attr("src",$(this).siblings("input:hidden")[0].value)			
+		}
+		$('li.castItem').each(function(){			
+			var castItemText = $(this).children("div.castdescription").text();
+			var toselectCast = $('<a href="#" onclick="return false;">'+castItemText+'</a>')
+			$(this).append(toselectCast);
+			toselectCast.click(selectCast);
+			var selectedCast = $('<b>'+castItemText+'</b>');			
+			$(this).append(selectedCast);
+			$(this).children("div.castdescription").hide();
+			$(this).children("b").hide();			
+		});		
+		//$('table tr:first td:eq(1) a').click()
+		*/
+		function selectCast(){			
+			if ($(this).children('.castFrame').is(":visible")){
+				//close it
+				$(this).children('.castFrame').attr("src",'')
+				$(this).children('.castFrame').hide();
+				$(this).children('.ui-icon-minusthick').addClass("ui-icon-plusthick")
+				$(this).children('.ui-icon-minusthick').removeClass("ui-icon-minusthick")					
+			}else{
+				//close all others
+				//$('.castFrame').attr("src",'')
+				$('.castFrame').hide();
+				$(".ui-icon-minusthick").addClass("ui-icon-plusthick")
+				$(".ui-icon-minusthick").removeClass("ui-icon-minusthick")
+				//open the current one
+				$(this).children('.castFrame').show();				
+				$(this).children('.castFrame').attr("src",$(this).children("input:hidden")[0].value);							
+				$(this).children('.ui-icon-plusthick').addClass("ui-icon-minusthick")
+				$(this).children('.ui-icon-plusthick').removeClass("ui-icon-plusthick")				
+				//alert("end")
+			}
+		}
+		function openSlideshowNewWindow(event){
+			event.stopPropagation();
+			//alert($(this).parent().children("input:hidden")[0].value)
+			window.open($(this).parent().children("input:hidden")[0].value)
+		}		
+		$('div.castItem div.ui-icon-newwin').click(openSlideshowNewWindow);
+		$('div.castItem').click(selectCast);
+		//$('div.castItem:first').click();
+		
+		
+	});
+	</script>
+	<style type="text/css">
+  	body {
+    	width:100%;
+    	height:100%;
+    	overflow:auto;
+    	//padding-left:20px;
+    }
+    div.headerStyle {
+    	margin-top:26px;
+    	margin-bottom:0px;
+    	font-size:16;
+    	font-weight:700;
+    	padding-left:20px;
+    	
+    }
+    p.paragraphStyle {
+    	padding-left:20px;    	
+    	
+    }
+    .paragraphStyle{
+    	margin-top:7px;
+    }
+    ul.paragraphStyle li{
+    	margin-top:0px;
+    	margin-bottom:7px;
+    }
+    a.castdescription{
+    	float:left;    	
+    }
+    div.iconCast{
+    	float:left;
+    }
+    #topWelcomPargraph{
+    	font-weight:700;
+    	//font-size:14;
+    	width:700px;
+    	margin-top:26px;
+    	padding-left:20px;
+    	margin-bottom:7px;
+    }
+    div.castItem {
+    	cursor:pointer;
+    	padding-left:20px;
+    	width:580px;
+    	margin-bottom:7px;
+    }
+    iframe.castFrame {
+    	display:none;
+    	margin-top:13px;
+    	margin-bottom:13px;
+    }
+    div.castItem div.ui-icon-newwin {
+    	float:right;
+    }
+  </style>
+  <title>Supplementary information for EpiExplorer's manuscript</title>
+</head>
+<body>
+<p id="topWelcomPargraph">
+This web page provides supplementary information for the manuscript describing EpiExplorer.  
+</p>
+
+<div class="headerStyle">Datasets used in the paper</div>
+<ul class="tutorialMode paragraphStyle">
+<li>5hmC peaks obtained from Szulwach et al. (PLoS Genetics 2011)<br> 
+	<!--ID: d_5hmChotspotsSzulwach_777078<br-->
+	ID: d_5hmChotspotsSzulwachetal_330832 <br>
+	<!--a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsSzulwach_777078" target="_blank">Load directly into EpiExplorer</a> <br-->
+	<a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsSzulwachetal_330832" target="_blank">Load directly into EpiExplorer</a> <br>
+	<a href="http://www.ncbi.nlm.nih.gov/pubmed/21731508" target="_blank">Publication</a>, <a href="http://www.plosgenetics.org/article/fetchSingleRepresentation.action?uri=info:doi/10.1371/journal.pgen.1002154.s005" target="_blank">Publication data</a>, <a href="Szulwach_5hmC_peaks_with_scores.bed" target="_blank">Processed data</a>
+</li>
+<li>Control set for 5hmC peaks obtained from Szulwach et al.<br> 
+	<!--ID: d_5hmChotspotsSzulwach_ref_777078<br-->
+	ID: d_5hmChotspotsSzulwachetal_ref_330832<br>
+	<!--a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsSzulwach_ref_777078" target="_blank">Load directly into EpiExplorer</a> <br-->
+	<a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsSzulwachetal_ref_330832" target="_blank">Load directly into EpiExplorer</a> <br>
+</li>
+<li>5hmC regions from Stroud et al. (Genome Biology 2011)<br> 
+	<!-->ID: d_5hmChotspotsStroudetal_999437</p-->
+	ID: d_5hmChotspotsStroudetal_934736<br>
+	<!--a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsStroudetal_999437" target="_blank">Load directly into EpiExplorer</a> <br-->
+	<a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets=d_5hmChotspotsStroudetal_934736" target="_blank">Load directly into EpiExplorer</a> <br>
+	<a href="http://www.ncbi.nlm.nih.gov/sites/entrez/21689397" target="_blank">Publication</a>, Raw data (personal communication)
+</li>
+
+
+</ul>
+
+<div class="headerStyle">Supplementary slideshows</div>
+<p class="paragraphStyle" style="margin-bottom:7px;"><i>(In case the slideshows do not open from the first time, please retry or open them in a separate window via the small icon)</i></p>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Step by step guide to Figure 1</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/d/1Damao82bAB4LB1RMT-l8KP75_veD9nBLQbX_burk5d8/embed?start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Step by step guide to Figure 2</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/d/1S15zXnKqvoVws3J0UVbLuAx61DRF3b5voQdzZqszsB0/embed?start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Step by step guide to Supplementary Figure 1</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/d/1OVJdi6TwhXWVPk5Ap1Kiwlb_RCKOjhHbNKW1_iacHEY/embed?start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>	
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castdescription">Using the interface of EpiExplorer</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1p0ueg6ndnTGBsULlljB9rs6nwmoOPiOEmkxl9jauQlk&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div> 
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Exploring a custom dataset(s) in EpiExplorer</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1E-Sp3LxAPP65lxl4wmHvgBMbzEevmJcZwLZZ_nm6pSw&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Comparing two datasets side-by-side</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1B8XwiPPqm-uj5PczXHn43Q1qCN8yLWNpUO0XeXV3R08&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Saving, exporting and sharing EpiExplorer results</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1KrDId6d8PzWuUuUfgSHDyTycfq3JE3yidZvRhfyy4I4&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Privacy and confidentiality or what happens with your data when you upload it?</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>	
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=19zNekmU604AAwPG0b-cNJOVAp9O-mrhO19b7RSR3AFk&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>	
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">How to test an EpiExplorer overlap for significance using the Genomic HyperBrowser?</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>	
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1-EEgRlqbXZ8cRgaOx4pEis_Mhj1S03hESDaumpTtqpk&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">Full listing of the genomic and epigenomic annotations currently available in EpiExplorer</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/spreadsheet/pub?key=0AmGLN6XZ0HmydGNoSi1pVDRmQkg3OERURkh5N09NX1E&output=html&widget=true"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>	
+<div class="castItem">
+	<div class="ui-icon ui-icon-plusthick iconCast"></div>
+	<a href="#" onclick="return false;" class="castLink">(NEW) Utilizing epigenome annotations base genome coverage as alternative control (or introducing the bubble chart)</a><div class="ui-icon ui-icon-newwin"></div>
+	<br/>
+	<input type="hidden" value="https://docs.google.com/presentation/embed?id=1xHCFf_R6KAeMkXGlwRZmq70ymGLK486yIffJRFQ8WRk&start=false&loop=false&delayms=3000"/>
+	<iframe class="castFrame" src="" frameborder="0" width="555" height="451"></iframe>
+</div>
+
+
+
+</body>
+</html>
+
