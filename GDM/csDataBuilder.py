@@ -67,8 +67,9 @@ class CSDataBuilder:
         t = "%(path)s/%(db)s.hybrid.from-ascii.withprefixes" % {"path": self.__path, "db": self.__db}
 
         
-        if delete_intermediary and os.path.exists(t):
+        if os.path.exists(t):
             os.remove(t)
+            
         os.symlink(f, t)
 
 
