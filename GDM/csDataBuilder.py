@@ -18,7 +18,7 @@ class CSDataBuilder:
         file_path =  "%(path)s/%(db)s.hybrid.prefixes" % {"path": self.__path, "db": self.__db}
 	my_env = {}
 	my_env["LC_ALL"]="POSIX"
-        cmd = ["/bin/sort", "-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
+        cmd = ["sort", "-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
 
         sorted_file_name = file_path + ".tmp"
         sorted_file = open(sorted_file_name, "w")
@@ -34,7 +34,7 @@ class CSDataBuilder:
         
     def do_sort(self):
         file_path =  "%(path)s/%(db)s.words-unsorted.ascii" % {"path": self.__path, "db": self.__db}
-        cmd = ["/bin/sort","-S4G","-T"+settings.fastTmpFolder,"-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
+        cmd = ["sort","-S4G","-T"+settings.fastTmpFolder,"-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
 
         sorted_file = open(self.__sorted_file_path, "w")
         my_env = {}
