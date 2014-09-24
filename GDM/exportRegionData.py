@@ -25,13 +25,11 @@ def exportAllData(datasets, cgsAS):
     try:
         currentDocumentIndex = exportRegionsData(fdd,fwd,datasets,cgsAS)
         exportExtraData(fdd,fwd,datasets,cgsAS,currentDocumentIndex)
-
     except:
         #delete the temporary files and exit
-        os.unlink(fnwd)
-        os.unlink(fndd)
-        os.unlink(fnpd)
-        raise
+        #raiseException = False here, as we raise previous Exception from try below
+        rmFiles([fnwd, fndd, fnpd], False) 
+        raise                      
 
     fdd.close()
     fwd.close()
