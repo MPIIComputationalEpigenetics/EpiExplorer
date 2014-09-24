@@ -50,13 +50,15 @@ class test_utilities(unittest.TestCase):
     def test_rmFiles_absent_file(self):
       #Raises exception
       #This raises actual Exception and fails if lamda is not used???
+      #http://stackoverflow.com/questions/6103825/how-to-properly-use-unit-testings-assertraises-with-nonetype-objects
       self.assertRaises(Exception, lambda: utilities.rmFiles(["absentfile"], True))
 
       #No exception
       #This was causing failures as call to log defaults to a file which did not exist
       self.assertTrue(utilities.rmFiles(["absentfile"], False) == 0)
 
-    def test_rmFiles_
+    def test_rmFiles_success(self):
+      pass
 
 
     def tearDown(self):
