@@ -297,7 +297,7 @@ class Genes(Dataset.Dataset):
         cgsAS.setFeatureDatasetProperty(self.datasetSimpleName,"localRegionRow",currentLocalRegionRow)
         cgsAS.setFeatureDatasetProperty(self.datasetSimpleName,"localRegionCursor",dataConnections[1][1])        
         
-        log(self.datasetSimpleName+"Before annotate with bed")
+        log(self.datasetSimpleName+": Before annotate with bed")
         
         fnBed =  getRegionsCollectionName(cgsAS.datasetCollectionName,self.genome)[:-8]+".bed"
         annotatefnBed = getDatasetDataName(cgsAS.datasetCollectionName, self.genome, self.datasetSimpleName)[:-8]+".annotated"
@@ -335,7 +335,7 @@ class Genes(Dataset.Dataset):
                 rlParts = rl.strip().split("\t")
                 cgsAS.featuresDatasets[self.datasetSimpleName]["data"]["data"][int(rlParts[3])][2].append(rlParts[-3])
             f.close()
-        log(self.datasetSimpleName+"After annotate with bed")
+        log(self.datasetSimpleName+": After annotate with bed")
         
 
     
@@ -462,16 +462,17 @@ class Genes(Dataset.Dataset):
         # INTTREE -> BEDTOOLS START
         overlap_ratio = cgsAS.featuresDatasets[self.datasetSimpleName]["data"]["data"][row[0]][0]
         mindistance = cgsAS.featuresDatasets[self.datasetSimpleName]["data"]["data"][row[0]][1]                
-            
+    
         results.append((row[0],overlap_ratio, 
                         mindistance,
                          0,#strand                         
                          ""))#gene name 
         for geneName in cgsAS.featuresDatasets[self.datasetSimpleName]["data"]["data"][row[0]][2]:
-            results.append((row[0],1,
-                         0,#distance upstream 
-                         self.geneLocations[geneName][3],#strand of the gene
-                         str(geneName)))
+        
+          results.append((row[0],1,
+                          0,#distance upstream 
+                          self.geneLocations[geneName][3],#strand of the gene
+                          str(geneName)))
         
         # INTTREE -> BEDTOOLS START
 #        addedOverlapInfo = {}     

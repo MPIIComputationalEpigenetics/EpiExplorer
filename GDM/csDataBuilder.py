@@ -16,12 +16,14 @@ class CSDataBuilder:
 
     def do_prefix_sort(self):        
         file_path =  "%(path)s/%(db)s.hybrid.prefixes" % {"path": self.__path, "db": self.__db}
-        cmd = ["/usr/bin/sort", "-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
+	my_env = {}
+	my_env["LC_ALL"]="POSIX"
+        cmd = ["sort", "-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
 
         sorted_file_name = file_path + ".tmp"
         sorted_file = open(sorted_file_name, "w")
         
-        px = subprocess.Popen(cmd, stdout=sorted_file, stderr=subprocess.PIPE)
+        px = subprocess.Popen(cmd, stdout=sorted_file, stderr=subprocess.PIPE, env=my_env)
         stderr = px.communicate()                    
         sorted_file.close()
         
@@ -32,11 +34,14 @@ class CSDataBuilder:
         
     def do_sort(self):
         file_path =  "%(path)s/%(db)s.words-unsorted.ascii" % {"path": self.__path, "db": self.__db}
-        cmd = ["/usr/bin/sort","-S4G","-T"+settings.fastTmpFolder,"-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
+        cmd = ["sort","-S4G","-T"+settings.fastTmpFolder,"-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
 
         sorted_file = open(self.__sorted_file_path, "w")
-        
-        px = subprocess.Popen(cmd, stdout=sorted_file, stderr=subprocess.PIPE)
+        my_env = {}
+	my_env["LC_ALL"]="POSIX"
+
+
+        px = subprocess.Popen(cmd, stdout=sorted_file, stderr=subprocess.PIPE, env=my_env)
         stderr = px.communicate()                    
         sorted_file.close()
 
@@ -62,8 +67,9 @@ class CSDataBuilder:
         t = "%(path)s/%(db)s.hybrid.from-ascii.withprefixes" % {"path": self.__path, "db": self.__db}
 
         
-        if delete_intermediary and os.path.exists(t):
+        if os.path.exists(t):
             os.remove(t)
+            
         os.symlink(f, t)
 
 

@@ -1,6 +1,7 @@
 import os
 import os.path
-import md5
+#import md5
+import hashlib
 import numpy
 import imp
 import traceback
@@ -692,19 +693,53 @@ def retryCall(call,times,timeToSleep=0):
     raise GDMException, "Failed "+str(call)+" several times "+str(times)
             
             
+#NJ File Utils
+#Soft links could be to directories here
+#Test using type(files) eq 'Type' or isinstance(obj, type)? or try for loop?
+#Apparently not http://stackoverflow.com/questions/19684434/best-way-to-check-function-arguments-in-python
+#Don't use assert either, but raise relevant Exception e.g. TypeError or ValueError if absolutely required
+#Also issubclass(obj, class) or hasattr(var, 'attrname')
 
+
+def rmFiles(files, raiseException = False):
+  """Removes a list of files and optionally raises an Exception if it fails to unlink any of them
+
+  Args:
+    files (list|tuple): File paths.
+    raiseException (boolean, optional): Raise Exception if unlink fails. Defaults to False.
     
+  Returns:
+    int: Number of files successfully removed. 
 
-        
-#x = {"a":1, "b":2, "c":3}
-#y = {"a":10, "b":20, "c":0.1111111111111111111111111111111}
-#z = {"a":111, "b":222, "c":0.000000000000000000001}
+  Raises:
+    OSError:   If os.unlink fails and raiseException is specified
+    Exception: If any of the path are not a file or a link
+  """  
 
-#storeCoverageValues("hg19", "x", x)
-#storeCoverageValues("hg19", "y", y)
-#storeCoverageValues("hg19", "z", z)
+  rmdFiles = 0
 
-#print getCovarageValues("hg19", "x")
-#print getCovarageValues("hg19", "y")
-#print getCovarageValues("hg19", "z")
-#print getCovarageValues("hg19", "q")
+  for file in files:
+    #Test is string?
+
+    if (os.path.isfile(file) or os.path.islink(file)):
+
+      try:
+        os.unlink(file)
+        rmdFiles += 1
+      except OSError, ex:
+        msg = "Failed to unlink file:\t" + file + "\n" + ex.errno + "\t" + ex.strerr
+
+        if raiseException:
+          raise ex(msg)
+        else:
+          log(msg)
+
+    elif raiseException:
+      raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file)
+
+    else:   
+      log("Failed to remove file as path is not a file or a link or does not exist:\t" + file)
+
+
+  return rmdFiles
+
