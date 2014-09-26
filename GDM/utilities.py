@@ -496,9 +496,9 @@ def getSafeWord(word,additional=""):
 def getMainDatasetIndexFileName(datasetCollectionName):
     import sys    
     if sys.platform == "win32":
-        datasetsIndexFile = settings.windowsBaseFolder+"Datasets/win_"+datasetCollectionName+".ini"
+        datasetsIndexFile = settings.baseFolder+"Datasets/win_"+datasetCollectionName+".ini"
     else:
-        datasetsIndexFile = settings.unixBaseFolder+"Datasets/unix_"+datasetCollectionName+".ini"
+        datasetsIndexFile = settings.baseFolder+"Datasets/unix_"+datasetCollectionName+".ini"
     return datasetsIndexFile 
 
 def downloadFile(url,localFile):

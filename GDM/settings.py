@@ -4,19 +4,28 @@ import os
 import sys
 import string
 import threading
-# the base folder for windows machines (local testing)
-windowsBaseFolder = "D:/Projects/Integrated_Genome_Profile_Search_Engine/Cosgen/"
-# the base folder for unix machines (the main computational server)
-unixBaseFolder = "/TL/epigenetics2/work/completesearch/"
-# baseFodler is platform independant base folder variable
+
+#Strip these from here so we can check in safely 
+#and import from environment?
+
+# baseFolder is platform independant base folder variable
 if sys.platform == "win32":
-    baseFolder = windowsBaseFolder
-else:
-    baseFolder = unixBaseFolder
+  #for local testing
+  baseFolder = "D:/Projects/Integrated_Genome_Profile_Search_Engine/Cosgen/"
+else:     #assume unix
+  baseFolder = "/TL/epigenetics2/work/completesearch/"
+
+
+queryServerHost = "srv-13-13"
+datasetServerHost = "srv-13-13"
+datasetServerPort = 51525
+queryServerPort = 51515
+instanceServer = "test"
+
 # The log file, where much information is stored
 exportBaseFolder = "/TL/www/epiexplorer/www/pub/Datasets/"
 
-logFile = baseFolder + "CGS_full.log"
+#logFile = baseFolder + "CGS_full.log"
 logFile = "/TL/www/epiexplorer/CGS.log"
 
 # classes for the datasets that were accepted until now
@@ -41,15 +50,11 @@ CS_TIME_REPORT_TIME = 24 * 60 * 60 # daily
 allowed_chars = string.ascii_letters + string.digits + '_:'
 trans_table = string.maketrans('','')
 
-queryServerHost = "srv-13-13"
-datasetServerHost = "srv-13-13"
-datasetServerPort = 51525
-queryServerPort = 51515
-instanceServer = "test"
+
 
 wordPrefixes = {
                 #===============================================================
-                # The once used for warming up the server are added also to completeSearch to the
+                # The ones used for warming up the server are added also to completeSearch to the
                 # list of special queries in Globals.h
                 # If these constants are changed here then they need to be changed there also
                 #===============================================================
@@ -117,12 +122,6 @@ wordPrefixes = {
 
 startedServersFile = baseFolder+"Datasets/Servers/CSservers.txt"
 
-#completionServer = "/TL/epigenetics/work/completesearch/binaries/05.2010/startCompletionServer"
-#completionServer = "/TL/epigenetics/work/completesearch/binaries/12.2010/startCompletionServer"
-#completionServer = "/TL/epigenetics/work/completesearch/binaries/02.2011/startCompletionServer"
-#completionServer = "/TL/epigenetics/work/completesearch/binaries/07.2011/startCompletionServer"
-#completionServer = "/TL/epigenetics/work/completesearch/binaries/12.2011/startCompletionServer"
-#CS_CODE_DIR="/TL/epigenetics/work/completesearch/binaries/02.2011/"
 CS_CODE_DIR="/TL/epigenetics2/work/completesearch/binaries/04.2012/"
 startCompletionServer = CS_CODE_DIR+"startCompletionServer"
 buildIndex = CS_CODE_DIR + "buildIndex"
@@ -259,7 +258,7 @@ doSendMails = True
 keepWordsFiles = False
 
 webservers = {"production":"http://epiexplorer.mpi-inf.mpg.de/server.php",
-        "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
+              "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
 
 csPortsStart = 45000
 csPortsMaxNumber = 1000 
