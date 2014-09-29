@@ -1,6 +1,5 @@
 import os
 import os.path
-#import md5
 import hashlib
 import numpy
 import imp
@@ -111,7 +110,7 @@ def load_module(code_path):
 
             fin = open(code_path, 'rb')
 
-            return imp.load_source(md5.new(code_path).hexdigest(), code_path, fin)
+            return imp.load_source(hashlib.new("md5", code_path).hexdigest(), code_path, fin)
         finally:
             try: fin.close()
             except: pass
