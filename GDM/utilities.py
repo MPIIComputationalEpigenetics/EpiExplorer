@@ -20,7 +20,7 @@ class GDMValueException(Exception):
 
 class RegionsInclusionException(GDMException):
     pass
-
+voner
 class CGSInvalidFormatException(GDMException):
     pass
 
@@ -561,7 +561,7 @@ class Coverages:
             f.close();
 
     def _loadCoverageValues(self, genome):        
-        if len(self.coverages.items()) == 0:
+        if len(coverages) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.coverages = {}
             else:    
@@ -604,7 +604,7 @@ class DownloadUrls:
         f.close();
 
     def _loadUrls(self, genome):        
-        if len(self.downloadUrls.items()) == 0:
+        if len(downloadUrls) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.downloadUrls = {}
             else:    
