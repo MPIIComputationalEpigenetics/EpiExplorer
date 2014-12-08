@@ -20,7 +20,7 @@ class GDMValueException(Exception):
 
 class RegionsInclusionException(GDMException):
     pass
-voner
+
 class CGSInvalidFormatException(GDMException):
     pass
 
@@ -29,7 +29,15 @@ def log(s):
         s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))        
     else:
         s = time.strftime(settings.logTimeFormat)+ " " + str(s)
-    print s
+    
+    #NJ print should only really be done for output relevant server start up procedure
+    #all other output should just be set to log file
+    #Plus the buffering on print means we quite often get incomplete output
+    #no except here? This could print to STDOUT if we cannot print to log file
+    #trying again may cause server to hang
+    #This should simply recreate the log file if it is removed?
+    #print s
+
     settings.logSemaphore.acquire()
     try:
         f = open(settings.logFile,"a")
@@ -72,7 +80,8 @@ def log_CSEngine(s):
     else:
         s = "CSEngine "+s
     log(s)
-    
+  
+
 def getFileName(name,absName):
     if not os.path.isfile(name):
         ff = os.path.join(os.path.dirname(absName),name)
@@ -561,7 +570,7 @@ class Coverages:
             f.close();
 
     def _loadCoverageValues(self, genome):        
-        if len(coverages) == 0:
+        if len(self.coverages) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.coverages = {}
             else:    
@@ -604,7 +613,7 @@ class DownloadUrls:
         f.close();
 
     def _loadUrls(self, genome):        
-        if len(downloadUrls) == 0:
+        if len(self.downloadUrls) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.downloadUrls = {}
             else:    
