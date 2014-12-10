@@ -1083,7 +1083,21 @@ class Genes(Dataset.Dataset):
 
         #print self.binaryFile
         
-        conn = sqlite3.connect(self.binaryFile)
+        #This connection code should be moved to a base Dataset.py method
+        #which could use subclass variables to create the tables.
+        
+        try:
+          conn = sqlite3.connect(self.binaryFile)
+        except Exception as e:
+                   
+          if not e.args: 
+            e.args=('',)
+          #endif
+          #e.args[0] += "\nFailed to connect to Genes DB " + self.binaryFile  #'tuple' object does not support item assignment
+          e.args = (e.args[0] + "\nFailed to connect to Genes DB " + self.binaryFile,) + e.args[1:]
+          
+          raise
+
         try:
             #initialize the database table
             c = conn.cursor()
@@ -1105,16 +1119,15 @@ class Genes(Dataset.Dataset):
             conn.close()
         except:
             # there was an exception            
-            try:
-                #close the DB connection
+            try: #close the DB connection
                 c.close()
                 conn.close()                
             except:
-                pass
-            #delete the file
-            os.unlink(self.binaryFile)
-            #reraise the exception
-            raise 
+                pass 
+          
+            rmFiles([self.binaryFile], False) #delete the file as is is empty/corrupt
+            raise                             #reraise the exception 
+
         log(self.datasetSimpleName+": Initializing regions bed file ")
         plainBedName = self.getBedFile()+".plain"                
         fBed = open(self.getBedFile()+".plain","w")
