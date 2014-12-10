@@ -2,6 +2,7 @@ import urllib2
 
 from HTMLParser import HTMLParser
 from htmlentitydefs import name2codepoint
+from settings import baseFolder
 
 
 def processString(string):
@@ -97,7 +98,7 @@ class AntibodyVocabulary(Vocabulary):
         if fromURL:
             f = urllib2.urlopen('http://genome.ucsc.edu/cgi-bin/hgEncodeVocab?ra=encode%2Fcv.ra&type=Antibody')
         else:
-            f = file("../Datasets/Vocabulary/antibody.html")
+            f = file(baseFolder + "/Datasets/Vocabulary/antibody.html")
         data = f.read()
         self.process_data(data)
 
@@ -114,7 +115,7 @@ class CellLineVocabulary(Vocabulary):
         if fromURL:
             f = urllib2.urlopen('http://genome.ucsc.edu/cgi-bin/hgEncodeVocab?ra=encode%2Fcv.ra&type=Cell+Line')
         else:
-            f = file("../Datasets/Vocabulary/cellline.html")
+            f = file(baseFolder + "/Datasets/Vocabulary/cellline.html")
         data = f.read()
         self.process_data(data)
 
