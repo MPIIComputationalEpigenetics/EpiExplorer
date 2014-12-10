@@ -1,8 +1,12 @@
 ## @package readDataset descriptions
 # 
 # This module reads dataset descriptions and retrieves objects of type dataset for each
-from utilities import *
+
 import os.path
+import re
+
+from utilities import *
+import settings
 
 ## readDatasets
 # 
@@ -35,8 +39,26 @@ def readDataset(datasetElements):
     # read the python class that corresponds how this dataset should be handled
     if not datasetBaseDescription.has_key("datasetPythonClass"):
         raise Exception , "Error:Dataset "+datasetElements[0]+" did not define its python class in "+datasetElements[1]
+    
+    #Allow full path over-ride for plug in outside of code dir
+    #Maintain support for old relative path config ../GDM/DatasetClasses
+    #else assume non-full path is rooted in that directory
+    datasetPythonClass = datasetBaseDescription["datasetPythonClass"] 
+    fullPathMatch      = re.match(r'/.*', datasetPythonClass)     #Matches from start by default
+
+    if not fullPathMatch:
+
+      relPathMatch = re.match(r'(\.\./)+GDM/DatasetClasses/(.*)', datasetPythonClass)
+
+      if relPathMatch:
+        datasetPythonClass = relPathMatch.group(2)
+      #endif
+
+      datasetPythonClass = settings.baseFolder + "GDM/DatasetClasses/" + datasetPythonClass
+    #endif
+
     #lead the module from the file
-    pythonModuleName = getFileName(datasetBaseDescription["datasetPythonClass"],datasetElements[1])    
+    pythonModuleName = getFileName(datasetPythonClass,datasetElements[1])    
     m = load_module(pythonModuleName)
     # the class name need to start with d_
     # make an instance from the class
