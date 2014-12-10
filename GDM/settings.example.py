@@ -21,7 +21,7 @@ from settings_default import *
 instanceServer    = "test"
 queryServerHost   = "CGSQueryServer_host_name"
 datasetServerHost = "CGSDatasetServer_host_name"
-xmlprcServerHost  = "CGSServer_host_name"
+forwardServerHost  = "CGSServer_host_name"
 #These hosts will likely all be the same
 #ini file writing will only be for settings.php
 #otherwise it maybe out of date for startCGSServers
@@ -30,7 +30,7 @@ xmlprcServerHost  = "CGSServer_host_name"
 #ports hosts
 datasetServerPort = 51525
 queryServerPort   = 51515
-xmplrpcServerPort = 56572
+forwardServerPort = 56572
 
 
 #This is likely to change from a dictionary to a simple scalar
@@ -73,7 +73,7 @@ for genomeID in genomeData.keys():
   rawDataFolder[genomeID]      = workingFolder + genomeID + "_RawDatasets/"
   indexDataFolder[genomeID]    = workingFolder + genomeID + "_CSFiles/"
   # The files to contain the links to all fully processed default datasets
-  fullyProcessedDefaultDatasetsFile[genomeID] = baseFolder + "Datasets/" + genomeID + "_DefaultFullyProcessedDatasets.ini"
+  fullyProcessedDefaultDatasetsFile[genomeID] = workingFolder + genomeID + "_DefaultFullyProcessedDatasets.ini"
   # The files to contain the links to all fully processed user datasets
   fullyProcessedUserDatasetsFile[genomeID] = workingFolder + genomeID + "_UserFullyProcessedDatasets.ini"
 

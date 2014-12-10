@@ -21,7 +21,7 @@ from settings_default import *
 instanceServer    = "test"
 queryServerHost   = "srv-13-13"
 datasetServerHost = "srv-13-13"
-xmlprcServerHost  = "wks-13-15" #?
+forwardServerHost  = "wks-13-15" #?
 #These hosts will likely all be the same
 #ini file writing will only be for settings.php
 #otherwise it maybe out of date for startCGSServers
@@ -30,7 +30,7 @@ xmlprcServerHost  = "wks-13-15" #?
 #ports hosts
 datasetServerPort = 51525
 queryServerPort   = 51515
-xmplrpcServerPort = 56572
+forwardServerPort = 56572
 
 #This is likely to change from a dictionary to a simple scalar
 #with instanceServer being used for differentiation of instance code/data/config paths
