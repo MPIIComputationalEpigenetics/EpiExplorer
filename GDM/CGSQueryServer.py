@@ -33,7 +33,9 @@ import ReportManager
        
 class CGSQueryServer():
     def __init__(self):
-        log_CQS("__init__: The CGS Query XMLRPC-Server runs at host: "+str(socket.gethostname())+", port: "+str(settings.queryServerPort)+".")
+        start_msg = "__init__: Starting CGS Query XMLRPC-Server at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
+        log_CQS(start_msg)
+        print start_msg + "\nLog file:\t" + settings.logFile
         self.servers = {} 
         self.serverPorts = {}
         #This holds the information for all currently started servers
@@ -298,7 +300,6 @@ class CGSQueryServer():
         port = settings.csPortsStart + (hash(datasetName+str(time.time())) % settings.csPortsMaxNumber)
         while self.serverPorts.has_key(port):
             port += 1
-        log_CQS("startServer: ...Starting CS server responsible for "+datasetName+" on port "+str(port))
         try:            
             hibridSize = int(os.path.getsize(settings.indexDataFolder[genome]+datasetName+".hybrid")) 
             historySize = str(min(2*hibridSize,2*1024*1024*1024))
@@ -310,7 +311,9 @@ class CGSQueryServer():
         #retcode = subprocess.call(["cd", settings.indexDataFolder[genome]], shell=True)
         serverArguments = [
                            settings.startCompletionServer,# standard start                           
-                           "--locale=en_US.utf8",# the locale of the server and the text
+                           "--locale=en_US.utf8",
+                           # the locale of the server and the text. This is not related to the POSIX based sorting
+                           #Move this to settings.defaults.py?
 #                           "--normalize-words", # not sure
                            "--log-file="+datasetName+".log",# the log file, this is the standard name
                            "--port="+str(port),#the port on which the server is going to be running
@@ -325,12 +328,15 @@ class CGSQueryServer():
 #                            "-P .completesearch_"+socket.gethostname()+"_"+str(port)+".pid",# name of file containing the process id,first %s will be replaced by host name, second %s will be replaced by port.
                             datasetName+".hybrid" # the file name of the main hybrid file
                            ]
-        #print serverArguments
-#/TL/epigenetics/work/completesearch/codebase/server/startCompletionServer --locale=en_US.utf8 --normalize-words --log-file=test_user_dataset.log --port=8989 -c 1G -h 1G -q 10000 -r -m test_user_dataset.hybrid
-        #print serverArguments
-#tail -f test_user_dataset.log        
+
+        log_CQS("startServer: Starting " + datasetName + " CS instance:\t" + " ".join(serverArguments))     
 
         p = subprocess.call(serverArguments,cwd=settings.indexDataFolder[genome])
+
+        #Is this error caught? We don't really want to die here, but early exit with error log would
+        #be good. How are these errors displayed in the interface?
+        #Can we return False early to signify failure. 
+
         if not isDefault:
             self.__updateRunningUserCSServer__(datasetName)           
         self.servers[datasetName] = port
@@ -698,7 +704,8 @@ class CGSQueryServer():
             self.reportTimer = Timer(settings.CS_TIME_REPORT_TIME, self.collectAndSendReport) 
             self.reportTimer.start()
         except Exception,ex:
-            log_CQS("__init__: collectAndSendReport Error: "+str(ex))
+            log_CQS("__init__: collectAndSendReport Error: " + str(ex))
+
         log_CQS("__init__: Leave collectAndSendReport.")
     
     def finish(self):
@@ -710,11 +717,22 @@ class CGSQueryServer():
 
 if __name__ == '__main__':
     queryServer = CGSQueryServer()
-    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.queryServerHost, settings.queryServerPort), SimpleXMLRPCRequestHandler,encoding='ISO-8859-1',allow_none=True)
+    start_msg   = "Starting CGS Query ThreadedXMLRPCServer:\t" + str(settings.queryServerHost) + ":" + str(settings.queryServerPort)
+    log_CQS(start_msg)
+    print(start_msg)
+
+    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.queryServerHost, settings.queryServerPort), 
+                                                       SimpleXMLRPCRequestHandler,
+                                                       encoding='ISO-8859-1',
+                                                       allow_none=True)
     server.request_queue_size = 20
     sys.setcheckinterval(30)#default is 100
     server.register_instance(queryServer)
-    print "The CGS Query XMLRPC-Server runs at host: "+str(settings.queryServerHost)+", port: "+str(settings.queryServerPort)+"."
+
+    start_msg = "Running CGS Query ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
+    log_CQS(start_msg)
+    print(start_msg)
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:

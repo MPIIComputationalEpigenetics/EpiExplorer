@@ -28,11 +28,15 @@ from utilities import *
 
 class CGSServer:
     def __init__(self):   
-        log_CFS("__init__: The CGS Forwarder XMLRPC-Server starts at host: "+str(socket.gethostname())+".")
+        start_msg = "__init__: Starting CGS Forwarder XMLRPC-Server at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
+        log_CFS(start_msg)
+        print start_msg + "\nLogfile:\t" + settings.logFile
+
         self.queryServer = xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
         self.datasetServer = xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
         self.blockedServers = {}     
         log_CFS("__init__: end")
+
     
     def blockServer(self,serverName,serverRequestType="all"):
         log_CFS("blockServer: '"+serverName+"' type '"+serverRequestType+"'")
@@ -207,12 +211,23 @@ class CGSServer:
 if __name__ == '__main__':   
     cfsServer = CGSServer()     
     s = getForwardServer(settings.instanceServer)
-    print s
-    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer(s, SimpleXMLRPCRequestHandler)#, encoding='ISO-8859-1') #', allow_none=False)
+    start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(s[0]) + ":" + str(s[1])
+    #start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
+    log_CFS(start_msg)
+    print(start_msg)
+
+    #server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
+    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer(s, SimpleXMLRPCRequestHandler)
+                                                       #, encoding='ISO-8859-1') #', allow_none=False)
     #server.request_queue_size = 2000
     server.register_instance(cfsServer)
     #server.socket_type = socket.SOCK_STREAM
-    log_CFS("The CGS Forwarder XMLRPC-Server runs at host: "+str(s[0])+", port: "+str(s[1])+".")
+
+    #start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
+    start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(s[1])
+    log_CFS(start_msg)
+    print(start_msg)
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
