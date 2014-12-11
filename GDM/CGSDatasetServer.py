@@ -44,7 +44,9 @@ from DatasetProcessorManager import DatasetProcessorManager
 
 class CGSDatasetServer:
     def __init__(self):   
-        log_CDS("__init__: The CGS Dataset XMLRPC-Server starts at host: "+str(socket.gethostname())+", port: "+str(settings.datasetServerPort)+".")
+        start_msg = "__init__: Starting CGS Dataset XMLRPC-Server at:\t" + str(socket.gethostname())+ ":" + str(settings.datasetServerPort)
+        log_CDS(start_msg)
+        print start_msg + "\nLog file:\t" + settings.logFile
         self.queryServer = xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)     
         self.dataStorage = DataStorageServer()   
         # load default datasets and their structures
@@ -1441,12 +1443,23 @@ class CGSDatasetServer:
         return self.queuedDatasetComputations.status()      
         
 if __name__ == '__main__':   
-    datasetServer = CGSDatasetServer()     
-    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.datasetServerHost, settings.datasetServerPort), SimpleXMLRPCRequestHandler,encoding='ISO-8859-1',allow_none=True)
+    datasetServer = CGSDatasetServer()   
+    start_msg     = "Starting CGS Dataset ThreadedXMLRPCServer:\t" + str(settings.datasetServerHost) + ":" + str(settings.datasetServerPort)
+    log_CDS(start_msg)
+    print(start_msg)
+
+    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.datasetServerHost, settings.datasetServerPort), 
+                                                       SimpleXMLRPCRequestHandler, 
+                                                       encoding='ISO-8859-1', 
+                                                       allow_none=True)
     server.request_queue_size = 20
     sys.setcheckinterval(30)#default is 100
     server.register_instance(datasetServer)
-    print "The CGS Dataset XMLRPC-Server runs at host: "+str(socket.gethostname())+", port: "+str(settings.datasetServerPort)+"."
+
+    start_msg = "Running CGS Dataset ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
+    log_CDS(start_msg)
+    print(start_msg)
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:

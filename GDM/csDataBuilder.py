@@ -16,8 +16,8 @@ class CSDataBuilder:
 
     def do_prefix_sort(self):        
         file_path =  "%(path)s/%(db)s.hybrid.prefixes" % {"path": self.__path, "db": self.__db}
-	my_env = {}
-	my_env["LC_ALL"]="POSIX"
+        my_env = {}
+        my_env["LC_ALL"]="POSIX"
         cmd = ["sort", "-b", "-k1,1", "-k2,2n", "-k4,4n", file_path]
 
         sorted_file_name = file_path + ".tmp"
