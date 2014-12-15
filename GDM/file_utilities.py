@@ -22,9 +22,8 @@ def getFileName(name, abs_name):
 
     return os.path.abspath(name)
 
+# TODO change read_ini_file to use ConfigParser? Will current EpiExplorer section-less ini's be valid?
 
-
-# TODO change this to use ConfigParser? Will current EpiExplorer section-less name=value ini's be valid?
 
 def read_ini_file(file_path, raise_exception=True):
     """Reads an EpiExplorer ini/settings file and loads it into dictionary. Empty lines and lines
@@ -54,7 +53,7 @@ def read_ini_file(file_path, raise_exception=True):
             return result
 
     # Pre-compile, although this will only save the in line re cache check
-    line_re = re.compile('(.*)=(.*)')
+    line_re = re.compile('(.*)\s*=\s*(.*)')
 
     for line in f:    # Using implicit f.__iter__ method here
         line = line.strip()  # Remove flanking white space first
@@ -143,7 +142,7 @@ def rm_files(files, raise_exception=False):
                 os.unlink(file_path)
                 rmd_files += 1
             except OSError, ex:
-                ex.strerror = "Failed to unlink file:\t" + file_path + "\n" + ex.errno + "\t" + ex.strerror
+                ex.strerror += "\nFailed to unlink file:\t" + file_path + "\n" + ex.errno
 
                 if raise_exception:
                     raise
@@ -159,6 +158,8 @@ def rm_files(files, raise_exception=False):
     # endfor
 
     return rmd_files
+
+# TODO Move this to and import from system_utils.py?
 
 
 def warning(*objs):
