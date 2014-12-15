@@ -19,6 +19,23 @@ from settings_default import *
 ### EpiExplorer GDM/UserInterface Config ###
 
 instanceServer    = "test"
+queryServerHost   = "CGSQueryServer_host_name"
+datasetServerHost = "CGSDatasetServer_host_name"
+forwardServerHost  = "CGSServer_host_name"
+#These hosts will likely all be the same
+#ini file writing will only be for settings.php
+#otherwise it maybe out of date for startCGSServers
+#Although we do want to stop the previously running servers for this instance
+#so startCGSServers will need to read both to get the old ports/host and the new
+#ports hosts
+datasetServerPort = 51525
+queryServerPort   = 51515
+forwardServerPort = 56572
+
+
+#This is likely to change from a dictionary to a simple scalar
+#with instanceServer being used for differentiation of instance code/data/config paths
+webservers        = {"test":"http://your/web/server:PORT/server.php"}
 #This is where all instance specific code/data dirs should go
 instanceFolder = "/Your/Base/Work/Directory/" + instanceServer + "/"
 baseFolder     = instanceFolder + "EpiExplorer/" 
@@ -27,15 +44,11 @@ baseFolder     = instanceFolder + "EpiExplorer/"
 #baseFolder     = instanceFolder + "EpiExplorer/" 
 #And is now used in place of relative paths to standard locations, 
 #meaning the server processes can be started from anywhere, rather then the GDM dir.
+
 #baseFolder is also used by performanceMultipleJoin.py
 
-(datasetServerHost, datasetServerPort,
- queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
-
-
 #Now maintaining all data outside of code directory
-#Datasets dir has been removed from hierarchy so all logs and output dirs
+#Datasets dir has been removed from hierachy so all logs and output dirs
 #are now in same directory
 
 #Keep input data outside of the instanceFolder for use by other  EpiExplorer instances

@@ -19,18 +19,23 @@ from settings_default import *
 ### EpiExplorer GDM/UserInterface Config ###
 
 instanceServer    = "test"
+queryServerHost   = "srv-13-13"
+datasetServerHost = "srv-13-13"
+forwardServerHost  = "wks-13-15" #?
+#These hosts will likely all be the same
+#ini file writing will only be for settings.php
+#otherwise it maybe out of date for startCGSServers
+#Although we do want to stop the previously running servers for this instance
+#so startCGSServers will need to read both to get the old ports/host and the new
+#ports hosts
+datasetServerPort = 51525
+queryServerPort   = 51515
+forwardServerPort = 56572
 
-(datasetServerHost, datasetServerPort,
- queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
-
-
-
-#Web server config is independant of the back end config
-#CGSServer.py (forwardServer) no longer does a round robin to server.php to get it's own settings
-#as they are specified above
-#webservers     = {"production":"http://epiexplorer.mpi-inf.mpg.de/server.php",
-#                  "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
+#This is likely to change from a dictionary to a simple scalar
+#with instanceServer being used for differentiation of instance code/data/config paths
+webservers     = {"production":"http://epiexplorer.mpi-inf.mpg.de/server.php",
+                  "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
 
 #This is where all instance specific code/data dirs should go
 #instanceFolder = "/Your/Base/Work/Directory/" + instanceServer + "/"

@@ -210,18 +210,21 @@ class CGSServer:
 
 if __name__ == '__main__':   
     cfsServer = CGSServer()     
-    start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
+    s = getForwardServer(settings.instanceServer)
+    start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(s[0]) + ":" + str(s[1])
+    #start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
 
-    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
-                                                       SimpleXMLRPCRequestHandler)
+    #server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
+    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer(s, SimpleXMLRPCRequestHandler)
                                                        #, encoding='ISO-8859-1') #', allow_none=False)
     #server.request_queue_size = 2000
     server.register_instance(cfsServer)
     #server.socket_type = socket.SOCK_STREAM
 
-    start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
+    #start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
+    start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(s[1])
     log_CFS(start_msg)
     print(start_msg)
 
