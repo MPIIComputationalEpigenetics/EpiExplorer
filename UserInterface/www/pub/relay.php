@@ -57,7 +57,7 @@ $xmlrpc_output_options = array(
     socket_close($socket);
 
     $logxmlRequest = xmlrpc_encode_request('log_me', array("response: ".$xmlResponse.":-)"));
-    sendRequest("wks-13-15", '/', $logxmlRequest, "56572");
+    sendRequest($rpc_server, '/', $logxmlRequest, $rpc_port);
     $xmlResponse = substr($xmlResponse, strpos($xmlResponse, "\r\n\r\n") +4);     
     $xmlResponse = xmlrpc_decode($xmlResponse);
 
