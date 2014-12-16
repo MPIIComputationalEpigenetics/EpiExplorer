@@ -34,7 +34,8 @@ class CGSServer:
 
         self.queryServer = xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
         self.datasetServer = xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
-        self.blockedServers = {}     
+        self.blockedServers = {}
+        print "__init__: end"
         log_CFS("__init__: end")
 
     
@@ -224,6 +225,19 @@ if __name__ == '__main__':
     start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
+
+    # Write forwardServer.conf file here
+    fserver_file = settings.configFolder + "forwardServer.conf"
+
+    try:
+        conf_file = open(fserver_file, 'w') # truncate
+        conf_file.write("SetEnv forwardServerHost " + str(socket.gethostname()) +
+            "\nSetEnv forwardServerPort " + str(settings.forwardServerPort))
+        conf_file.close()
+        print "Wrote forwardServer config, place this outside the web document root and 'Include' it in httpd.conf:\n\t" + fserver_file
+    except IOError, e:
+        e.strerr += "Failed to write forwardServer config to:\t" + fserverFile
+        raise
 
     try:
         server.serve_forever()
