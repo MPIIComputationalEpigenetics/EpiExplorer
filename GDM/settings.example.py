@@ -21,7 +21,8 @@ from settings_default import *
 instanceServer    = "test"
 #This is where all instance specific code/data dirs should go
 instanceFolder = "/Your/Base/Work/Directory/" + instanceServer + "/"
-baseFolder     = instanceFolder + "EpiExplorer/" 
+baseFolder     = instanceFolder + "EpiExplorer/"
+configFolder   = baseFolder + "Config/"
 
 #This is expected to be root directory of the EpiExplorer code e.g.
 #baseFolder     = instanceFolder + "EpiExplorer/" 
@@ -31,7 +32,7 @@ baseFolder     = instanceFolder + "EpiExplorer/"
 
 (datasetServerHost, datasetServerPort,
  queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
+ forwardServerHost, forwardServerPort) = read_CGSServer_ini(configFolder + "CGSServers.ini")
 
 
 #Now maintaining all data outside of code directory

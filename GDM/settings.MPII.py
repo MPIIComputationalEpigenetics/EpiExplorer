@@ -20,18 +20,6 @@ from settings_default import *
 
 instanceServer    = "test"
 
-(datasetServerHost, datasetServerPort,
- queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
-
-
-
-#Web server config is independant of the back end config
-#CGSServer.py (forwardServer) no longer does a round robin to server.php to get it's own settings
-#as they are specified above
-#webservers     = {"production":"http://epiexplorer.mpi-inf.mpg.de/server.php",
-#                  "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
-
 #This is where all instance specific code/data dirs should go
 #instanceFolder = "/Your/Base/Work/Directory/" + instanceServer + "/"
 
@@ -48,6 +36,13 @@ else:     #assume unix
 #meaning the server processes can be started from anywhere, rather then the GDM dir.
 
 #baseFolder is also used by performanceMultipleJoin.py
+configFolder   = baseFolder + "Config/"
+
+(datasetServerHost, datasetServerPort,
+ queryServerHost, queryServerPort,
+ forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
+
+
 
 #Now maintaining all data outside of code directory
 #Datasets dir has been removed from hierachy so all logs and output dirs

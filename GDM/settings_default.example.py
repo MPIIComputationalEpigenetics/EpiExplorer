@@ -12,9 +12,9 @@ from file_utilities import *
 
 def read_CGSServer_ini(file_path):
     host_ports = read_ini_file(file_path)
-    return [host_ports['datasetServerHost'], host_ports['datasetServerPort'],
-            host_ports['queryServerHost'], host_ports['queryServerPort'],
-            host_ports['forwardServerHost'], host_ports['forwardServerPort']]
+    return (host_ports['datasetServerHost'], int(host_ports['datasetServerPort']),
+            host_ports['queryServerHost'],   int(host_ports['queryServerPort']),
+            host_ports['forwardServerHost'], int(host_ports['forwardServerPort']))
 
 
 # classes for the datasets that were accepted until now
