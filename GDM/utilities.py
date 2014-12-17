@@ -7,10 +7,10 @@ import imp
 import traceback
 import sys
 import shutil
-import urllib
+# import re #imported in file_utilities
+# import urllib
 
 import settings
-
 
 
 
@@ -26,20 +26,15 @@ class RegionsInclusionException(GDMException):
 class CGSInvalidFormatException(GDMException):
     pass
 
+# TODO Shouldn't this except and print to STDOUT/ERR instead?
+# Currently does nothing if it can't print to log file
+
+
 def log(s):    
     if isinstance(s,list):                
         s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))        
     else:
         s = time.strftime(settings.logTimeFormat)+ " " + str(s)
-    
-
-    #NJ print should only really be done for output reelvant server start up procedure
-    #all other output should just be set to log file
-    #Plus the buffering on print means we quite often get incomplete output
-    #no except here? This could print to STDOUT if we cannot print to log file
-    #trying again may cause server to hang
-    #This should simply recreate the log file if it is removed?
-    #print s
 
     settings.logSemaphore.acquire()
     try:
@@ -147,7 +142,7 @@ def readSettingsFile(file_name):
 def convertStrandToInt(strand):
     if strand == "+":
         return 2
-    elif strand=="-":
+    elif strand == "-":
         return 1
     else:
         return 0
@@ -619,4 +614,37 @@ def retryCall(call,times,timeToSleep=0):
                 time.sleep(timeToSleep)
     raise GDMException, "Failed "+str(call)+" several times "+str(times)
             
-    
+
+# TODO Move CGS server specific methods to cgs_base_server.py class
+# or at least genericise them and call from base class
+
+def write_pid_to_file(process_name, pid_file):
+
+    try:
+        # This assumes that only one server will be over-writing this at a time
+        # cannot r+ here to over-write specific line, as it may cause munged content if new line is shorter
+
+        pid_line = process_name + "\t" + str(os.getpid())
+        data = []
+
+        if os.path.isfile(pid_file):
+            file_obj = open(pid_file, 'r')
+            server_match = re.compile(re.escape(process_name))
+
+            for line in pid_file:
+                if server_match.match(line):
+                    data.append(pid_line)
+                else:
+                    data.append(line)
+
+            file_obj.close()
+        else:
+            data.append(pid_line)
+
+        file_obj = open(pid_file, 'w')
+        file_obj.write("\n".join(data))
+        file_obj.close()
+
+    except IOError, e:
+        # Don't raise here as this is not fatal, but will prevent startCGSServers.sh from working
+        print e.args + "\n\t" + pid_file

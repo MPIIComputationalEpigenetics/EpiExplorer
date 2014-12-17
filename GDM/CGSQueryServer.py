@@ -30,7 +30,12 @@ import CSQuery
 import CGSServerEngine
 import ReportManager
        
-       
+# Make sure STDOUT is unbuffered so the init output gets printed else all other output should be logged (with buffering)
+# This should really be done ins CGSBaseServer.py class which absorb some other common things from the other CGS servers
+# Do we need to manage file locks for threads as per logs? This assumes all prints are done before threading is launched
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+
+
 class CGSQueryServer():
     def __init__(self):
         start_msg = "__init__: Starting CGS Query XMLRPC-Server at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
@@ -732,6 +737,8 @@ if __name__ == '__main__':
     start_msg = "Running CGS Query ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
     log_CQS(start_msg)
     print(start_msg)
+
+    write_pid_to_file("CGSQueryServer.py", settings.configFolder + "CGSServers.pid.txt")
 
     try:
         server.serve_forever()

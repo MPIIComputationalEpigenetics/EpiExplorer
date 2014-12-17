@@ -142,12 +142,10 @@ def rm_files(files, raise_exception=False):
                 os.unlink(file_path)
                 rmd_files += 1
             except OSError, ex:
-                ex.strerror += "\nFailed to unlink file:\t" + file_path + "\n" + ex.errno
-
                 if raise_exception:
                     raise
                 else:
-                    warning(ex)
+                    warning("Failed to unlink file:\t" + file_path)
 
         elif raise_exception:
             raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file_path)

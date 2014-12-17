@@ -39,7 +39,13 @@ from settings import datasetClasses
 from DataStorageServer import DataStorageServer
 from DatasetProcessorManager import DatasetProcessorManager
 
-#import multiprocessing #Needs python2.6
+# import multiprocessing #Needs python2.6
+
+# Make sure STDOUT is unbuffered so the init output gets printed else all other output should be logged (with buffering)
+# This should really be done in a CGS_base_server.py class which absorbs some other common things from the other
+# CGS servers e.g. log wrapper (instead of having them in utilities)
+# Do we need to manage file locks for threads as per logs? This assumes all prints are done before threading is launched
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
 class CGSDatasetServer:
@@ -1459,6 +1465,8 @@ if __name__ == '__main__':
     start_msg = "Running CGS Dataset ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
     log_CDS(start_msg)
     print(start_msg)
+
+    write_pid_to_file("CGSDatasetServer.py", settings.configFolder + "CGSServers.pid.txt")
 
     try:
         server.serve_forever()
