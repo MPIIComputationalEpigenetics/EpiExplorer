@@ -43,7 +43,7 @@ class CGSServer:
         log_CFS("__init__: end")
 
     
-    def blockServer(self,serverName,serverRequestType="all"):
+    def blockServer(self, serverName, serverRequestType="all"):
         log_CFS("blockServer: '"+serverName+"' type '"+serverRequestType+"'")
         if serverName:
             if not self.blockedServers.has_key(serverName):        
@@ -213,17 +213,15 @@ class CGSServer:
     def stopComputation(self, datasetID):
         return self.datasetServer.stopDatasetComputation(datasetID) 
 
-if __name__ == '__main__':   
-    cfsServer = CGSServer()     
+if __name__ == '__main__':
     start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
-
     server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
                                                        SimpleXMLRPCRequestHandler)
                                                        # , encoding='ISO-8859-1') #', allow_none=False)
     # server.request_queue_size = 2000
-    server.register_instance(cfsServer)
+    server.register_instance(CGSServer())
     # server.socket_type = socket.SOCK_STREAM
 
     start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
