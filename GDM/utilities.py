@@ -7,11 +7,10 @@ import imp
 import traceback
 import sys
 import shutil
-# import re #imported in file_utilities
+import re
 # import urllib
 
 import settings
-
 
 
 class GDMException(Exception):    
@@ -623,15 +622,14 @@ def write_pid_to_file(process_name, pid_file):
     try:
         # This assumes that only one server will be over-writing this at a time
         # cannot r+ here to over-write specific line, as it may cause munged content if new line is shorter
-
         pid_line = process_name + "\t" + str(os.getpid())
         data = []
 
         if os.path.isfile(pid_file):
             file_obj = open(pid_file, 'r')
             server_match = re.compile(re.escape(process_name))
-
-            for line in pid_file:
+            
+            for line in file_obj:
                 if server_match.match(line):
                     data.append(pid_line)
                 else:
