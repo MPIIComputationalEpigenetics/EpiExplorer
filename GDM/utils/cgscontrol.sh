@@ -9,6 +9,10 @@
 # For now this is now located within the APP_INS_DIR, so this should be added to to the $PATH in init_epi_env.sh
 # TODO Add instance support, to allow this script to control multiple instances based on separated settings/config
 
+# TODO update server output tail to handle 'exited with status' error
+
+# TODO change -o to default and add a -C(ascade) option, to bounce the whole stack
+
 stopServer(){
   local server_type=$1
   local file_pid=$(getServerPID $server_type)
@@ -43,8 +47,8 @@ startServer(){
   local server_type=$1
   local out_file=${OUTPUT_DIR}/${server_type}.out
   local server_path=${APP_INS_DIR}/EpiExplorer/GDM/${server_type}.py
-  #echo -e "\nStarting $server_type..."
   echo ""
+  [ $QUIET ] && echo -e "Starting $server_type..."
 
   if [ -e $out_file ]; then
     mv $out_file ${ARCHIVE_DIR}/$(basename $out_file).$$
@@ -56,9 +60,13 @@ startServer(){
   #To maintain leading white space in read
 
   tail -n 100 -f $out_file | while read line; do
-    echo -e $line
+    [ ! $QUIET ] && echo -e $line
+
+    #Also catch existed with status error here too and exit
     [[ "$line" == "Running $server_type ThreadedXMLRPCServer"* ]] && pkill -P $$ 'tail'
   done
+
+
 
   #Check server is actually running in case it fell over before server forever
   local running_pid=$(getServerPID $server_type)
@@ -89,9 +97,10 @@ OPTIND=1
 CGSQ=
 CGSS=
 CGSD=
-ONLY_SERVER=
+CASCADE=
 ACTION=
 STOP=
+QUIET=
 SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
 #Resolves all links. Although this will not work if being sourced?
 #This also does not handle -bash being returned from $0, but tha tonly affects testing
@@ -109,17 +118,17 @@ usage="Usage:\tstartCGSServers.sh <OPTIONS>  ACTION (e.g. start, stop or restart
     -d (Control CGSDatasetServer)
     -q (Control CGSQueryServer)
     -s (Control CGSServer)
-    -o (Start only the specified server, default controls all dependant servers)
-    -O (Output directory for logs etc. default = $OUTPUT_DIR)
-    -Q (Quiet down now. Does not tee server output)"
+    -c (Cascade mode also affects dependant servers)
+    -o (Output directory for logs etc. default = $OUTPUT_DIR)
+    -Q (Quiet down now. Does not show server start up output)"
 
-while getopts ":O:dqsoQh" opt; do
+while getopts ":o:dqscQh" opt; do
   case $opt in
-    O  ) OUTPUT_DIR=$OPTARG;;
+    o  ) OUTPUT_DIR=$OPTARG;;
     d  ) CGSD=1;;
     q  ) CGSQ=1;;
     s  ) CGSS=1;;
-    o  ) ONLY_SERVER=1;;
+    c  ) CASCADE=1;;
     Q  ) QUIET=1;;
     h  ) echo -e $usage; exit 0;;
     \? ) echo -e "Unrecognized option\n$usage"; exit 1;;
@@ -162,12 +171,12 @@ ARCHIVE_DIR="${OUTPUT_DIR}/log_archive"
 
 if [ $CGSD ]; then
   stopServer CGSDatasetServer
-  [ ! $ONLY_SERVER ] && CGSQ=1;
+  [ $CASCADE ] && CGSQ=1;
 fi
 
 if [ $CGSQ ]; then
   stopServer CGSQueryServer
-  [ ! $ONLY_SERVER ] && CGSS=1;
+  [ $CASCADE ] && CGSS=1;
 fi
 
 [ $CGSS ] && stopServer CGSServer
