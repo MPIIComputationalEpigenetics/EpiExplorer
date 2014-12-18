@@ -628,12 +628,17 @@ def write_pid_to_file(process_name, pid_file):
         if os.path.isfile(pid_file):
             file_obj = open(pid_file, 'r')
             server_match = re.compile(re.escape(process_name))
-            
+            seen_server = False
+
             for line in file_obj:
                 if server_match.match(line):
                     data.append(pid_line)
+                    seen_server = True
                 else:
                     data.append(line)
+
+            if not seen_server:
+                data.append(pid_line)
 
             file_obj.close()
         else:
@@ -644,5 +649,5 @@ def write_pid_to_file(process_name, pid_file):
         file_obj.close()
 
     except IOError, e:
-        # Don't raise here as this is not fatal, but will prevent startCGSServers.sh from working
+        # Don't raise here as this is not fatal, but will prevent cgscontrol.sh from working
         print e.args + "\n\t" + pid_file
