@@ -214,7 +214,7 @@ class CGSServer:
         return self.datasetServer.stopDatasetComputation(datasetID) 
 
 if __name__ == '__main__':
-    start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
+    start_msg = "Starting CGSServer ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
     server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
@@ -224,7 +224,7 @@ if __name__ == '__main__':
     server.register_instance(CGSServer())
     # server.socket_type = socket.SOCK_STREAM
 
-    start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
+    start_msg = "Running CGSServer ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
 

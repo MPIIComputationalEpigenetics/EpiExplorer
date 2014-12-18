@@ -721,7 +721,7 @@ class CGSQueryServer():
         self.csManager.cancel()
 
 if __name__ == '__main__':
-    start_msg = "Starting CGS Query ThreadedXMLRPCServer:\t" + str(settings.queryServerHost) + ":" + str(settings.queryServerPort)
+    start_msg = "Starting CGSQueryServer ThreadedXMLRPCServer:\t" + str(settings.queryServerHost) + ":" + str(settings.queryServerPort)
     log_CQS(start_msg)
     print(start_msg)
     server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.queryServerHost, settings.queryServerPort), 
@@ -732,7 +732,7 @@ if __name__ == '__main__':
     sys.setcheckinterval(30)#default is 100
     queryServer = CGSQueryServer()
     server.register_instance(queryServer)
-    start_msg = "Running CGS Query ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
+    start_msg = "Running CGSQueryServer ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.queryServerPort)
     log_CQS(start_msg)
     print(start_msg)
     write_pid_to_file("CGSQueryServer.py", settings.configFolder + "CGSServers.pid.txt")
