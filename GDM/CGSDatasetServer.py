@@ -1459,7 +1459,7 @@ if __name__ == '__main__':
     server.request_queue_size = 20
     sys.setcheckinterval(30)#default is 100
     server.register_instance(CGSDatasetServer())
-    start_msg = "Running CGSDatasetSever ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
+    start_msg = "Running CGSDatasetServer ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
     log_CDS(start_msg)
     print(start_msg)
     write_pid_to_file("CGSDatasetServer.py", settings.configFolder + "CGSServers.pid.txt")

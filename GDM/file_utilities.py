@@ -53,7 +53,7 @@ def read_ini_file(file_path, raise_exception=True):
             return result
 
     # Pre-compile, although this will only save the in line re cache check
-    line_re = re.compile('(.*)\s*=\s*(.*)')
+    line_re = re.compile('([^\s]+)\s*=\s*(.*)')
 
     for line in f:    # Using implicit f.__iter__ method here
         line = line.strip()  # Remove flanking white space first
