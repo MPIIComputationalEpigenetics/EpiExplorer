@@ -38,11 +38,12 @@ else:     #assume unix
 #baseFolder is also used by performanceMultipleJoin.py
 configFolder   = baseFolder + "Config/"
 
-(datasetServerHost, datasetServerPort,
- queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(baseFolder + "Config/CGSServers.ini")
-
-
+forwardServerHost="wks-13-15"
+forwardServerPort=56572
+datasetServerHost="srv-13-13"
+datasetServerPort=51525
+queryServerHost="srv-13-13"
+queryServerPort=51515
 
 #Now maintaining all data outside of code directory
 #Datasets dir has been removed from hierachy so all logs and output dirs

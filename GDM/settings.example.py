@@ -30,9 +30,12 @@ configFolder   = baseFolder + "Config/"
 #meaning the server processes can be started from anywhere, rather then the GDM dir.
 #baseFolder is also used by performanceMultipleJoin.py
 
-(datasetServerHost, datasetServerPort,
- queryServerHost, queryServerPort,
- forwardServerHost, forwardServerPort) = read_CGSServer_ini(configFolder + "CGSServers.ini")
+forwardServerHost="your_CGSServerHost""
+forwardServerPort=56572
+datasetServerHost="your_CGSDatasetServerHost"
+datasetServerPort=51525
+queryServerHost="your_CGSQueryServerHost
+queryServerPort=51515
 
 
 #Now maintaining all data outside of code directory
