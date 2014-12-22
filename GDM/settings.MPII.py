@@ -19,23 +19,6 @@ from settings_default import *
 ### EpiExplorer GDM/UserInterface Config ###
 
 instanceServer    = "test"
-queryServerHost   = "srv-13-13"
-datasetServerHost = "srv-13-13"
-forwardServerHost  = "wks-13-15" #?
-#These hosts will likely all be the same
-#ini file writing will only be for settings.php
-#otherwise it maybe out of date for startCGSServers
-#Although we do want to stop the previously running servers for this instance
-#so startCGSServers will need to read both to get the old ports/host and the new
-#ports hosts
-datasetServerPort = 51525
-queryServerPort   = 51515
-forwardServerPort = 56572
-
-#This is likely to change from a dictionary to a simple scalar
-#with instanceServer being used for differentiation of instance code/data/config paths
-webservers     = {"production":"http://epiexplorer.mpi-inf.mpg.de/server.php",
-                  "test":"http://moebius.ag3.mpi-sb.mpg.de/epiexplorer/server.php"}
 
 #This is where all instance specific code/data dirs should go
 #instanceFolder = "/Your/Base/Work/Directory/" + instanceServer + "/"
@@ -53,6 +36,14 @@ else:     #assume unix
 #meaning the server processes can be started from anywhere, rather then the GDM dir.
 
 #baseFolder is also used by performanceMultipleJoin.py
+configFolder   = baseFolder + "Config/"
+
+forwardServerHost="wks-13-15"
+forwardServerPort=56572
+datasetServerHost="srv-13-13"
+datasetServerPort=51525
+queryServerHost="srv-13-13"
+queryServerPort=51515
 
 #Now maintaining all data outside of code directory
 #Datasets dir has been removed from hierachy so all logs and output dirs

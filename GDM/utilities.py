@@ -1,4 +1,3 @@
-import os
 import os.path
 import hashlib
 import numpy
@@ -6,10 +5,9 @@ import imp
 import traceback
 import sys
 import shutil
-import urllib
+import re
 
 import settings
-import time
 
 
 class GDMException(Exception):    
@@ -24,19 +22,15 @@ class RegionsInclusionException(GDMException):
 class CGSInvalidFormatException(GDMException):
     pass
 
+# TODO Shouldn't this except and print to STDOUT/ERR instead?
+# Currently does nothing if it can't print to log file
+
+
 def log(s):    
     if isinstance(s,list):                
         s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))        
     else:
         s = time.strftime(settings.logTimeFormat)+ " " + str(s)
-    
-    #NJ print should only really be done for output relevant server start up procedure
-    #all other output should just be set to log file
-    #Plus the buffering on print means we quite often get incomplete output
-    #no except here? This could print to STDOUT if we cannot print to log file
-    #trying again may cause server to hang
-    #This should simply recreate the log file if it is removed?
-    #print s
 
     settings.logSemaphore.acquire()
     try:
@@ -82,15 +76,6 @@ def log_CSEngine(s):
     log(s)
   
 
-def getFileName(name,absName):
-    if not os.path.isfile(name):
-        ff = os.path.join(os.path.dirname(absName),name)
-        if not os.path.isfile(ff):
-            raise Exception, "Error: No valid file name from "+name+" and " +absName
-        name = ff
-    return os.path.abspath(name)
-
-
 def load_dataset_subclass(code_path,otherClasses):
     if False:
         completeCode = ""
@@ -129,41 +114,36 @@ def load_module(code_path):
     except:
         traceback.print_exc(file = sys.stderr)
         raise
-## readSettingsFile
-# 
-# Reads an ini settings file and loads it into dictionary
-def readSettingsFile(fileName):
-    
-    ## Format of the dataset index file
-    # datasetName=datasetfile
-    # where datasetfile is the file describing the dataset
+
+def readSettingsFile(file_name):
+    """Wrapper method to read_ini_file to provide log output should a file be absent
+
+    Args:
+      file_name (str): File path
+
+    Returns:
+      dict: Key value pairs parsed from ini file, or empty dictionary if file is absent
+
+    Raises:
+      Nothing
+    """
     result = {}
-    if not os.path.isfile(fileName):
-        log(["Settings file",fileName,"does not exist!"])        
+
+    if not os.path.isfile(file_name):
+        log("Settings file" + file_name + "does not exist!")
         return result
-    f = open(fileName)
-    line = f.readline()    
-    while line:
-        if line[0] != '#':
-            if len(line.strip())> 0:
-                lineParts = line.strip().split("=") 
-                lineParts = map(lambda x:x.strip(),lineParts)
-                if len(lineParts) < 2:
-                    raise Exception, "Error:Invalid line "+line+" in "+fileName
-                if len(lineParts) == 2:
-                    result[lineParts[0]] = lineParts[1]
-                else:
-                    result[lineParts[0]] = "=".join(lineParts[1:])
-        line = f.readline() 
-    f.close()
-    return result    
+
+    return read_ini_file(file_name)
+
 def convertStrandToInt(strand):
     if strand == "+":
         return 2
-    elif strand=="-":
+    elif strand == "-":
         return 1
     else:
         return 0
+
+
 def convertIntToStrand(strand):
     if strand == 2:
         return "+"
@@ -171,6 +151,8 @@ def convertIntToStrand(strand):
         return "-"
     else:
         return "."
+
+
 def convertChromToInt(genome,chr):
     chr = chr.strip()
     if isinstance(chr,int):
@@ -178,25 +160,8 @@ def convertChromToInt(genome,chr):
     try:
         return settings.genomeChromToInt[genome][str(chr)]
     except:
-        raise GDMException, "Invalid chromosome string '"+chr+"' for  "+genome + str(settings.genomeChromToInt[genome].keys())
-
-# MOVED THE CASES TO settings.genomeChromToInt
-#def convertChromToInt(genome,chr):
-#    if isinstance(chr,int):
-#        return chr
-#    
-#    if len(chr) > 3:
-#        chr = chr[3:]    
-#    try:    
-#        chr = int(chr)       
-#    except:
-#       if chr[0] == "X":
-#           return 23
-#       elif chr[0] == "Y":
-#           return 24
-#       else:
-#           raise GDMException, chr  
-#    return chr
+        raise GDMException("Invalid chromosome string '" + chr + "' for  " + genome +
+                           str(settings.genomeChromToInt[genome].keys()))
 
 
 def convertIntToChrom(genome,chr):
@@ -207,18 +172,6 @@ def convertIntToChrom(genome,chr):
     except:
         raise GDMException, "Invalid chromosome number '"+chr+"' for "+genome
 
-# MOVED THE CASES TO settings.genomeIntToChrom
-#def convertIntToChrom(genome,chr):
-#    if isinstance(chr,str):
-#        return chr
-#    if chr < 23:
-#        return "chr"+str(chr)
-#    elif  chr == 23:
-#        return "chrX"
-#    elif  chr == 24:
-#        return "chrY"
-#    else:
-#        raise Exception
 
 def getRegionsCollectionName(datasetCollectionName,genome):
     return settings.rawDataFolder[genome]+datasetCollectionName+"_regions.sqlite3"
@@ -372,10 +325,6 @@ def getFastTmpCollectionFolder(datasetCollectionName):
 def getCompleteSearchDirectory(genome):
     return settings.indexDataFolder[genome]
 
-def mkdir(path):
-    if not os.path.isdir(path):
-        print "Mkdir",path
-        os.mkdir(path)
         
 def getCompleteSearchDocumentsWordsFile(datasetCollectionName,genome):
     path = getFastTmpCollectionFolder(datasetCollectionName)
@@ -415,18 +364,6 @@ def getCompleteSearchFinalPrefixesFile(datasetCollectionName,genome):
     return path+datasetCollectionName+".hybrid.prefixes"
     #return settings.indexDataFolder[genome]+datasetCollectionName+".hybrid.prefixes"
 
-def line_count(filename):
-    f = open(filename)                  
-    lines = 0
-    buf_size = 1024 * 1024
-    read_f = f.read # loop optimization
-
-    buf = read_f(buf_size)
-    while buf:
-        lines += buf.count('\n')
-        buf = read_f(buf_size)
-    f.close()
-    return lines
 
 def getCorrectedCoordinates(genome,chr,start,stop):
     if start > stop:
@@ -509,17 +446,6 @@ def getMainDatasetIndexFileName(datasetCollectionName):
         datasetsIndexFile = settings.baseFolder+"Datasets/unix_"+datasetCollectionName+".ini"
     return datasetsIndexFile 
 
-def downloadFile(url,localFile):
-    import os.path
-    if os.path.isfile(localFile):
-        raise Exception, "Error: File already exists "+localFile
-    from urllib import FancyURLopener
-
-    # a special opener to simulate firefox queries
-    class MyOpener(FancyURLopener):
-        version = 'Mozilla/5.0'
-    myopener = MyOpener()
-    myopener.retrieve(url, localFile)
     
 def toTermWordScore(numberOfGenes,base):
     # The idea of this score is to make categories with base or less genes to have the maximum score
@@ -659,11 +585,6 @@ def getDatasetStatusAsText(activeStep,activeStepDetailedStatus = ""):
             status[i] = '<p style="color:grey">'+status[i]+'</p>'
     return "\n".join(status)
 
-def fileTimeStr(f):
-    fileTime = os.path.getctime(f)
-    t = time.gmtime(fileTime)
-    s = time.strftime("%d %b %Y", t)
-    return s
 
 def moveTmpIndexFilesToIndexFolder(datasetCollectionName,genome):
     fastTmpDir = getFastTmpCollectionFolder(datasetCollectionName)
@@ -674,17 +595,6 @@ def moveTmpIndexFilesToIndexFolder(datasetCollectionName,genome):
         if os.path.isfile(fastTmpDir+fileName):
             shutil.move(fastTmpDir+fileName, completeSearchDir+fileName)
 
-__servers = {}
-def getForwardServer(name):
-    if __servers.has_key(name):
-        return __servers[name]
-
-    u = urllib.urlopen(settings.webservers[name])
-    line = u.read()
-    s = line.split(":")
-    s = (s[0], int(s[1]))
-    __servers[name] = s
-    return s
 
 def retryCall(call,times,timeToSleep=0):
     ex = GDMException()
@@ -700,54 +610,200 @@ def retryCall(call,times,timeToSleep=0):
                 time.sleep(timeToSleep)
     raise GDMException, "Failed "+str(call)+" several times "+str(times)
             
-            
-#NJ File Utils
-#Soft links could be to directories here
-#Test using type(files) eq 'Type' or isinstance(obj, type)? or try for loop?
-#Apparently not http://stackoverflow.com/questions/19684434/best-way-to-check-function-arguments-in-python
-#Don't use assert either, but raise relevant Exception e.g. TypeError or ValueError if absolutely required
-#Also issubclass(obj, class) or hasattr(var, 'attrname')
 
+# TODO Move CGS server specific methods to cgs_base_server.py class
+# or at least genericise them and call from base class
 
-def rmFiles(files, raiseException = False):
-  """Removes a list of files and optionally raises an Exception if it fails to unlink any of them
+def write_pid_to_file(process_name, pid_file):
 
-  Args:
-    files (list|tuple): File paths.
-    raiseException (boolean, optional): Raise Exception if unlink fails. Defaults to False.
-    
-  Returns:
-    int: Number of files successfully removed. 
+    try:
+        # This assumes that only one server will be over-writing this at a time
+        # cannot r+ here to over-write specific line, as it may cause munged content if new line is shorter
+        pid_line = process_name + "\t" + str(os.getpid())
+        data = []
 
-  Raises:
-    OSError:   If os.unlink fails and raiseException is specified
-    Exception: If any of the path are not a file or a link
-  """  
+        if os.path.isfile(pid_file):
+            file_obj = open(pid_file, 'r')
+            server_match = re.compile(re.escape(process_name))
+            seen_server = False
 
-  rmdFiles = 0
+            for line in file_obj:
+                if server_match.match(line):
+                    data.append(pid_line)
+                    seen_server = True
+                else:
+                    data.append(line)
 
-  for file in files:
-    #Test is string?
+            if not seen_server:
+                data.append(pid_line)
 
-    if (os.path.isfile(file) or os.path.islink(file)):
-
-      try:
-        os.unlink(file)
-        rmdFiles += 1
-      except OSError, ex:
-        msg = "Failed to unlink file:\t" + file + "\n" + ex.errno + "\t" + ex.strerr
-
-        if raiseException:
-          raise ex(msg)
+            file_obj.close()
         else:
-          log(msg)
+            data.append(pid_line)
 
-    elif raiseException:
-      raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file)
+        file_obj = open(pid_file, 'w')
+        file_obj.write("\n".join(data))
+        file_obj.close()
 
-    else:   
-      log("Failed to remove file as path is not a file or a link or does not exist:\t" + file)
+    except IOError, e:
+        # Don't raise here as this is not fatal, but will prevent cgscontrol.sh from working
+        print e.args + "\n\t" + pid_file
 
 
-  return rmdFiles
 
+# Potentially move to and: from file_utilities import *
+# This was originally required when setting_default.py used read_ini_file
+# which cause a circular import dependency. Although this has now been removed.
+
+def getFileName(name, abs_name):
+    if not os.path.isfile(name):
+        ff = os.path.join(os.path.dirname(abs_name), name)
+
+        if not os.path.isfile(ff):
+            raise Exception("Error: No valid file name from " + name + " and " + abs_name)
+
+        name = ff
+
+    return os.path.abspath(name)
+
+# TODO change read_ini_file to use ConfigParser? Will current EpiExplorer section-less ini's be valid?
+
+
+def read_ini_file(file_path, raise_exception=True):
+    """Reads an EpiExplorer ini/settings file and loads it into dictionary. Empty lines and lines
+    beginning with # or ; will be ignored
+
+    Args:
+      file_name (str): File path
+      raiseException (boolean, optional): Raise Exception if unlink fails. Defaults to True.
+
+    Returns:
+      dict: Key value pairs parsed from ini file
+
+    Raises:
+      IOError:   If file open fails
+      Exception: If invalid line found
+    """
+    result = {}
+
+    try:
+        f = open(file_path)
+    except IOError, e:
+
+        if raise_exception:
+            raise
+        else:
+            warning(e)
+            return result
+
+    # Pre-compile, although this will only save the in line re cache check
+    line_re = re.compile('([^\s]+)\s*=\s*(.*)')
+
+    for line in f:    # Using implicit f.__iter__ method here
+        line = line.strip()  # Remove flanking white space first
+
+        if line and not (line.startswith("#") or line.startswith(";")):
+            line_match = line_re.match(line)
+
+            if line_match:
+                result[line_match.group(1)] = line_match.group(2)
+            else:
+                raise Exception("Found invalid line in " + file_path + "\nLine:\t" + line)
+    f.close()
+    return result
+
+
+def mkdir(path):
+    if not os.path.isdir(path):
+        print("Mkdir", path)
+        os.mkdir(path)
+
+
+def line_count(file_name):
+    f = open(file_name)
+    lines = 0
+    buf_size = 1024 * 1024
+    read_f = f.read  # loop optimization
+    buf = read_f(buf_size)
+
+    while buf:
+        lines += buf.count('\n')
+        buf = read_f(buf_size)
+
+    f.close()
+    return lines
+
+
+def downloadFile(url, local_file):
+    if os.path.isfile(local_file):
+        raise Exception("Error: File already exists " + local_file)
+
+    from urllib import FancyURLopener
+
+    class MyOpener(FancyURLopener):  # a special opener to simulate firefox queries
+        version = 'Mozilla/5.0'
+
+    myopener = MyOpener()
+    myopener.retrieve(url, local_file)
+
+
+def fileTimeStr(f):
+    file_time = os.path.getctime(f)
+    t = time.gmtime(file_time)
+    s = time.strftime("%d %b %Y", t)
+    return s
+
+
+# Soft links could be to directories here
+# Test using type(files) eq 'Type' or isinstance(obj, type)? or try for loop?
+# Apparently not http://stackoverflow.com/questions/19684434/best-way-to-check-function-arguments-in-python
+# Don't use assert either, but raise relevant Exception e.g. TypeError or ValueError if absolutely required
+# Also issubclass(obj, class) or hasattr(var, 'attrname')
+
+
+def rm_files(files, raise_exception=False):
+    """Removes a list of files and optionally raises an Exception if it fails to unlink any of them
+
+    Args:
+      files (list|tuple): File paths.
+      raiseException (boolean, optional): Raise Exception if unlink fails. Defaults to False.
+
+    Returns:
+      int: Number of files successfully removed.
+
+    Raises:
+      OSError:   If os.unlink fails and raiseException is specified
+      Exception: If any of the path are not a file or a link
+    """
+
+    rmd_files = 0
+
+    for file_path in files:
+
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+
+            try:
+                os.unlink(file_path)
+                rmd_files += 1
+            except OSError, ex:
+                if raise_exception:
+                    raise
+                else:
+                    warning("Failed to unlink file:\t" + file_path)
+
+        elif raise_exception:
+            raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file_path)
+
+        else:
+            warning("Failed to remove file as path is not a file or a link or does not exist:\t" + file_path)
+        # endif
+    # endfor
+
+    return rmd_files
+
+
+# TODO Move this to and import from system_utils.py?
+
+
+def warning(*objs):
+    print("WARNING: ", *objs, file=sys.stderr)

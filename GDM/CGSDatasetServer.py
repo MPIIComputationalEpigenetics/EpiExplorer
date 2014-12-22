@@ -39,7 +39,13 @@ from settings import datasetClasses
 from DataStorageServer import DataStorageServer
 from DatasetProcessorManager import DatasetProcessorManager
 
-#import multiprocessing #Needs python2.6
+# import multiprocessing #Needs python2.6
+
+# Make sure STDOUT is unbuffered so the init output gets printed else all other output should be logged (with buffering)
+# This should really be done in a CGS_base_server.py class which absorbs some other common things from the other
+# CGS servers e.g. log wrapper (instead of having them in utilities)
+# Do we need to manage file locks for threads as per logs? This assumes all prints are done before threading is launched
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
 class CGSDatasetServer:
@@ -1442,23 +1448,21 @@ class CGSDatasetServer:
     def getDatasetQueueStatus(self):
         return self.queuedDatasetComputations.status()      
         
-if __name__ == '__main__':   
-    datasetServer = CGSDatasetServer()   
-    start_msg     = "Starting CGS Dataset ThreadedXMLRPCServer:\t" + str(settings.datasetServerHost) + ":" + str(settings.datasetServerPort)
+if __name__ == '__main__':
+    start_msg     = "Starting CGSDatasetServer ThreadedXMLRPCServer:\t" + str(settings.datasetServerHost) + ":" + str(settings.datasetServerPort)
     log_CDS(start_msg)
     print(start_msg)
-
     server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.datasetServerHost, settings.datasetServerPort), 
                                                        SimpleXMLRPCRequestHandler, 
                                                        encoding='ISO-8859-1', 
                                                        allow_none=True)
     server.request_queue_size = 20
     sys.setcheckinterval(30)#default is 100
-    server.register_instance(datasetServer)
-
-    start_msg = "Running CGS Dataset ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
+    server.register_instance(CGSDatasetServer())
+    start_msg = "Running CGSDatasetServer ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.datasetServerPort)
     log_CDS(start_msg)
     print(start_msg)
+    write_pid_to_file("CGSDatasetServer.py", settings.configFolder + "CGSServers.pid.txt")
 
     try:
         server.serve_forever()

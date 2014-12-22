@@ -7,23 +7,27 @@
 """ 
 
 
+# from threading import *
+from utilities import *
+# from random import randint
+from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler  # ,SimpleXMLRPCServer
+
 import ThreadedXMLRPCServer
-from SimpleXMLRPCServer import SimpleXMLRPCServer,SimpleXMLRPCRequestHandler
 import xmlrpclib
-from random import randint 
-import time
-from threading import * 
+# import time
 import sys
-import logging
+# import logging
 import socket
 import os
 import os.path
-import subprocess
+# import subprocess
 import settings
-import shutil
+# import shutil
 
-from utilities import *
-
+# Make sure STDOUT is unbuffered so the init output gets printed else all other output should be logged (with buffering)
+# This should really be done ins CGSBaseServer.py class which absorb some other common things from the other CGS servers
+# Do we need to manage file locks for threads as per logs? This assumes all prints are done before threading is launched
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
 class CGSServer:
@@ -34,11 +38,12 @@ class CGSServer:
 
         self.queryServer = xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
         self.datasetServer = xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
-        self.blockedServers = {}     
+        self.blockedServers = {}
+        print "__init__: end"
         log_CFS("__init__: end")
 
     
-    def blockServer(self,serverName,serverRequestType="all"):
+    def blockServer(self, serverName, serverRequestType="all"):
         log_CFS("blockServer: '"+serverName+"' type '"+serverRequestType+"'")
         if serverName:
             if not self.blockedServers.has_key(serverName):        
@@ -208,28 +213,38 @@ class CGSServer:
     def stopComputation(self, datasetID):
         return self.datasetServer.stopDatasetComputation(datasetID) 
 
-if __name__ == '__main__':   
-    cfsServer = CGSServer()     
-    s = getForwardServer(settings.instanceServer)
-    start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(s[0]) + ":" + str(s[1])
-    #start_msg = "Starting CGS Forward ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
+if __name__ == '__main__':
+    start_msg = "Starting CGSServer ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
+    log_CFS(start_msg)
+    print(start_msg)
+    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
+                                                       SimpleXMLRPCRequestHandler)
+                                                       # , encoding='ISO-8859-1') #', allow_none=False)
+    # server.request_queue_size = 2000
+    server.register_instance(CGSServer())
+    # server.socket_type = socket.SOCK_STREAM
+
+    start_msg = "Running CGSServer ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
     log_CFS(start_msg)
     print(start_msg)
 
-    #server = ThreadedXMLRPCServer.ThreadedXMLRPCServer((settings.forwardServerHost, settings.forwardServerPort),
-    server = ThreadedXMLRPCServer.ThreadedXMLRPCServer(s, SimpleXMLRPCRequestHandler)
-                                                       #, encoding='ISO-8859-1') #', allow_none=False)
-    #server.request_queue_size = 2000
-    server.register_instance(cfsServer)
-    #server.socket_type = socket.SOCK_STREAM
+    write_pid_to_file("CGSServer.py", settings.configFolder + "CGSServers.pid.txt")
 
-    #start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
-    start_msg = "Running CGS Forward ThreadedXMLRPCServer at:\t" + str(socket.gethostname()) + ":" + str(s[1])
-    log_CFS(start_msg)
-    print(start_msg)
+    # Write forwardServer.conf file here
+    fserver_file = settings.configFolder + "forwardServer.conf"
+
+    try:
+        conf_file = open(fserver_file, 'w')
+        conf_file.write("SetEnv forwardServerHost " + str(socket.gethostname()) +
+                        "\nSetEnv forwardServerPort " + str(settings.forwardServerPort))
+        conf_file.close()
+        print "Wrote forwardServer config. Keep this outside the web document root and add this to httpd.conf:\n" + \
+              "\tInclude " + fserver_file
+    except IOError, e:
+        #warning("Failed to write forwardServer config to:\t" + fserver_file)
+        raise IOError(e.args[0], e.args[1] + "\n\t" + fserver_file )
 
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print "CFS Server is stopping..."
-

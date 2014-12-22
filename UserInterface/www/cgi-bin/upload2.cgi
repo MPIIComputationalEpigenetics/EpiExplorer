@@ -5,14 +5,18 @@ print "Content-Type: text/html\n\n"     # HTML is following
 import cgi
 import xmlrpclib
 import os
-import urllib
+#import urllib
 
-u = urllib.urlopen("http://epiexplorer.mpi-inf.mpg.de/server.php")
-s = u.readline()
-s = "http://" + s;
+#u = urllib.urlopen("http://epiexplorer.mpi-inf.mpg.de/server.php")
+#s = u.readline()
+#s = "http://" + s;
+s = "http://" + os.environ["forwardServerHost"] + ":" + os.environ["forwardServerPort"]
 
-#server = xmlrpclib.Server("http://infao3700:56572")
-#server = xmlrpclib.Server("janus:56572")
+# Change this to read forwardServer.ini, which should be written by CGSServer init to
+# a file in the web hierarchy, preferable not something that is publicly visible!
+
+
+
 server = xmlrpclib.Server(s)
 
 #cgi.print_environ()

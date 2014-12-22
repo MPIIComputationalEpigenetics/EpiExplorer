@@ -28,7 +28,7 @@ def exportAllData(datasets, cgsAS):
     except:
         #delete the temporary files and exit
         #raiseException = False here, as we raise previous Exception from try below
-        rmFiles([fnwd, fndd, fnpd], False) 
+        rm_files([fnwd, fndd, fnpd], False)
         raise                      
 
     fdd.close()
