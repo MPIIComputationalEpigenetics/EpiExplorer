@@ -1,4 +1,8 @@
+from __future__ import print_function  # Disable default print statement in place of function
+
+import os
 import os.path
+import time
 import hashlib
 import numpy
 import imp
@@ -188,9 +192,9 @@ def listDatabaseInfo(databaseFile):
     conn = sqlite3.connect(databaseFile)
     c = conn.cursor()
     c.execute("select * from sqlite_master")
-    print "Listing data stored in ",databaseFile
+    print("Listing data stored in ",databaseFile)
     for row in c:
-        print row
+        print(row)
     c.close()
     conn.close()
     
@@ -647,7 +651,7 @@ def write_pid_to_file(process_name, pid_file):
 
     except IOError, e:
         # Don't raise here as this is not fatal, but will prevent cgscontrol.sh from working
-        print e.args + "\n\t" + pid_file
+        print(e.args + "\n\t" + pid_file)
 
 
 
