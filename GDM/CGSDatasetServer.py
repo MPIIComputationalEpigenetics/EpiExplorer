@@ -35,7 +35,7 @@ import UserHandling
 
 from DatasetClasses import *
 from Vocabulary import *
-from settings import datasetClasses
+#from settings import datasetClasses
 from DataStorageServer import DataStorageServer
 from DatasetProcessorManager import DatasetProcessorManager
 
@@ -148,63 +148,32 @@ class CGSDatasetServer:
     
     def getCustomDatasetIniFileName(self,datasetName):
         return settings.folderForTemporaryDatasets + datasetName + ".ini"
-    
+
     def __createUserDatasetSettingsFile__(self, datasetName, regionsFile, 
 										  genome, additionalSettingsFileName,  
 										  officialName="", description="", 
 										  moreInfoLink="", computeSettings={}):
         filename = self.getCustomDatasetIniFileName(datasetName)
-        f = open(filename, "w")
-        f.write("datasetSimpleName = " + datasetName + "\n")
-        f.write("datasetWordName = " + datasetName + "\n")
-        f.write("genome = " + genome + "\n")
-        
-        
-        f.write("hasGenomicRegions = True\n")
-        f.write("regionsFiltering = \n")
-        f.write("hasFeatures = False\n")
-        f.write("datasetFrom = "+os.path.abspath(settings.downloadDataFolder[genome] + datasetName+".user")+"\n")
-        f.write("datasetOriginal = "+regionsFile+"\n")
-        f.write("chromIndex = 0\n")
-        f.write("chromStartIndex = 1\n")
-        f.write("chromEndIndex = 2\n")
-        f.write("datasetPythonClass = ../../GDM/DatasetClasses/DatasetRegions.py\n")
-        if officialName:
-            f.write("datasetOfficialName = " + officialName + "\n")
-        else:
-            f.write("datasetOfficialName = " + datasetName + "\n")
-        f.write("dataCategories = User\n")
-        f.write("datasetDescription = "+description.replace("\n"," ### ")+"\n")
-        f.write("datasetMoreInfo = "+moreInfoLink+"\n")
-        f.write("datasetType = Default\n")
-        f.write("hasBinning = True\n")
-        f.write("additionalSettingsFile = "+str(additionalSettingsFileName)+"\n")
-        for cs in ["mergeOverlaps","useScore","useStrand"]:
-            if computeSettings.has_key(cs) and computeSettings[cs]:
-            	 f.write(cs+" = True\n")
-                 if cs=="useScore":
-                     f.write("scoreIndex = 4\n")
-                 elif cs=="useStrand":
-                     f.write("strandIndex = 5\n")
-            else:
-            	 f.write(cs+" = False\n")
-        f.close()
-        self.datasetInfo[datasetName] = {
-                            "simpleName":datasetName,
-                            "officialName":(officialName or datasetName),
-                            "hasBinning":True,
-                            "genome":genome,
-                            "categories":["User"],
-                            "description":description.replace("###","\n"),
-                            "moreInfoLink":moreInfoLink,                            
-                            "numberOfRegions":0,
-                            "datasetType":"Default",
-                            "isDefault":False,
-                            "overlappingText": datasetName
-                            }
-        
-        
-        log_CDS(["__createUserDatasetSettingsFile__: Added datasetinfo for ",str(datasetName),self.datasetInfo[datasetName]["officialName"],str(genome)])
+
+        dset_info = {"simpleName":datasetName,
+                     "officialName":(officialName or datasetName),
+                     "hasBinning":True,
+                     "genome":genome,
+                     "categories":["User"],
+                     "description":description.replace("###","\n"),
+                     "moreInfoLink":moreInfoLink,
+                     "numberOfRegions":0,
+                     "datasetType":"Default",
+                     "isDefault":False,
+                     "overlappingText": datasetName
+        }
+        self.datasetInfo[datasetName] = dset_info
+
+        write_dataset_ini_file(filename, os.path.abspath(settings.downloadDataFolder[genome] + datasetName + ".user"),
+                               dset_info, regionsFile, additionalSettingsFileName, computeSettings)
+        log_CDS(["__createUserDatasetSettingsFile__: Added datasetinfo for ",
+                 str(datasetName),self.datasetInfo[datasetName]["officialName"],
+                 str(genome)])
         return filename
 
     

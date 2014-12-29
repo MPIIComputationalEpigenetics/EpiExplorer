@@ -806,6 +806,63 @@ def rm_files(files, raise_exception=False):
     return rmd_files
 
 
+# TODO Move this to server_utils.py
+
+# The defaults in here should be optional?
+# But present for clarity?
+
+# Is datasetPythonClass relative path okay here?
+
+# description has an integral ### line separator
+# Although this is currently also introducing spaces
+# readDataSetDescriptions should handle that?
+# regionsFiltering has now value?!
+
+def write_dataset_ini_file(filename, dataset_from, dset_info,
+                           regionsFile, additionalSettingsFileName, computeSettings):
+    if computeSettings is None: computeSettings = {}  # Protect against mutable default
+
+    out_string = ("datasetSimpleName = " + dset_info['simpleName'] + "\n" +
+                  "datasetWordName = " + dset_info['simpleName'] + "\n" +
+                  "genome = " + dset_info['genome'] + "\n" +
+                  "hasGenomicRegions = True\n" +
+                  "regionsFiltering = \n" +
+                  "hasFeatures = False\n" +
+                  "datasetFrom = " + dataset_from + "\n" +
+                  "datasetOriginal = " + regionsFile + "\n" +
+                  "chromIndex = 0\n" +
+                  "chromStartIndex = 1\n" +
+                  "chromEndIndex = 2\n" +
+                  "datasetPythonClass = ../../GDM/DatasetClasses/DatasetRegions.py\n" +
+                  "datasetOfficialName = " + dset_info['officialName'] +
+                  "dataCategories = User\n" +
+                  "datasetDescription = " + dset_info['description'].replace("\n", " ### ") + "\n" +
+                  "datasetMoreInfo = " + dset_info['moreInfoLink'] + "\n" +
+                  "datasetType = Default\n" +
+                  "hasBinning = True\n" +
+                  "additionalSettingsFile = " + str(additionalSettingsFileName) + "\n")
+
+    for cs in ["mergeOverlaps","useScore","useStrand"]:
+        if computeSettings.has_key(cs) and computeSettings[cs]:
+             out_string += cs + " = True\n"
+
+             if cs=="useScore":
+                 out_string += "scoreIndex = 4\n"
+             elif cs=="useStrand":
+                 out_string += "strandIndex = 5\n"
+
+        else:
+             out_string += cs + " = False\n"
+
+    f = open(filename, "w")
+    f.write(out_string)
+    f.close()
+    return
+
+
+
+
+
 # TODO Move this to and import from system_utils.py?
 
 
