@@ -1,14 +1,15 @@
 <?php
-  require_once("grab_globals.lib.php");  
-  include("xmlrpc_submit.php");
-  include("settings.php");
-  include("utils.php");
+	require_once("grab_globals.lib.php");
+  	include("xmlrpc_submit.php");
+  	include("settings.php");
+  	include("utils.php");
   
-	// This part send a request for basic information for the regions supported by the current started server
-	ob_start();
-	$xmlRequest = xmlrpc_encode_request('getStatus', array($_SERVER['SERVER_NAME'],"main"));
-	$arrayResponse = sendRequest($rpc_server, '/', $xmlRequest, $rpc_port);
+  	// This part send a request for basic information for the regions supported by the current started server
+  	ob_start();
+  	$xmlRequest = xmlrpc_encode_request('getStatus', array($_SERVER['SERVER_NAME'],"main"));
+  	$arrayResponse = sendRequest($rpc_server, '/', $xmlRequest, $rpc_port);
 	ob_end_clean();	
+
 	if($arrayResponse === "OK") {
 		//header('Content-Type: text/html'); // plain html file		
 	}else if(strlen(strstr($_SERVER['SERVER_NAME'],'epiex.mpi-inf.mpg.de')) != 0){
@@ -17,11 +18,10 @@
 		//echo "not ok $arrayResponse";	
 		if (strlen(strstr($_SERVER['SERVER_NAME'],'moebius')) == 0){
 			// Do not send mails if test servers (located on http://moebius... ) are not working
-			$to = "epiexplorer@mpi-inf.mpg.de";
  			$subject = "EpiExplorer XMLRPC Server is not working! (".date("H:i:s d.m.y")." , ".anonimizedUser().")";
  			$body = "On ".date("H:i:s d.m.y")." requested by ".$_SERVER["REMOTE_ADDR"]." (".gethostbyaddr($_SERVER["REMOTE_ADDR"])."\n"."Status:'".$arrayResponse."'\n"."More info: \n"."Server name:  ".$_SERVER['SERVER_NAME']."\n"."Request URI:  ".$_SERVER['REQUEST_URI']."\n"."Http referer:  ".$_SERVER['HTTP_REFERER']."\n";
  			
-	 		if (mail($to, $subject, $body)) {
+	 		if (mail($contact_email, $subject, $body)) {
 	   			header( 'Location: maintenance.php') ;
 	  		} else {
 	   			header( 'Location: maintenance.php') ;
@@ -29,9 +29,17 @@
 		}else{
 			header( 'Location: maintenance.php') ;
 		}
-	}  	 	
-?>
-<?php
+	}
+
+	// Define the optional twitter html
+  	$twitter_html='';
+
+ 	if(isset($twitter_handle)){
+	  	$twitter_html = "<li><a href=\"http://twitter.com/#!/$twitter_handle\" target=\"_blank\">
+		   					<img src=\"extras/twitter_newbird_blue_32.png\" class=\"menusubicon\" alt=\"Twitter\"/>Contact us via Twitter</a>
+			    		 </li>";
+  	}
+
 	if (strlen(strstr($_SERVER['SERVER_NAME'],'cosgen.bioinf')) == 0 && strlen(strstr($_SERVER['SERVER_NAME'],'epiex.mpi-inf.mpg.de')) == 0){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -495,13 +503,15 @@ $(function() {
 								<img src="extras/userecho_32.png" class="menusubicon" alt="Questions, problems, ideas"/>Questions, problems, ideas?
 							</a>						
 						</li>
-						<li>
+
+						<?php echo $twitter_html; ?>
+						<!-- <li>
 							<a href="http://twitter.com/#!/hEpiExplorer" target="_blank">
 								<img src="extras/twitter_newbird_blue_32.png" class="menusubicon" alt="Twitter"/>Contact us via Twitter
 							</a>
-						</li>
+						</li> -->
 						<li>
-							<a href="mailto:epiexplorer@mpi-inf.mpg.de">
+							<a href="mailto:<?php echo $contact_mail; ?>">
 								<img src="extras/mail-mark-unread_32.png" class="menusubicon" alt="Email"/>Contact us via email
 							</a>
 						</li>
@@ -609,7 +619,7 @@ $(function() {
 			
 		</div>
 	    
-	    <!--div class="footer ui-layout-south">Contact us via <a href="mailto:epiexplorer@mpi-inf.mpg.de">email</a>, <a href="http://twitter.com/#!/hEpiExplorer">twitter</a> or in our <a href="http://epiexplorer.userecho.com/forum/5999-feedback/">feedback forum</a>.</div--> 
+	    <!--div class="footer ui-layout-south">Contact us via <a href="mailto:<?php echo $contact_email; ?>">email</a>, <a href="http://twitter.com/#!/hEpiExplorer">twitter</a> or in our <a href="http://epiexplorer.userecho.com/forum/5999-feedback/">feedback forum</a>.</div-->
 	    	
 	    
 	</div><!-- End of rightside-->

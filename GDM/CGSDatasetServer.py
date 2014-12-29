@@ -243,7 +243,7 @@ class CGSDatasetServer:
             for featureDatasetName in featureDatasets.keys():
                 log_CDS(["__processDatasetGivenRegions__: Computing scores for",datasetName, featureDatasetName])
                 if self.queuedDatasetComputations.getComputationStatus(datasetName)[0] == -1:
-                    returnMessage = "Dataset computation was stopped by the EpiExplorer staff. Contact epiexplorer@mpi-inf.mpg.de for more info."
+                    returnMessage = "Dataset computation was stopped by the EpiExplorer staff. Contact " + settings.contact_email + " for more info."
                     self.queuedDatasetComputations.indicateComputationError(datasetName,returnMessage)
                     raise GDMException, returnMessage  
                 self.queuedDatasetComputations.indicateComputationProgress(datasetName,getDatasetStatusAsText(2,"Step 3/6: Computing annotation "+featureDatasets[featureDatasetName].datasetOfficialName+" ("+str(currentNumber)+" out of total "+str(totalAnnotationFeatures)+" annotations are completed)"))# computing
@@ -566,23 +566,31 @@ class CGSDatasetServer:
     def sendUserDatasetNotificationEmail(self, originalDatasetName, datasetName,email,errorMessage):
         if not settings.doSendMails:
             return
+
         log_CDS(["sendUserDatasetNotificationEmail: called with ",originalDatasetName, datasetName,email,errorMessage])
         sendMail = "/usr/sbin/sendmail"
         messageText = "Mime-Version: 1.0\n"
         messageText += "Content-type: text/html; charset=\"iso-8859-1\"\n"
+
         if str(email):
             messageText += "To:"+str(email)+"\n"
-        messageText += "Bcc:halachev@mpi-inf.mpg.de,albrecht@mpi-inf.mpg.de\n"
-        messageText += "From:epiexplorer@mpi-inf.mpg.de\n"
-        messageText += "Reply-to: epiexplorer@mpi-inf.mpg.de\n";
+
+        if settings.bcc_emails:
+            messageText += "Bcc:" + settings.bcc_emails + "\n"
+
+        messageText += "From:" + settings.contact_email + "\n"
+        messageText += "Reply-to:" + settings.contact_email + "\n"
+
         if errorMessage:
             messageText += "Subject: There was a problem with your EpiExplorer dataset ("+originalDatasetName+")\n"
         else:
             messageText += "Subject: Your EpiExplorer dataset ("+originalDatasetName+") is available\n"
+
         messageText += "\n"
         messageText += "<html><body>\n"
         messageText += "Dear EpiExplorer user,\n<br>"
         messageText += "\n<br>"
+
         if errorMessage:
             messageText += "There was a problem with computing your dataset.\n<br><br>" 
             messageText += "The error message is '"+errorMessage+"'.\n<br><br>"
@@ -647,9 +655,13 @@ class CGSDatasetServer:
         messageText = "Mime-Version: 1.0\n"
         messageText += "Content-type: text/html; charset=\"iso-8859-1\"\n"
         messageText += "To:"+str(email)+"\n"
-        messageText += "Bcc:halachev@mpi-inf.mpg.de,albrecht@mpi-inf.mpg.de\n"
-        messageText += "From:epiexplorer@mpi-inf.mpg.de\n"
-        messageText += "Reply-to: epiexplorer@mpi-inf.mpg.de\n";
+
+        if settings.bcc_emails:
+            messageText += "Bcc:" + settings.bcc_emails + "\n"
+
+        messageText += "From:" + settings.contact_email + "\n"
+        messageText += "Reply-to:" + settings.contact_email + "\n"
+
         if errorMessage:
             messageText += "Subject: There was a problem with the export of your EpiExplorer dataset\n"
         else:

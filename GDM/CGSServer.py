@@ -236,7 +236,8 @@ if __name__ == '__main__':
     try:
         conf_file = open(fserver_file, 'w')
         conf_file.write("SetEnv forwardServerHost " + str(socket.gethostname()) +
-                        "\nSetEnv forwardServerPort " + str(settings.forwardServerPort))
+                        "\nSetEnv forwardServerPort " + str(settings.forwardServerPort) +
+                        "\nSetEnv contact_email " + settings.contact_email)
         conf_file.close()
         print "Wrote forwardServer config. Keep this outside the web document root and add this to httpd.conf:\n" + \
               "\tInclude " + fserver_file

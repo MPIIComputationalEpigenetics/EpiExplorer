@@ -11,12 +11,10 @@
 	ob_end_clean();	
 	if($arrayResponse === "OK") {		
 	}else{
-		//echo "not ok $arrayResponse";	
-		
-		$to = "epiexplorer@mpi-inf.mpg.de";
+		//echo "not ok $arrayResponse";
  		$subject = "CGS XMLRPC Server is not working! (".date("H:i:s d.m.y")." , ".anonimizedUser().")";
  		$body = "On ".date("H:i:s d.m.y")." requested by ".anonimizedUser()."\nStatus:'".$arrayResponse."'";
- 		if (mail($to, $subject, $body)) {
+ 		if (mail($contact_email, $subject, $body)) {
    			header( 'Location: maintenance.php') ;
   		} else {
    			header( 'Location: maintenance.php') ;
