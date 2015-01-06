@@ -3,7 +3,7 @@
   	include("xmlrpc_submit.php");
   	include("settings.php");
   	include("utils.php");
-  
+
   	// This part send a request for basic information for the regions supported by the current started server
   	ob_start();
   	$xmlRequest = xmlrpc_encode_request('getStatus', array($_SERVER['SERVER_NAME'],"main"));
@@ -20,7 +20,7 @@
 			// Do not send mails if test servers (located on http://moebius... ) are not working
  			$subject = "EpiExplorer XMLRPC Server is not working! (".date("H:i:s d.m.y")." , ".anonimizedUser().")";
  			$body = "On ".date("H:i:s d.m.y")." requested by ".$_SERVER["REMOTE_ADDR"]." (".gethostbyaddr($_SERVER["REMOTE_ADDR"])."\n"."Status:'".$arrayResponse."'\n"."More info: \n"."Server name:  ".$_SERVER['SERVER_NAME']."\n"."Request URI:  ".$_SERVER['REQUEST_URI']."\n"."Http referer:  ".$_SERVER['HTTP_REFERER']."\n";
- 			
+
 	 		if (mail($contact_email, $subject, $body)) {
 	   			header( 'Location: maintenance.php') ;
 	  		} else {
@@ -505,16 +505,11 @@ $(function() {
 						</li>
 
 						<?php echo $twitter_html; ?>
-						<!-- <li>
-							<a href="http://twitter.com/#!/hEpiExplorer" target="_blank">
-								<img src="extras/twitter_newbird_blue_32.png" class="menusubicon" alt="Twitter"/>Contact us via Twitter
-							</a>
-						</li> -->
-						<li>
-							<a href="mailto:<?php echo $contact_mail; ?>">
-								<img src="extras/mail-mark-unread_32.png" class="menusubicon" alt="Email"/>Contact us via email
-							</a>
+
+						<li><a href="mailto:<?php echo $contact_email; ?>">
+								<img src="extras/mail-mark-unread_32.png" class="menusubicon" alt="Email"/>Contact us via email</a>
 						</li>
+
 						<li>
 							<a href="welcome.php" onclick="return false;" id="showWelcomePageInFrame">
 								<img src="extras/applications-education.png" class="menusubicon" alt="Slideshows"/>Slideshows
@@ -619,7 +614,7 @@ $(function() {
 			
 		</div>
 	    
-	    <!--div class="footer ui-layout-south">Contact us via <a href="mailto:<?php echo $contact_email; ?>">email</a>, <a href="http://twitter.com/#!/hEpiExplorer">twitter</a> or in our <a href="http://epiexplorer.userecho.com/forum/5999-feedback/">feedback forum</a>.</div-->
+	    <!--div class="footer ui-layout-south">Contact us via <a href="mailto:<?php echo $contact_email;?>">email</a>, <a href="http://twitter.com/#!/hEpiExplorer">twitter</a> or in our <a href="http://epiexplorer.userecho.com/forum/5999-feedback/">feedback forum</a>.</div-->
 	    	
 	    
 	</div><!-- End of rightside-->
