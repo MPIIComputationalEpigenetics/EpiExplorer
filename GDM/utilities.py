@@ -636,7 +636,7 @@ def write_pid_to_file(process_name, pid_file):
                     data.append(pid_line)
                     seen_server = True
                 else:
-                    data.append(line)
+                    data.append(line.rstrip())
 
             if not seen_server:
                 data.append(pid_line)
