@@ -170,7 +170,7 @@ while getopts ":o:dqscQh" opt; do
     s  ) CGSS=1;;
     c  ) CASCADE=1;;
     Q  ) QUIET=1;;
-    h  ) echo -e $usage; exit 0;;
+    h  ) echo -e "$usage"; exit 0;;
     \? ) echo -e "Unrecognized option\n$usage"; exit 1;;
     -  ) shift; break;; #Standard argument separator
   esac
