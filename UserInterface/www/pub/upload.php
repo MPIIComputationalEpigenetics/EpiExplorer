@@ -129,7 +129,7 @@ var alreadyUploaded = {};
 								}
 							}
 					});
-					$('#beforeUploadStatus').html('<h4 style="color:#FF0000;">Uploading...</h4><br/><img src="http://epiexplorer.mpi-inf.mpg.de/extras/ajax-loader-big.gif" alt="Processing"/>');
+					$('#beforeUploadStatus').html('<h4 style="color:#FF0000;">Uploading...</h4><br/><img src="/extras/ajax-loader-big.gif" alt="Processing"/>');
 					return true;
 				}else{
 					return false;

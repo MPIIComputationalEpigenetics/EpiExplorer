@@ -50,7 +50,10 @@
 	<link rel="SHORTCUT ICON" href="extras/new_logo_symbol_16.ico"/>
 	<link href="menu/menu.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="jQuery/js/jquery-1.4.2.min.js"></script>	
-	
+
+	<!--  Global var for commonExploreCGS.js -->
+	<script>var contact_email = <?php echo json_encode($contact_email); ?></script>
+
 	<?php 
 		// Temporary switch this idea off
 		// Somehow it messes up with global variables defined in CGSTexts.js

@@ -27,6 +27,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<link href="menu/menu.css" rel="stylesheet" type="text/css" />
+
+	<!-- Global var for commonExploreCGS.js -->
+	<script>var contact_email = <?php echo json_encode($contact_email); ?>;</script>
+
 	<script type="text/javascript" src="jQuery/js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="commonCGS.js"></script>
 	<script type="text/javascript" src="commonExploreCGS.js"></script>
