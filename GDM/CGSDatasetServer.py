@@ -1372,46 +1372,45 @@ class CGSDatasetServer:
     
 # URL to EpiExplorer processed BED data (We don't have this yet, but we'll add them to the frontend) (example, epiexplorer.mpi-inf.mpg.de/RawAnnotation/20120212/H3K4me3_GM12878.bed.gz)
 # How was it processed from EpiExplorer (Example, template, you can fill for all histones and TFBS: the regions from the current selection were intersected with the annotation bed files from UCSC. Every region that overlaps was marked and the percent of the region overlapping with peaks was computed. If a region did not overlap, the distance to the nearest peak was computed. The overlap and distance scores were computed using BEDtools.)
-    
+
     def getDatasetDescriptions(self, datasetSimpleName):
-        log_CDS(["getDatasetDescriptions called with '"+datasetSimpleName+"'"])        
-        if self.defaultDatasets.has_key(datasetSimpleName):
-            dataset = self.defaultDatasets[datasetSimpleName]                
-           
-            if dataset is None:            
-                return {}
-        
+        log_CDS(["getDatasetDescriptions called with '"+datasetSimpleName+"'"])
+        dataset = self.defaultDatasets.get(datasetSimpleName, None)
+        if dataset is None:
+            log_CDS(["datasetSimpleName '"+datasetSimpleName+"' not found."])
+            return {}
+
         result = {}
         celllines = []
         if hasattr(dataset, 'tissues'):
             celllines = dataset.tissues
             result["tissues_descriptions"] = {}
             result["tissues_details"] = {}
-            
+
         elif hasattr(dataset, 'tissue'):
             celllines = [dataset.tissue]
             result["tissues_descriptions"] = {}
             result["tissues_details"] = {}
 
-        for cellline in celllines: 
-            result["tissues_descriptions"][cellline] = self.getCellLineInfo(cellline)[2]        
+        for cellline in celllines:
+            result["tissues_descriptions"][cellline] = self.getCellLineInfo(cellline)[2]
             result["tissues_details"][cellline] = self.getCellLineInfo(cellline)[7]
-            
+
         if hasattr(dataset, 'histoneMark'):
             result["histonemark"] = dataset.histoneMark
             result["histonemark_info"] = self.getAntibodyDescription(dataset.histoneMark)
             result["histonemark_description"] = self.getAntibodyInfo(dataset.histoneMark)[3]
-            
+
         if (hasattr(dataset, "datasetWordName")):
             if dataset.datasetWordName == "bhist" or dataset.datasetWordName == "tfbs":
                 result["processed"] = "The regions from the current selection were intersected with the annotation bed files from UCSC. Every region that overlaps was marked and the percent of the region overlapping with peaks was computed. If a region did not overlap, the distance to the nearest peak was computed. The overlap and distance scores were computed using BEDtools."
-                
-        result["description"] = dataset.datasetDescription                
-        result["dataURL"] = dataset.downloadUrls        
+
+        result["description"] = dataset.datasetDescription
+        result["dataURL"] = dataset.downloadUrls
         result["data_date"] = dataset.downloadDate
-        
+
         return result
-    
+
     def recordUserLicense(self,userData):
         return UserHandling.recordUserLicense(userData)
     
