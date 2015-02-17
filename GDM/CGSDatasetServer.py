@@ -1176,6 +1176,7 @@ class CGSDatasetServer:
         log_CDS("getDatasetInfo: dataset name "+datasetSimpleName+"properties: "+str(properties))
         if self.datasetInfo.has_key(datasetSimpleName): 
             if not properties:           
+        log_CDS("getDatasetInfo: dataset name '"+datasetSimpleName+"' properties: "+str(properties))
                 return self.datasetInfo[datasetSimpleName]
             else:
                 newDatasetInfo = {}
