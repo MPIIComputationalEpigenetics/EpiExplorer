@@ -14,7 +14,8 @@ import time
 #mainFolder = os.path.abspath(os.path.dirname(__file__)+"/..")+os.sep
 #sys.path.insert(0,mainFolder)
 
-import re
+import re, warnings
+
 
 from utilities import *
 import Dataset
@@ -22,7 +23,7 @@ import IntervalArray
 # import IntervalTree
 import settings
 # import cPickle
-# import utilities
+
 
 
 # todo NJ Move a lot of this out to a bed format file, or a Dataset methods which takes the relevant bed config
@@ -172,7 +173,7 @@ class Histone(Dataset.Dataset):
 
 
     def hasAllDownloadedFiles(self):
-        # warning("In hasAllDownloadedFiles")
+        # warnings.warn("In hasAllDownloadedFiles")
 
         # TODO These 3 if blocks should be done in __init__ (possibly Dataset)
         if isinstance(self.tissues,str):
@@ -203,15 +204,16 @@ class Histone(Dataset.Dataset):
             # NJ For some reason the final datasetLocalFile in this loop is never seen by isfile and returns False?
 
             if os.path.isfile(datasetLocalFile):
-                # warning("Found:\tx" + datasetLocalFile + "x")
+                # warnings.warn("Found:\tx" + datasetLocalFile + "x")
 
                 self.downloadUrls[tissue] = datasetURL
                 self.downloadDate = fileTimeStr(datasetLocalFile)
             else:
-                warning("Not found as file:\tx" + datasetLocalFile + "x")
+                warnings.warn("Local file could not be found.\n\tSource:\t" +
+                    datasetURL+ "\n\tLocal:\t" + datasetLocalFile )
 
                 # ls_output = os.popen('ls ' + datasetLocalFile).read()
-                # warning("ls output is" + ls_output)
+                # warnings.warn("ls output is" + ls_output)
                 '''
                 items = os.path.split(datasetLocalFile)
                 for i in range(1,len(items)):
@@ -226,7 +228,7 @@ class Histone(Dataset.Dataset):
                 '''
 
                 #if os.path.exists(datasetLocalFile):
-                #    warning("But does exist")
+                #    warnings.warn("But does exist")
                 return False
 
         return True
@@ -270,7 +272,6 @@ class Histone(Dataset.Dataset):
 
         # In fact it seems like these data processing operations should be moved to a separate class,
         # as there is massive redundancy across the dataset classes
-C
 
         for tissue in self.intervalArrays.keys():
             overlapingRegions = self.intervalArrays[tissue].findTwoDimentionalWithAdditionalInfo(chrom, start, stop,cgsAS.featuresDatasets[self.datasetSimpleName]['data'][tissue])
@@ -348,7 +349,7 @@ C
                 f.close()
 
 
-                # warning("Loading data for tissue:\t" + tissue)
+                # warnings.warn"Loading data for tissue:\t" + tissue)
 
                 for line in lines:
                     try:
@@ -421,7 +422,7 @@ C
                 nc = c.fetchone()[0]
 
                 if nc == 0:
-                    warning("Skipping IntervalArray for " + tissueName)
+                    warnings.warn("Skipping IntervalArray for " + tissueName)
                     # NJ This will ultimately fail in when itertaing over the tissue in if len(data): below
                     # actually no, will just create empty lists for those tissues
                     # should prbably die here in some way? or at least warn about the absent data
