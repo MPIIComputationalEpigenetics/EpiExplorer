@@ -48,6 +48,7 @@ from DatasetProcessorManager import DatasetProcessorManager
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
+
 class CGSDatasetServer:
     def __init__(self):   
         start_msg = "__init__: Starting CGS Dataset XMLRPC-Server at:\t" + str(socket.gethostname())+ ":" + str(settings.datasetServerPort)
@@ -60,10 +61,12 @@ class CGSDatasetServer:
         self.defaultAnnotationNames = {}
         self.antibodyVocabulary = AntibodyVocabulary()
         self.cellLineVocabulary = CellLineVocabulary()
+
         for genomeID in settings.genomeData.keys():
             datasetsIndexFile = getMainDatasetIndexFileName(genomeID)                
             genomeDefaultDatasets = readDatasetDescriptions.readDatasets(datasetsIndexFile)
             self.defaultDatasets.update(genomeDefaultDatasets)
+
         self.datasetInfo = {}
         log_CDS("__init__: Default datasets read "+str(self.defaultDatasets.keys()))
         for datasetKey in self.defaultDatasets.keys():
@@ -75,7 +78,7 @@ class CGSDatasetServer:
             try:
                 if self.queryServer.hasActiveServer(dataset.datasetSimpleName):
                     datasetRegionsCount = int(self.queryServer.answerQuery(settings.wordPrefixes["region"],0,0,dataset.datasetSimpleName)[2])
-            except Exception,ex:
+            except Exception, ex:
                 log_CDS("__init__: Failed to retrieve regions count for dataset "+str(datasetKey))
                 
             self.datasetInfo[dataset.datasetSimpleName] = {
@@ -155,22 +158,50 @@ class CGSDatasetServer:
 										  moreInfoLink="", computeSettings={}):
         filename = self.getCustomDatasetIniFileName(datasetName)
 
-        dset_info = {"simpleName":datasetName,
-                     "officialName":(officialName or datasetName),
-                     "hasBinning":True,
-                     "genome":genome,
-                     "categories":["User"],
-                     "description":description.replace("###","\n"),
-                     "moreInfoLink":moreInfoLink,
-                     "numberOfRegions":0,
-                     "datasetType":"Default",
-                     "isDefault":False,
-                     "overlappingText": datasetName
+        dset_info = {'simpleName': datasetName,
+                     'officialName': (officialName or datasetName),
+                     'hasBinning': True,
+                     'genome': genome,
+                     'categories': ['User'],
+                     'description': description.replace("###","\n"),
+                     'moreInfoLink': moreInfoLink,
+                     'numberOfRegions': 0,
+                     'datasetType': "Default",
+                     'isDefault': False,
+                     'overlappingText': datasetName
         }
         self.datasetInfo[datasetName] = dset_info
 
-        write_dataset_ini_file(filename, os.path.abspath(settings.downloadDataFolder[genome] + datasetName + ".user"),
-                               dset_info, regionsFile, additionalSettingsFileName, computeSettings)
+        # Copy so we don't update self.datasetInfo
+        ini_info = dset_info.copy()
+        # Delete some that don't go in the ini file
+        del ini_info['numberOfRegions']
+        del ini_info['isDefault']
+        del ini_info['overlappingText']
+
+        # rename categories here
+
+        # Re/define some more keys
+        ini_info['datasetSimpleName'] = ini_info.pop('simpleName')
+        ini_info['datasetWordName'] = ini_info['datasetSimpleName']  # This seems at odds with normal details vs class summary naming scheme
+        ini_info['datasetOfficialName'] = ini_info.pop('officialName')
+        ini_info['dataCategories'] = ini_info.pop('categories')  # Not datasetCategories!
+        ini_info['hasGenomicRegions'] = "True"
+        ini_info['regionsFiltering'] = ''
+        ini_info['datasetFrom'] = os.path.abspath(settings.downloadDataFolder[genome] + datasetName + ".user")
+        ini_info['datasetOriginal'] = regionsFile
+        ini_info['datasetPythonClass'] = "../../GDM/DatasetClasses/DatasetRegions.py"
+        ini_info['datasetDescription'] = ini_info.pop('description')
+        ini_info['datasetMoreInfo'] = ini_info.pop('moreInfoLink')
+        ini_info['additionalSettingsFile'] = str(additionalSettingsFileName)
+        # default bed indexes
+        ini_info['chromIndex'] = 0
+        ini_info['chromStartIndex'] = 1
+        ini_info['chromEndIndex'] = 2
+        # A lot of the above defaults can probably go once some defaults support has been added
+        # to a base Dataset class
+
+        write_dataset_ini_file(filename, ini_info, computeSettings)
         log_CDS(["__createUserDatasetSettingsFile__: Added datasetinfo for ",
                  str(datasetName),self.datasetInfo[datasetName]["officialName"],
                  str(genome)])
@@ -562,7 +593,13 @@ class CGSDatasetServer:
 #            raise Exception, "This dataset was already processed!"
         log_CDS("getUniqueDatasetName: end "+datasetNewName)
         return datasetNewName
-    
+
+    #TODO This should be independent of the web config, so we should pass the web host through here
+    #Is this called directly by the web code?
+    #This also has the potential to be sending to no-one if user email
+    #is not defined and bcc_emails are not defined. in which case log this?
+    # Or has this already been logged sufficiently?
+
     def sendUserDatasetNotificationEmail(self, originalDatasetName, datasetName,email,errorMessage):
         if not settings.doSendMails:
             return
@@ -598,21 +635,28 @@ class CGSDatasetServer:
         else:
             messageText += "Your EpiExplorer dataset is available under the DID <b>"+datasetName+"</b>\n<br>"
             messageText += 'You can use it directly by going to <a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets='+datasetName+'">EpiExplorer from here</a>\n<br>'
+
         messageText += "\n<br>"
         messageText += "Regards,\n<br>"
         messageText += "EpiExplorer support\n<br>"
         messageText += "</body></html>\n"
+
         if "win32" in sys.platform:
             log_CDS("Email notification is not supported under Windows OS")   
-            return     
+            return
+
         try:
             p = os.popen("%s -t" % sendMail, 'w')
             p.write(messageText)
             p.close()
         except Exception,ex:
             log_CDS("Error: "+"Problem with sending the user email "+str(ex))
+
         log_CDS("sendUserDatasetNotificationEmail: end ")   
-    
+
+    #Why isn't this being used by other sendEmail methods?
+    #TODO Move this generic method to base_server.py
+
     def sendNotificationEmail(self,toEmail,bccEmail,fromEmail,replyToEmail,subject,body):
         sendMail = "/usr/sbin/sendmail"
         messageText = "Mime-Version: 1.0\n"

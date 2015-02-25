@@ -739,6 +739,10 @@ def line_count(file_name):
 
 
 def downloadFile(url, local_file):
+    # NJ This isfile test is likely already done in the caller (ideally with an MD5 check)
+    # todo add a force=True arg, that would change current behaviour
+    # todo fetch to tmp file and mv to final local_file, as broken/partial downloads will currently be used
+
     if os.path.isfile(local_file):
         raise Exception("Error: File already exists " + local_file)
 
@@ -793,7 +797,7 @@ def rm_files(files, raise_exception=False):
                 if raise_exception:
                     raise
                 else:
-                    warning("Failed to unlink file:\t" + file_path)
+                    warning("Failed to unlink file:\t" + file_path + "\n" + ex.strerror)
 
         elif raise_exception:
             raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file_path)
@@ -806,53 +810,103 @@ def rm_files(files, raise_exception=False):
     return rmd_files
 
 
-# TODO Move this to server_utils.py
-
-# The defaults in here should be optional?
-# But present for clarity?
-
+# TODO Move this to server_utils.py or readDatasetDescriptions.py or a renamed module which handles both read and write
 # Is datasetPythonClass relative path okay here?
+# Why is hasFeatures False here for user sets, when all but the tiling sets have this set to True?
 
-# description has an integral ### line separator
-# Although this is currently also introducing spaces
-# readDataSetDescriptions should handle that?
-# regionsFiltering has now value?!
+# Defaults, mandatory fields and var dependancy logic should be handled in Dataset classes (adding additional base
+# classes if required).
+# Simply create the object to set the defaults or test the mandatory requirements
+# This would require moving Dataset creation code out of readDatasetDescriptions.py
 
-def write_dataset_ini_file(filename, dataset_from, dset_info,
-                           regionsFile, additionalSettingsFileName, computeSettings):
-    if computeSettings is None: computeSettings = {}  # Protect against mutable default
+# Why are some of these not in dset_info, what happens to hasFeatures when read from settings file?
+# There's also a massive redundancy between creating the Dataset objects and what is cached in
+# CGSDataset.datasetInfo it seems there is some translation and copying of the dictionary, rather than just using
+# the dataset object!? Consequently some of these values are never cached in CGSDataset.datasetInfo, some of these seem
+# redundant? useNeighborhood is surely True if neighborhoodBeforeStart and neighborhoodAfterEnd are set?
 
-    out_string = ("datasetSimpleName = " + dset_info['simpleName'] + "\n" +
-                  "datasetWordName = " + dset_info['simpleName'] + "\n" +
-                  "genome = " + dset_info['genome'] + "\n" +
-                  "hasGenomicRegions = True\n" +
-                  "regionsFiltering = \n" +
-                  "hasFeatures = False\n" +
-                  "datasetFrom = " + dataset_from + "\n" +
-                  "datasetOriginal = " + regionsFile + "\n" +
-                  "chromIndex = 0\n" +
-                  "chromStartIndex = 1\n" +
-                  "chromEndIndex = 2\n" +
-                  "datasetPythonClass = ../../GDM/DatasetClasses/DatasetRegions.py\n" +
-                  "datasetOfficialName = " + dset_info['officialName'] +
-                  "dataCategories = User\n" +
-                  "datasetDescription = " + dset_info['description'].replace("\n", " ### ") + "\n" +
-                  "datasetMoreInfo = " + dset_info['moreInfoLink'] + "\n" +
-                  "datasetType = Default\n" +
-                  "hasBinning = True\n" +
-                  "additionalSettingsFile = " + str(additionalSettingsFileName) + "\n")
+# All other have hasFeatures = True except hg*_PutativeenhancersErnstetal.ini?
+# is this because it is a default query set?
+# what is the difference between hasFeatures and hasGenomicRegions?
+# No, hg19_ucsc_cpg_islands hasGenomicsRegions and features
+# This is generated via a merge and intersect of some chmm files
+# It unclear where the actual merged datafile is, or where the additional settings file is
 
-    for cs in ["mergeOverlaps","useScore","useStrand"]:
-        if computeSettings.has_key(cs) and computeSettings[cs]:
-             out_string += cs + " = True\n"
 
-             if cs=="useScore":
-                 out_string += "scoreIndex = 4\n"
-             elif cs=="useStrand":
-                 out_string += "strandIndex = 5\n"
+def write_dataset_ini_file(filename, dset_info, compute_settings=None):
+    dset_info = dset_info.copy()   # Shallow copy dset_info so we don't update/destroy in caller
 
+    if compute_settings is None:
+        compute_settings = {}  # Protect against mutable default
+
+    # datasetSimpleName:   Mandatory - Specific internal name  e.g. hg18_TFBS_cmyc rather than c-myc. Seems to match ini
+    #  file name
+    # datasetOfficialName: Mandatory(non-user) - Specific display name e.g. c-myc rather than hg18_TFBS_cmyc
+    # datasetWordName:     Mandatory - Seems to be to a broad classification of the data type
+    #   e.g. bhist (Broad histone), tfbs, rrbs etc.
+    # genome:              Mandatory - UCSC genome version e.g. hg19. This is normally implicit from the name.
+    # hasGenomicRegions:   Mandatory - Boolean
+    #   True for all default query sets, gene, tiling, DNase1, Infinium, repeats/conservation (algorithms) & lamin B1?
+    #   False for all TFBS and histone Chip-Seq. RnBeads (inc tiling, genes, promoters, probes & cpg), RRBS, DNAsequence
+    #   chromosome_band, ChromHMM
+    # regionsFiltering:    Mandatory - but can be empty for user sets
+    #   Always combineOverlaps apart from gene like inis which also have: remove duplicates, merge gene names
+    # hasFeatures:         Mandatory - Boolean
+    #   True for all but tiling sets and hg1*_PutativeenhancersErnstetal.ini (is this a bug?)
+    # features:            Dependant on hasFeatures and data type???
+    # datasetFrom:
+    # datasetMoreInfo: Mandatory(seemingly) - Seems to be used for web display link of source data, or empty for
+    #   defaults data sets and some infinium sets
+    # datasetType: Optional - seemingly only ever set to II27 for Illumina Infinium sets
+    # hasBinning: Optional - seemingly always True. Default query sets only
+    # additionalSettingFile: Optional - Only for hg*_PutativeenhancersErnstetal.ini and user data sets
+
+    # Use ini_vars to ensure nicely ordered output
+    # Drop this and just use an ordered dictionary? Needs python 2.7
+    # This may not support all data types yet, but definitely checked all hg19: default query sets, Histones, TFBS, RRBS
+    # Probably need to add ChromHMM for Blueprint segmentations, and look at Ensembl RegBuild too.
+    # There's a whole bunch more variables
+    # find ./ -name 'hg19*ini' -exec cat {} \; | grep '=' | grep -vE '^#' | cut -f 1 -d '=' | sort | uniq
+
+    ini_vars = ['datasetSimpleName', 'datasetWordName', 'genome', 'hasGenomicRegions', 'regionsFiltering',
+                'hasFeatures', 'features', 'useNeighborhood', 'neighborhoodBeforeStart', 'neighborhoodAfterEnd',
+                'histoneMark', 'tissue', 'tissues', 'datasetFrom', 'datasetFormat', 'datasetOriginal', 'chromIndex',
+                'chromStartIndex', 'chromEndIndex', 'signalValueIndex', 'pValueIndex', 'scoreIndex', 'scoreBase',
+                'hasHeader', 'datasetPythonClass', 'datasetOfficialName', 'dataCategories', 'datasetDescription',
+                'datasetMoreInfo', 'datasetType', 'hasBinning', 'additionalSettingsFile']
+    # Do a bit of pre-formatting
+    dset_info['dataCategories'] = "/".join(dset_info['dataCategories'])  # why is this / separated rather than comma?
+    dset_info['datasetDescription'] = dset_info['datasetDescription'].replace("\n", " ### ")
+    out_string = ''
+
+    # Handle str or iterable values
+    for str_or_iter_var in ['tissues', 'datasetFrom', 'datasetMoreInfo']:
+        if (str_or_iter_var in dset_info) and hasattr(dset_info[str_or_iter_var], '__iter__'):
+            dset_info[str_or_iter_var] = ', '.join(dset_info[str_or_iter_var])  # assume iterable contains strings
+
+    # Add the known vars in order at the start
+    for ini_var in ini_vars:
+
+        if ini_var in dset_info:
+            out_string += ini_var + " = " + str(dset_info[ini_var]) + "\n"
+            del dset_info[ini_var]  # this will be affecting reference in caller!
+
+    # Add the unknown vars at the bottom
+    for ini_var in dset_info:
+        warning("Ini file variable is not recognised in ordered list:\t" + ini_var)  # It may still be valid
+        out_string += ini_var + " = " + str(dset_info[ini_var]) + "\n"
+
+    for cs in ["mergeOverlaps", "useScore", "useStrand"]:
+        if cs in compute_settings and compute_settings[cs]:
+            out_string += cs + " = True\n"
+
+            if cs == "useScore":
+                out_string += "scoreIndex = 4\n"
+            elif cs == "useStrand":
+                out_string += "strandIndex = 5\n"
         else:
-             out_string += cs + " = False\n"
+            # This is seemingly not mandatory for non User sets as they are not in the ini files
+            out_string += cs + " = False\n"
 
     f = open(filename, "w")
     f.write(out_string)
@@ -860,11 +914,39 @@ def write_dataset_ini_file(filename, dataset_from, dset_info,
     return
 
 
+# TODO Move this to a seq_utils.py class?
+# Regex to match Brno histone nomenclature
+# See validate_histone_string for more info
+# r(awstring) prefix as we don't want the escapes to pass through the string interpreter to re.compile
+brno_regex = re.compile(r"""H([1234]|(2(A|B)(\.)?[12XZ]))  # Histone variant (Groups 1-4)
+                               ([A-Za-z]+[1-9][0-9]{0,2})? # Residue type/position optional (Group 5)
+                               ([A-Za-z]+[1-3]?)?$         # Residue Modification optional (Group 6)""", re.VERBOSE)
 
 
+def validate_histone_string(hist_string):
+    """Matches string argument against the brno histone nomenclature (doi:10.1038/nsmb0205-110).
+    This should match all valid formats e.g.
+        Histone variant:    H1, H2, H3, H4, H2A.Z etc
+        Histone residue:    H3K4, H4K20
+        Histone modification: H3ac (general), H3K27ac (specific)
+    The are some caveats which should be noted:
+        1. Residue and modification matches are case insensitive
+        2. H2A/B '.' specification is optional e.g. H2AZ and H2A.Z are both matched
+        3. The histone variant match largely only deals with the main histone family, not subfamily (except some H2A/B)
+           or the more specific sub-family members
 
-# TODO Move this to and import from system_utils.py?
+    Args:
+      hist_string (string): Histone or histone modification name
+
+    Returns:
+      MatchObject or None
+
+    Raises:
+      See re.match
+    """
+    return brno_regex.match(hist_string)
 
 
 def warning(*objs):
+    # TODO Move this to and import from system_utils.py?
     print("WARNING: ", *objs, file=sys.stderr)
