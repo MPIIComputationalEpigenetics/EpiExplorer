@@ -228,9 +228,7 @@ if __name__ == '__main__':
     log_CFS(start_msg)
     print(start_msg)
 
-    write_pid_to_file("CGSServer.py", settings.configFolder + "CGSServers.pid.txt")
-
-    # Write forwardServer.conf file here
+    # Write shared front/back end config
     fserver_file = settings.configFolder + "forwardServer.conf"
 
     try:
@@ -244,6 +242,8 @@ if __name__ == '__main__':
     except IOError, e:
         #warning("Failed to write forwardServer config to:\t" + fserver_file)
         raise IOError(e.args[0], e.args[1] + "\n\t" + fserver_file )
+
+    write_pid_to_file("CGSServer.py", settings.configFolder + "CGSServers.pid.txt")
 
     try:
         server.serve_forever()
