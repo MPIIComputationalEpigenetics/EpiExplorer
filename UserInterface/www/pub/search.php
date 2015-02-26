@@ -200,7 +200,8 @@ $(function() {
 		return queryText;			
 	}	
 	var regionSetOverlapWords = {
-				"broad_histones":"overlaps:bhistone:*",				
+				"broad_histones":"overlaps:bhist:*",
+				// NJ Unclear what would need adding here for Blueprint
 				"ensembl_gene_promoters_centered":"overlaps:promoters_centered",
 				"repeat_masker":"overlaps:repeats:all",
 				"ensembl_gene_genes":"overlaps:genes",				
