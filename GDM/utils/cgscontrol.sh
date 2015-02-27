@@ -60,6 +60,16 @@ startServer(){
   IFS=''
   #To maintain leading white space in read
 
+  # This sometimes fails to see outfile so let's have a few winks
+  sleep 2
+
+  # The CGSQueryServer may hang on startup with something like
+  #File "CGSQueryServer.py", line 303, in startServer
+  #  raise GDMException,extext
+  #utilities.GDMException: Error: The main hybrid file .../hg19_ensembl_gene_promoters.hybrid for the server hg19_ensembl_gene_promoters does not exist!
+  # This is due to old entries in hg19_DefaultFullyProcessedDatasets.ini
+  # Simply remove the entries for datasets which have not yet been fully processed
+
   tail -n 100 -f $out_file | while read line; do
     [ ! $QUIET ] && echo -e $line
 
