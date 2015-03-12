@@ -200,12 +200,16 @@ def listDatabaseInfo(databaseFile):
     
 def getIndexOfActiveModule(m):
     l = dir(m)
+
     for i in range(len(l)):
         if l[i].startswith('d_'):            
             return i
+
         if l[i] in settings.datasetClasses:
             return i
-    extext = "No regognized dataset module in "+str(l)+"\n is specified in datasetClasses "+str(settings.datasetClasses)
+
+    extext = "No recognized Dataset module in " + str(l) + "\n is specified in settings.datasetClasses " + \
+             str(settings.datasetClasses)
     log(extext)
     raise Exception, extext 
         
@@ -415,7 +419,10 @@ def wordFloatFixed(f,np,nq):
     p = int(f)
     q = f-p                     
     return wordFixed(p,np) + wordFloat(q,nq)
-      
+
+
+# this is lpad! Or even pythons own zfill!
+
 def wordFixed(f,n):
     r = str(f)
     lr = len(r)
@@ -844,6 +851,7 @@ def write_dataset_ini_file(filename, dset_info, compute_settings=None):
     # datasetOfficialName: Mandatory(non-user) - Specific display name e.g. c-myc rather than hg18_TFBS_cmyc
     # datasetWordName:     Mandatory - Seems to be to a broad classification of the data type
     #   e.g. bhist (Broad histone), tfbs, rrbs etc.
+
     # genome:              Mandatory - UCSC genome version e.g. hg19. This is normally implicit from the name.
     # hasGenomicRegions:   Mandatory - Boolean
     #   True for all default query sets, gene, tiling, DNase1, Infinium, repeats/conservation (algorithms) & lamin B1?
@@ -860,7 +868,8 @@ def write_dataset_ini_file(filename, dset_info, compute_settings=None):
     # datasetType: Optional - seemingly only ever set to II27 for Illumina Infinium sets
     # hasBinning: Optional - seemingly always True. Default query sets only
     # additionalSettingFile: Optional - Only for hg*_PutativeenhancersErnstetal.ini and user data sets
-
+    # dataCategories:      Optional? - Slash(/) separated list of data categories. Used in index, so order
+    #   appears to matter and should match other data sets with same categories.
     # Use ini_vars to ensure nicely ordered output
     # Drop this and just use an ordered dictionary? Needs python 2.7
     # This may not support all data types yet, but definitely checked all hg19: default query sets, Histones, TFBS, RRBS
@@ -875,7 +884,12 @@ def write_dataset_ini_file(filename, dset_info, compute_settings=None):
                 'hasHeader', 'datasetPythonClass', 'datasetOfficialName', 'dataCategories', 'datasetDescription',
                 'datasetMoreInfo', 'datasetType', 'hasBinning', 'additionalSettingsFile']
     # Do a bit of pre-formatting
-    dset_info['dataCategories'] = "/".join(dset_info['dataCategories'])  # why is this / separated rather than comma?
+
+    if 'dataCategories' in dset_info:
+        dset_info['dataCategories'] = "/".join(dset_info['dataCategories'])
+        # why is this / separated rather than comma?
+        # Eventually used in index by converting to a single spacelss string
+        # sometimes with datasetWordName appended
     dset_info['datasetDescription'] = dset_info['datasetDescription'].replace("\n", " ### ")
     out_string = ''
 
@@ -896,6 +910,7 @@ def write_dataset_ini_file(filename, dset_info, compute_settings=None):
         warning("Ini file variable is not recognised in ordered list:\t" + ini_var)  # It may still be valid
         out_string += ini_var + " = " + str(dset_info[ini_var]) + "\n"
 
+    # These seem only to be used for 'Regions' inis, but always set to false?
     for cs in ["mergeOverlaps", "useScore", "useStrand"]:
         if cs in compute_settings and compute_settings[cs]:
             out_string += cs + " = True\n"
