@@ -34,7 +34,7 @@ stopServer(){
       echo ""
 
     elif [[ $ACTION == stop ]]; then
-      echo "$server_type is not currently running"
+      echo "Failed to identify running $server_type with PID $file_pid"
     fi
   elif [[ $ACTION == stop ]]; then
     echo "Failed to get $server_type PID from CGSServers.pid.txt"
@@ -55,6 +55,8 @@ startServer(){
 
 
   #Execute this?
+  # Need to eval this echo as $! is not reporting
+
   (nohup python $server_path  2>&1; echo "$server_type PID $! exited with status $?" ) > $out_file &
   #This now captures STDOUT as sys.stdout is set to unbuffered
   IFS=''
@@ -74,9 +76,10 @@ startServer(){
     [ ! $QUIET ] && echo -e $line
 
     [[ "$line" == "Running $server_type ThreadedXMLRPCServer"* ]] && pkill -P $$ 'tail'
-    #Also catch existed with status error here too and exit
-    #will this just exit the while subshell or the whole script
-    [[ "$line" == " exited with status "* ]] && exit 1
+    # Also catch existed with status error here too and exit
+    # will this just exit the while subshell or the whole script
+    # This is currently not catching and exiting
+    [[ "$line" == *" exited with status "* ]] && exit 1
   done
 
 
