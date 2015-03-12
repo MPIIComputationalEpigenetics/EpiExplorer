@@ -598,7 +598,7 @@ class BaseFeature(Dataset.Dataset):
 
             for tissue in self.tissues:
                 # NJ tissueData = map(lambda x:x[:5],filter(lambda x:x[5]==tissue,data))
-                tissueData = map(lambda x:x[1:],filter(lambda x:x[0]==tissue, data))
+                tissueData = map(lambda x:x[1:], filter(lambda x:x[0]==tissue, data))
                 self.intervalArrays[tissue].loadFullDataSortedbyChrom(tissueData,True)
                 log("\ttissue " + tissue + " is ready")
             #log(["Adding an array for histone mark",hmark,"and tissue all with total of",len(data),"rows"])
