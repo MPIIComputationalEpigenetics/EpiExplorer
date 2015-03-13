@@ -104,7 +104,7 @@ class BaseFeature(Dataset.Dataset):
         # move this to a distance specific attr, and assign in subclass
         # could also enable 'decoration' based on data type in init
         self.annotated_table_def = "(regionID INTEGER, overlap_ratio REAL, overlap_count INTEGER, " + \
-                                   "distance_upstream INTEGER, distance_downstream INTEGER)"
+                                   "distance_upstream INTEGER, distance_downstream INTEGER, tissue TEXT)"
         # use this to dynamically define the word prefix keys?
 
         # Default bed values, they may not necessarily be used in the subclass
@@ -649,7 +649,7 @@ class BaseFeature(Dataset.Dataset):
             raise
 
 
-    # Only releveant for hasRegions = True
+    # Only releveant for hasRegions = True ?
     # def getRegions(self):
     #    return self.getRegionsFromLocalDB()
 
