@@ -35,7 +35,7 @@ import UserHandling
 
 from DatasetClasses import *
 from Vocabulary import *
-from settings import datasetClasses
+#from settings import datasetClasses
 from DataStorageServer import DataStorageServer
 from DatasetProcessorManager import DatasetProcessorManager
 
@@ -46,6 +46,7 @@ from DatasetProcessorManager import DatasetProcessorManager
 # CGS servers e.g. log wrapper (instead of having them in utilities)
 # Do we need to manage file locks for threads as per logs? This assumes all prints are done before threading is launched
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+
 
 
 class CGSDatasetServer:
@@ -60,10 +61,12 @@ class CGSDatasetServer:
         self.defaultAnnotationNames = {}
         self.antibodyVocabulary = AntibodyVocabulary()
         self.cellLineVocabulary = CellLineVocabulary()
+
         for genomeID in settings.genomeData.keys():
             datasetsIndexFile = getMainDatasetIndexFileName(genomeID)                
             genomeDefaultDatasets = readDatasetDescriptions.readDatasets(datasetsIndexFile)
             self.defaultDatasets.update(genomeDefaultDatasets)
+
         self.datasetInfo = {}
         log_CDS("__init__: Default datasets read "+str(self.defaultDatasets.keys()))
         for datasetKey in self.defaultDatasets.keys():
@@ -75,7 +78,7 @@ class CGSDatasetServer:
             try:
                 if self.queryServer.hasActiveServer(dataset.datasetSimpleName):
                     datasetRegionsCount = int(self.queryServer.answerQuery(settings.wordPrefixes["region"],0,0,dataset.datasetSimpleName)[2])
-            except Exception,ex:
+            except Exception, ex:
                 log_CDS("__init__: Failed to retrieve regions count for dataset "+str(datasetKey))
                 
             self.datasetInfo[dataset.datasetSimpleName] = {
@@ -148,63 +151,60 @@ class CGSDatasetServer:
     
     def getCustomDatasetIniFileName(self,datasetName):
         return settings.folderForTemporaryDatasets + datasetName + ".ini"
-    
+
     def __createUserDatasetSettingsFile__(self, datasetName, regionsFile, 
 										  genome, additionalSettingsFileName,  
 										  officialName="", description="", 
 										  moreInfoLink="", computeSettings={}):
         filename = self.getCustomDatasetIniFileName(datasetName)
-        f = open(filename, "w")
-        f.write("datasetSimpleName = " + datasetName + "\n")
-        f.write("datasetWordName = " + datasetName + "\n")
-        f.write("genome = " + genome + "\n")
-        
-        
-        f.write("hasGenomicRegions = True\n")
-        f.write("regionsFiltering = \n")
-        f.write("hasFeatures = False\n")
-        f.write("datasetFrom = "+os.path.abspath(settings.downloadDataFolder[genome] + datasetName+".user")+"\n")
-        f.write("datasetOriginal = "+regionsFile+"\n")
-        f.write("chromIndex = 0\n")
-        f.write("chromStartIndex = 1\n")
-        f.write("chromEndIndex = 2\n")
-        f.write("datasetPythonClass = ../../GDM/DatasetClasses/DatasetRegions.py\n")
-        if officialName:
-            f.write("datasetOfficialName = " + officialName + "\n")
-        else:
-            f.write("datasetOfficialName = " + datasetName + "\n")
-        f.write("dataCategories = User\n")
-        f.write("datasetDescription = "+description.replace("\n"," ### ")+"\n")
-        f.write("datasetMoreInfo = "+moreInfoLink+"\n")
-        f.write("datasetType = Default\n")
-        f.write("hasBinning = True\n")
-        f.write("additionalSettingsFile = "+str(additionalSettingsFileName)+"\n")
-        for cs in ["mergeOverlaps","useScore","useStrand"]:
-            if computeSettings.has_key(cs) and computeSettings[cs]:
-            	 f.write(cs+" = True\n")
-                 if cs=="useScore":
-                     f.write("scoreIndex = 4\n")
-                 elif cs=="useStrand":
-                     f.write("strandIndex = 5\n")
-            else:
-            	 f.write(cs+" = False\n")
-        f.close()
-        self.datasetInfo[datasetName] = {
-                            "simpleName":datasetName,
-                            "officialName":(officialName or datasetName),
-                            "hasBinning":True,
-                            "genome":genome,
-                            "categories":["User"],
-                            "description":description.replace("###","\n"),
-                            "moreInfoLink":moreInfoLink,                            
-                            "numberOfRegions":0,
-                            "datasetType":"Default",
-                            "isDefault":False,
-                            "overlappingText": datasetName
-                            }
-        
-        
-        log_CDS(["__createUserDatasetSettingsFile__: Added datasetinfo for ",str(datasetName),self.datasetInfo[datasetName]["officialName"],str(genome)])
+
+        dset_info = {'simpleName': datasetName,
+                     'officialName': (officialName or datasetName),
+                     'hasBinning': True,
+                     'genome': genome,
+                     'categories': ['User'],
+                     'description': description.replace("###","\n"),
+                     'moreInfoLink': moreInfoLink,
+                     'numberOfRegions': 0,
+                     'datasetType': "Default",
+                     'isDefault': False,
+                     'overlappingText': datasetName
+        }
+        self.datasetInfo[datasetName] = dset_info
+
+        # Copy so we don't update self.datasetInfo
+        ini_info = dset_info.copy()
+        # Delete some that don't go in the ini file
+        del ini_info['numberOfRegions']
+        del ini_info['isDefault']
+        del ini_info['overlappingText']
+
+        # rename categories here
+
+        # Re/define some more keys
+        ini_info['datasetSimpleName'] = ini_info.pop('simpleName')
+        ini_info['datasetWordName'] = ini_info['datasetSimpleName']  # This seems at odds with normal details vs class summary naming scheme
+        ini_info['datasetOfficialName'] = ini_info.pop('officialName')
+        ini_info['dataCategories'] = ini_info.pop('categories')  # Not datasetCategories!
+        ini_info['hasGenomicRegions'] = "True"
+        ini_info['regionsFiltering'] = ''
+        ini_info['datasetFrom'] = os.path.abspath(settings.downloadDataFolder[genome] + datasetName + ".user")
+        ini_info['datasetOriginal'] = regionsFile
+        ini_info['datasetPythonClass'] = "../../GDM/DatasetClasses/DatasetRegions.py"
+        ini_info['datasetDescription'] = ini_info.pop('description')
+        ini_info['datasetMoreInfo'] = ini_info.pop('moreInfoLink')
+        ini_info['additionalSettingsFile'] = str(additionalSettingsFileName)
+        # default bed indexes
+        ini_info['chromIndex'] = 0
+        ini_info['chromStartIndex'] = 1
+        ini_info['chromEndIndex'] = 2
+        # A lot of the above defaults can probably go once some defaults support has been added
+        # to a base Dataset class
+
+        write_dataset_ini_file(filename, ini_info, computeSettings)
+        log_CDS(["__createUserDatasetSettingsFile__: Added datasetinfo for ",
+                 str(datasetName),self.datasetInfo[datasetName]["officialName"],
+                 str(genome)])
         return filename
 
     
@@ -274,7 +274,7 @@ class CGSDatasetServer:
             for featureDatasetName in featureDatasets.keys():
                 log_CDS(["__processDatasetGivenRegions__: Computing scores for",datasetName, featureDatasetName])
                 if self.queuedDatasetComputations.getComputationStatus(datasetName)[0] == -1:
-                    returnMessage = "Dataset computation was stopped by the EpiExplorer staff. Contact epiexplorer@mpi-inf.mpg.de for more info."
+                    returnMessage = "Dataset computation was stopped by the EpiExplorer staff. Contact " + settings.contact_email + " for more info."
                     self.queuedDatasetComputations.indicateComputationError(datasetName,returnMessage)
                     raise GDMException, returnMessage  
                 self.queuedDatasetComputations.indicateComputationProgress(datasetName,getDatasetStatusAsText(2,"Step 3/6: Computing annotation "+featureDatasets[featureDatasetName].datasetOfficialName+" ("+str(currentNumber)+" out of total "+str(totalAnnotationFeatures)+" annotations are completed)"))# computing
@@ -593,27 +593,41 @@ class CGSDatasetServer:
 #            raise Exception, "This dataset was already processed!"
         log_CDS("getUniqueDatasetName: end "+datasetNewName)
         return datasetNewName
-    
+
+    #TODO This should be independent of the web config, so we should pass the web host through here
+    #Is this called directly by the web code?
+    #This also has the potential to be sending to no-one if user email
+    #is not defined and bcc_emails are not defined. in which case log this?
+    # Or has this already been logged sufficiently?
+
     def sendUserDatasetNotificationEmail(self, originalDatasetName, datasetName,email,errorMessage):
         if not settings.doSendMails:
             return
+
         log_CDS(["sendUserDatasetNotificationEmail: called with ",originalDatasetName, datasetName,email,errorMessage])
         sendMail = "/usr/sbin/sendmail"
         messageText = "Mime-Version: 1.0\n"
         messageText += "Content-type: text/html; charset=\"iso-8859-1\"\n"
+
         if str(email):
             messageText += "To:"+str(email)+"\n"
-        messageText += "Bcc:halachev@mpi-inf.mpg.de,albrecht@mpi-inf.mpg.de\n"
-        messageText += "From:epiexplorer@mpi-inf.mpg.de\n"
-        messageText += "Reply-to: epiexplorer@mpi-inf.mpg.de\n";
+
+        if settings.bcc_emails:
+            messageText += "Bcc:" + settings.bcc_emails + "\n"
+
+        messageText += "From:" + settings.contact_email + "\n"
+        messageText += "Reply-to:" + settings.contact_email + "\n"
+
         if errorMessage:
             messageText += "Subject: There was a problem with your EpiExplorer dataset ("+originalDatasetName+")\n"
         else:
             messageText += "Subject: Your EpiExplorer dataset ("+originalDatasetName+") is available\n"
+
         messageText += "\n"
         messageText += "<html><body>\n"
         messageText += "Dear EpiExplorer user,\n<br>"
         messageText += "\n<br>"
+
         if errorMessage:
             messageText += "There was a problem with computing your dataset.\n<br><br>" 
             messageText += "The error message is '"+errorMessage+"'.\n<br><br>"
@@ -621,21 +635,28 @@ class CGSDatasetServer:
         else:
             messageText += "Your EpiExplorer dataset is available under the DID <b>"+datasetName+"</b>\n<br>"
             messageText += 'You can use it directly by going to <a href="http://epiexplorer.mpi-inf.mpg.de/index.php?userdatasets='+datasetName+'">EpiExplorer from here</a>\n<br>'
+
         messageText += "\n<br>"
         messageText += "Regards,\n<br>"
         messageText += "EpiExplorer support\n<br>"
         messageText += "</body></html>\n"
+
         if "win32" in sys.platform:
             log_CDS("Email notification is not supported under Windows OS")   
-            return     
+            return
+
         try:
             p = os.popen("%s -t" % sendMail, 'w')
             p.write(messageText)
             p.close()
         except Exception,ex:
             log_CDS("Error: "+"Problem with sending the user email "+str(ex))
+
         log_CDS("sendUserDatasetNotificationEmail: end ")   
-    
+
+    #Why isn't this being used by other sendEmail methods?
+    #TODO Move this generic method to base_server.py
+
     def sendNotificationEmail(self,toEmail,bccEmail,fromEmail,replyToEmail,subject,body):
         sendMail = "/usr/sbin/sendmail"
         messageText = "Mime-Version: 1.0\n"
@@ -678,9 +699,13 @@ class CGSDatasetServer:
         messageText = "Mime-Version: 1.0\n"
         messageText += "Content-type: text/html; charset=\"iso-8859-1\"\n"
         messageText += "To:"+str(email)+"\n"
-        messageText += "Bcc:halachev@mpi-inf.mpg.de,albrecht@mpi-inf.mpg.de\n"
-        messageText += "From:epiexplorer@mpi-inf.mpg.de\n"
-        messageText += "Reply-to: epiexplorer@mpi-inf.mpg.de\n";
+
+        if settings.bcc_emails:
+            messageText += "Bcc:" + settings.bcc_emails + "\n"
+
+        messageText += "From:" + settings.contact_email + "\n"
+        messageText += "Reply-to:" + settings.contact_email + "\n"
+
         if errorMessage:
             messageText += "Subject: There was a problem with the export of your EpiExplorer dataset\n"
         else:

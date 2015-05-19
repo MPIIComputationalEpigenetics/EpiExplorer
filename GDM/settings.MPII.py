@@ -45,6 +45,10 @@ datasetServerPort=51525
 queryServerHost="srv-13-13"
 queryServerPort=51515
 
+contact_email="epiexplorer@mpi-inf.mpg.de"
+bcc_emails="halachev@mpi-inf.mpg.de,albrecht@mpi-inf.mpg.de"
+
+
 #Now maintaining all data outside of code directory
 #Datasets dir has been removed from hierachy so all logs and output dirs
 #are now in same directory

@@ -1,4 +1,11 @@
 
+
+//This is for passing as a referer URL to other sites
+//Requests to server_host should be done with relative paths
+var server_host=window.location.origin;
+
+// var contact_email should have been set as global before import
+
 function getQuery(sep, queryPrefix, queryType) {
 	var queryParts = [];
 	var querySelector = "span.nonExistingClass";
@@ -2803,7 +2810,7 @@ function updateOpenedFeatureJTableLines(result, otherParameters) {
 
 	} else {
 		// alert("featureTable 5.1")
-		var newTableLine = $('<tr style="width:100%;" class="noResultsRow"><td ></td><td align="left">Your last query returned no results. If you belive this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at epiexplorer@mpi-inf.mpg.de</td><td align="right"></td></tr>');
+		var newTableLine = $('<tr style="width:100%;" class="noResultsRow"><td ></td><td align="left">Your last query returned no results. If you believe this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at ' + contact_email + '</td><td align="right"></td></tr>');
 		// add the row to the table
 		$('#openedFeatureResults tr').remove();
 		$('#openedFeatureResults').append(newTableLine);
@@ -2811,7 +2818,7 @@ function updateOpenedFeatureJTableLines(result, otherParameters) {
 		if (otherParameters[4]) {
 			// $('#rangeFeatureAutocompleteSearch').remove(); //
 			$('#rangeFeaturePlotMain').children().remove()
-			rangePlot = $('<table id="rangeFeaturePlot"><tr><td><div id="rangeFeaturePlotTable" ></div></td><td><div id="rangeFeaturePlotTableCloud" ></div></td></tr><tr class="noResultsRow">Your last query returned no results. If you belive this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at epiexplorer@mpi-inf.mpg.de </tr></table>');
+			rangePlot = $('<table id="rangeFeaturePlot"><tr><td><div id="rangeFeaturePlotTable" ></div></td><td><div id="rangeFeaturePlotTableCloud" ></div></td></tr><tr class="noResultsRow">Your last query returned no results. If you belive this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at ' + contact_email + '</tr></table>');
 			$('#rangeFeaturePlotMain').append(rangePlot);
 			// var rangePlot = $('<div id="rangeFeaturePlot">No results fit this
 			// query</div>');
@@ -2829,7 +2836,7 @@ function updateOpenedFeatureJTableLines(result, otherParameters) {
 							$('<tr><td><div id="rangeFeaturePlotTable" ></div></td><td><div id="rangeFeaturePlotTableCloud" ></div></td></tr>'));
 			$('#rangeFeaturePlot')
 					.append(
-							$('<tr class="noResultsRow"><td colspan="2">Your last query returned no results. If you belive this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at epiexplorer@mpi-inf.mpg.de </td></tr>'));
+							$('<tr class="noResultsRow"><td colspan="2">Your last query returned no results. If you belive this to be a mistake, please save the current session as URL from the button in the top left and send us the link together with a short description at ' + contact_email + '</td></tr>'));
 		}
 	}
 }
@@ -2842,48 +2849,39 @@ function updateOpenedFeatureJTableLinesGONAMES(result, otherParameters) {
 			});
 
 	var completionsValues = [];
-	$
-			.ajax({
-				type : 'POST',
-				url : "relay.php",
-				async : false,
-				dataType : "json",
-				data : {
-					"type" : "getGeneExtraInfo",
+	$.ajax({
+			type : 'POST',
+			url : "relay.php",
+			async : false,
+			dataType : "json",
+			data : {"type" : "getGeneExtraInfo",
 					"genome" : settings["genome"],
 					"infoType" : "GO",
 					"elements" : Object.keys(completionsCounts)
-				// .join(",")
-				},
-				success : function(result, textStatus, jqXHR) {
-					$
-							.each(
-									result[0],
-									function(term, termData) {
-										var description = termData[0];
-										var title = '<a href="http://amigo.geneontology.org/cgi-bin/amigo/term_details?term='
-												+ term
-												+ '" target="_blank">'
-												+ term + '</a>'
-										var geneCount = parseInt(termData[2],
-												10);
-										var ratio = parseFloat((completionsCounts[term] / geneCount)
-												.toPrecision(3));
-										var icon = '<div class="CGSicon ui-icon ui-icon-play ui-icon-turnred selectGOName" title="Use this refinement"></div>'
-										completionsValues.push([ title,
-												completionsCounts[term],
-												geneCount, description, ratio,
-												icon ]);
-									});
-				},
-
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("error")
-					alert(jqXHR);
-					alert(textStatus);
-					alert(errorThrown);
-				}
-			});
+					// .join(",")
+			},
+			success : function(result, textStatus, jqXHR) {
+					$.each(result[0],
+						function(term, termData) {
+						var description = termData[0];
+						var title = '<a href="http://amigo.geneontology.org/cgi-bin/amigo/term_details?term='
+							+ term + '" target="_blank">' + term + '</a>'
+						var geneCount = parseInt(termData[2], 10);
+						var ratio = parseFloat((completionsCounts[term] / geneCount).toPrecision(3));
+						var icon = '<div class="CGSicon ui-icon ui-icon-play ui-icon-turnred selectGOName" title="Use this refinement"></div>'
+						completionsValues.push([ title,
+							completionsCounts[term],
+							geneCount, description, ratio,
+							icon ]);
+						});
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("error")
+				alert(jqXHR);
+				alert(textStatus);
+				alert(errorThrown);
+			}
+	});
 
 	/*
 	 * var GOquery = getQueryComplexJoin("
@@ -2980,7 +2978,7 @@ function updateOpenedFeatureJTableLinesGENENAMES(result, otherParameters) {
 						var titleParts = title.split(" ");
 						// alert("Gene name")
 						if (settings["genome"] == "hg18"){
-							var ensLink = '<a href="http://may2009.archive.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g='+titleParts[1]+'" target="_blank">'+titleParts[1]+'</a>'
+							var ensLink = '<a href="http://grch37.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g='+titleParts[1]+'" target="_blank">'+titleParts[1]+'</a>'
 						}else if (settings["genome"] == "hg19"){
 							var ensLink = '<a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g='+titleParts[1]+'" target="_blank">'+titleParts[1]+'</a>'
 						}else if (settings["genome"] == "mm9"){
@@ -3637,9 +3635,12 @@ function updateOpenedFeatureRegionsList(result, otherParameters) {
 	ucscLink = ucscLink + "&position=" + toplineParts[toplineParts.length - 3]
 			+ "%3A" + toplineParts[toplineParts.length - 2] + "-"
 			+ toplineParts[toplineParts.length - 1]
+
+	// TODO change this to to use getExportLink. Remove server_host and put window.location.origin in getExportLink
 	ucscLink = ucscLink
 			+ "&hgt.customText="
-			+ encodeURIComponent("http://epiexplorer.mpi-inf.mpg.de/relay.php?type=exportRegionsAndSendBack&exportType=UCSC&regiontype="
+			+ encodeURIComponent(server_host +
+					"/relay.php?type=exportRegionsAndSendBack&exportType=UCSC&regiontype="
 					+ regiontype
 					+ "&query="
 					+ query
@@ -6059,34 +6060,28 @@ function initExploreButtons() {
 							dataToBeSend["rNORegions"] = currentState["referenceQuery"]["totalNumber"]
 						}
 
-						$
-								.ajax({
-									type : 'GET',
-									url : "relay.php",
-									data : dataToBeSend,
-									dataType : "json",
-									success : function(jsonResult) {
-										if (jsonResult[0] == '0') {
-											// success
-											// url =
-											// document.location.href+"?analysisLink="+jsonResult[1]
-											var urlText = "http://epiexplorer.mpi-inf.mpg.de/index.php?analysisLink="
-													+ jsonResult[1]
-											$('#currentLinkLocation')
-													.html(
-															'<a href="'
-																	+ urlText
-																	+ '" target="_blank">'
-																	+ urlText
-																	+ '</a>')
+						$.ajax({type : 'GET',
+								url : "relay.php",
+								data : dataToBeSend,
+								dataType : "json",
+								success : function(jsonResult) {
+									if (jsonResult[0] == '0') {
+										// success
+										// url =
+										// document.location.href+"?analysisLink="+jsonResult[1]
+										//TODO change this to relative URL?
+										var urlText = server_host + "/index.php?analysisLink="
+												+ jsonResult[1]
+										$('#currentLinkLocation')
+											.html('<a href="' + urlText
+												+ '" target="_blank">' + urlText + '</a>')
 										} else {
-											$('#currentLinkLocation').text(
-													jsonResult[1])
+											$('#currentLinkLocation').text(jsonResult[1])
 										}
 									}
 								});
-
 					});
+
 	$('#userDatasetID').keypress(function(e) {
 		// e.preventDefault();
 		if (e.which == 13) {
@@ -6176,9 +6171,11 @@ function initExploreButtons() {
 	});
 
 }
+
 function getExportLink(type){
-	return "http://epiexplorer.mpi-inf.mpg.de/" +			
-			"relay.php?type=exportRegionsAndSendBack&exportType="+type+"&regiontype="
+	// This has to be the full non-relative URL for use as a 'referer url' in external links
+	return server_host +
+			"/relay.php?type=exportRegionsAndSendBack&exportType="+type+"&regiontype="
 					+ currentState["exploreRegionSelected"]
 					+ "&query="
 					+ getQuery("::qq::", "Eregion", "main")
@@ -8449,6 +8446,7 @@ function clearCharts() {
 	currentState["activeChart"] = [];
 	// alert("Cleared!");
 }
+
 function setCurrentStatus(text, showProcessing) {
 	if (text == null) {
 		$('#currentStatus').children().remove();
@@ -8467,6 +8465,7 @@ function setCurrentStatus(text, showProcessing) {
 
 	}
 }
+
 function showRefinementNotification(title,message){
 	//alert(type)
 	//alert(message)

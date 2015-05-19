@@ -2,6 +2,7 @@
   // php initialization of XML-RPC variables
   require_once("grab_globals.lib.php");
   include("xmlrpc_submit.php");
+  include("settings.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +13,8 @@
 	<link href="menu/menu.css" rel="stylesheet" type="text/css" />
 	<!--script type="text/javascript" src="jQuery/js/jquery-1.4.2.min.js"></script-->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"/>
-	
+	<!--  Global var for commonExploreCGS.js -->
+	<script>var contact_email = <?php echo json_encode($contact_email); ?>;</script>
 	<script type="text/javascript" src="commonCGS.js"></script>
 	<script type="text/javascript" src="CGSTexts.js"></script>
 	<script type="text/javascript" src="commonExploreCGS.js"></script>	

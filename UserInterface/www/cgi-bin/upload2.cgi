@@ -5,17 +5,11 @@ print "Content-Type: text/html\n\n"     # HTML is following
 import cgi
 import xmlrpclib
 import os
-#import urllib
 
-#u = urllib.urlopen("http://epiexplorer.mpi-inf.mpg.de/server.php")
-#s = u.readline()
-#s = "http://" + s;
+
+#The are from SetEnvs in the Include file written CGSServer.__main__
 s = "http://" + os.environ["forwardServerHost"] + ":" + os.environ["forwardServerPort"]
-
-# Change this to read forwardServer.ini, which should be written by CGSServer init to
-# a file in the web hierarchy, preferable not something that is publicly visible!
-
-
+contact_email = os.environ["contact_email"]
 
 server = xmlrpclib.Server(s)
 
@@ -66,8 +60,10 @@ def main():
 		regionsContent = form['dataList'].value
 
 	if len(regionsContent) == 0:
-		statusText = "Error: We could not receive your dataset. Please make sure it does not exceed the current limit of 100MB. For uploading a larger file, you can contact the EpiExplorer support team at epiexplorer@mpi-inf.mpg.de "
-		return [1,statusText]
+		statusText = ("Error: We could not receive your dataset. Please make sure it does not exceed " +
+					  " the current limit of 100MB. For uploading a larger file, you can contact the " +
+					  " EpiExplorer support team at " + contact_email)
+		return [1, statusText]
 	else:
 		#print "4. Data was successfully read: ",len(regionsContent)," <br>"
 		if form.has_key("datasetConvertSpacesToTabs") and str(form["datasetConvertSpacesToTabs"].value)=="on":

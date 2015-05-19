@@ -172,7 +172,7 @@ class CGSQueryServer():
         if len(allGenes):
             regionsContent = "\n".join(map(lambda gene:"\t".join(gene),allGenes))
         else:
-            regionsContent = "<this query resulted in no genes. If you believe this to be a mistake, please contact epiexplorer@mpi-inf.mpg.de>"
+            regionsContent = "<this query resulted in no genes. If you believe this to be a mistake, please contact " + settings.contact_email + ">"
         log_CQS("exportGenesAndSendBack regionsContent processed "+str(len(regionsContent)))
         return regionsContent
     def exportGOsAndSendBack(self,regionSet,query):
@@ -197,7 +197,7 @@ class CGSQueryServer():
             allGOCategoriesList.reverse()
             goExport = "\n".join(map(lambda go:"\t".join(map(str,[go[-1][4:]]+go[1:4]+[go[0]])),allGOCategoriesList))
         else:
-            goExport = "<this query resulted in no GO categories. If you believe this to be a mistake, please contact epiexplorer@mpi-inf.mpg.de>"
+            goExport = "<this query resulted in no GO categories. If you believe this to be a mistake, please contact " + settings.contact_email + ">"
         log_CQS("exportGOsAndSendBack regionsContent processed "+str(len(goExport)))
         return goExport
         
@@ -219,7 +219,7 @@ class CGSQueryServer():
             allGOtermsList.reverse()
             termContent = "\n".join(map(lambda term:str(term[1])+"\t"+str(term[0]),allGOtermsList))
         else:
-            termContent = "<this query resulted in no terms. If you believe this to be a mistake, please contact epiexplorer@mpi-inf.mpg.de>"
+            termContent = "<this query resulted in no terms. If you believe this to be a mistake, please contact " + settings.contact_email + ">"
         log_CQS("exportGOTermsAndSendBack regionsContent processed "+str(len(termContent)))
         return termContent    
     
@@ -241,7 +241,7 @@ class CGSQueryServer():
             allGOtermsList.reverse()
             termContent = "\n".join(map(lambda term:str(term[1])+"\t"+str(term[0]),allGOtermsList))
         else:
-            termContent = "<this query resulted in no terms. If you believe this to be a mistake, please contact epiexplorer@mpi-inf.mpg.de>"
+            termContent = "<this query resulted in no terms. If you believe this to be a mistake, please contact " + settings.contact_email + ">"
         log_CQS("exportOMIMTermsAndSendBack regionsContent processed "+str(len(termContent)))
         return termContent     
                     
@@ -523,9 +523,9 @@ class CGSQueryServer():
         sendMail = "/usr/sbin/sendmail"
         messageText = "Mime-Version: 1.0\n"
         messageText += "Content-type: text/html; charset=\"iso-8859-1\"\n"
-        messageText += "To:epiexplorer@mpi-inf.mpg.de\n"        
-        messageText += "From:epiexplorer@mpi-inf.mpg.de\n"
-        #if email:
+        messageText += "To:" + settings.contact_email + "\n"
+        messageText += "From:" + settings.contact_email + "\n"
+        #if email
         #    messageText += "Reply-to: "+str(email)+"\n";        
         messageText += "Subject: EpiExplorer "+str(ftype)+" feedback \n"        
         messageText += "\n"
@@ -703,7 +703,8 @@ class CGSQueryServer():
         log_CQS("__init__: Start collectAndSendReport")
         try:        
             report = self.reportManager.generateReport()
-            self.datasetServer.sendNotificationEmail("halachev@mpi-inf.mpg.de,felipe.albrecht@mpi-inf.mpg.de","","epiexplorer@mpi-inf.mpg.de","","EpiExplorer daily report",report)
+            self.datasetServer.sendNotificationEmail(settings.contact_email, settings.bcc_emails,
+                                                     "EpiExplorer daily report", report)
             self.reportManager.initStats()        
                 
             self.reportTimer = Timer(settings.CS_TIME_REPORT_TIME, self.collectAndSendReport) 
