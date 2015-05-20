@@ -37,6 +37,9 @@ datasetServerPort=51525
 queryServerHost="your_CGSQueryServerHost
 queryServerPort=51515
 
+contact_email="epiexplorer@your.domain"
+bcc_emails="you@your_domain.com,someone_else@their.domain"
+
 
 #Now maintaining all data outside of code directory
 #Datasets dir has been removed from hierarchy so all logs and output dirs

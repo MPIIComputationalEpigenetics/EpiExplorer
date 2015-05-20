@@ -14,11 +14,10 @@
 	}else{
 		//echo "not ok $arrayResponse";	
 		if (strlen(strstr($_SERVER['SERVER_NAME'],'moebius')) == 0){
-			$to = "epiexplorer@mpi-inf.mpg.de";
 	 		$subject = "EpiExplorer XMLRPC Server is not working! (".date("H:i:s d.m.y")." , ".anonimizedUser().")";
 	 		$body = "On ".date("H:i:s d.m.y")." requested by ".$_SERVER["REMOTE_ADDR"]." (".gethostbyaddr($_SERVER["REMOTE_ADDR"])."\n"."Status:'".$arrayResponse."'\n"."More info: \n"."Server name:  ".$_SERVER['SERVER_NAME']."\n"."Request URI:  ".$_SERVER['REQUEST_URI']."\n"."Http referer:  ".$_SERVER['HTTP_REFERER']."\n";
 	 		
-	 		if (mail($to, $subject, $body)) {
+	 		if (mail($contact_email, $subject, $body)) {
 	   			header( 'Location: maintenance.php') ;
 	  		} else {
 	   			header( 'Location: maintenance.php') ;
@@ -130,7 +129,7 @@ var alreadyUploaded = {};
 								}
 							}
 					});
-					$('#beforeUploadStatus').html('<h4 style="color:#FF0000;">Uploading...</h4><br/><img src="http://epiexplorer.mpi-inf.mpg.de/extras/ajax-loader-big.gif" alt="Processing"/>');
+					$('#beforeUploadStatus').html('<h4 style="color:#FF0000;">Uploading...</h4><br/><img src="/extras/ajax-loader-big.gif" alt="Processing"/>');
 					return true;
 				}else{
 					return false;

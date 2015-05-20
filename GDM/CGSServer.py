@@ -230,21 +230,22 @@ if __name__ == '__main__':
     log_CFS(start_msg)
     print(start_msg)
 
-    write_pid_to_file("CGSServer.py", settings.configFolder + "CGSServers.pid.txt")
-
-    # Write forwardServer.conf file here
+    # Write shared front/back end config
     fserver_file = settings.configFolder + "forwardServer.conf"
 
     try:
         conf_file = open(fserver_file, 'w')
         conf_file.write("SetEnv forwardServerHost " + str(socket.gethostname()) +
-                        "\nSetEnv forwardServerPort " + str(settings.forwardServerPort))
+                        "\nSetEnv forwardServerPort " + str(settings.forwardServerPort) +
+                        "\nSetEnv contact_email " + settings.contact_email)
         conf_file.close()
         print "Wrote forwardServer config. Keep this outside the web document root and add this to httpd.conf:\n" + \
               "\tInclude " + fserver_file
     except IOError, e:
         #warning("Failed to write forwardServer config to:\t" + fserver_file)
         raise IOError(e.args[0], e.args[1] + "\n\t" + fserver_file )
+
+    write_pid_to_file("CGSServer.py", settings.configFolder + "CGSServers.pid.txt")
 
     try:
         server.serve_forever()

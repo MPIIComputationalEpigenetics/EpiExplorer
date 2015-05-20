@@ -34,7 +34,7 @@ stopServer(){
       echo ""
 
     elif [[ $ACTION == stop ]]; then
-      echo "$server_type is not currently running"
+      echo "Failed to identify running $server_type with PID $file_pid"
     fi
   elif [[ $ACTION == stop ]]; then
     echo "Failed to get $server_type PID from CGSServers.pid.txt"
@@ -55,18 +55,31 @@ startServer(){
 
 
   #Execute this?
+  # Need to eval this echo as $! is not reporting
+
   (nohup python $server_path  2>&1; echo "$server_type PID $! exited with status $?" ) > $out_file &
   #This now captures STDOUT as sys.stdout is set to unbuffered
   IFS=''
   #To maintain leading white space in read
 
+  # This sometimes fails to see outfile so let's have a few winks
+  sleep 2
+
+  # The CGSQueryServer may hang on startup with something like
+  #File "CGSQueryServer.py", line 303, in startServer
+  #  raise GDMException,extext
+  #utilities.GDMException: Error: The main hybrid file .../hg19_ensembl_gene_promoters.hybrid for the server hg19_ensembl_gene_promoters does not exist!
+  # This is due to old entries in hg19_DefaultFullyProcessedDatasets.ini
+  # Simply remove the entries for datasets which have not yet been fully processed
+
   tail -n 100 -f $out_file | while read line; do
     [ ! $QUIET ] && echo -e $line
 
     [[ "$line" == "Running $server_type ThreadedXMLRPCServer"* ]] && pkill -P $$ 'tail'
-    #Also catch existed with status error here too and exit
-    #will this just exit the while subshell or the whole script
-    [[ "$line" == " exited with status "* ]] && exit 1
+    # Also catch existed with status error here too and exit
+    # will this just exit the while subshell or the whole script
+    # This is currently not catching and exiting
+    [[ "$line" == *" exited with status "* ]] && exit 1
   done
 
 
@@ -170,7 +183,7 @@ while getopts ":o:dqscQh" opt; do
     s  ) CGSS=1;;
     c  ) CASCADE=1;;
     Q  ) QUIET=1;;
-    h  ) echo -e $usage; exit 0;;
+    h  ) echo -e "$usage"; exit 0;;
     \? ) echo -e "Unrecognized option\n$usage"; exit 1;;
     -  ) shift; break;; #Standard argument separator
   esac

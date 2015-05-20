@@ -12,12 +12,10 @@
 	ob_end_clean();	
 	if($arrayResponse === "OK") {		
 	}else{
-		//echo "not ok $arrayResponse";	
-		
-		$to = "epiexplorer@mpi-inf.mpg.de";
+		//echo "not ok $arrayResponse";
  		$subject = "CGS XMLRPC Server is not working! (".date("H:i:s d.m.y")." , ".anonimizedUser().")";
  		$body = "On ".date("H:i:s d.m.y")." requested by ".$_SERVER["REMOTE_ADDR"]." (".gethostbyaddr($_SERVER["REMOTE_ADDR"])."\nStatus:'".$arrayResponse."'";
- 		if (mail($to, $subject, $body)) {
+ 		if (mail($contact_email, $subject, $body)) {
    			header( 'Location: maintenance.php') ;
   		} else {
    			header( 'Location: maintenance.php') ;
@@ -202,7 +200,8 @@ $(function() {
 		return queryText;			
 	}	
 	var regionSetOverlapWords = {
-				"broad_histones":"overlaps:bhistone:*",				
+				"broad_histones":"overlaps:bhist:*",
+				// NJ Unclear what would need adding here for Blueprint
 				"ensembl_gene_promoters_centered":"overlaps:promoters_centered",
 				"repeat_masker":"overlaps:repeats:all",
 				"ensembl_gene_genes":"overlaps:genes",				

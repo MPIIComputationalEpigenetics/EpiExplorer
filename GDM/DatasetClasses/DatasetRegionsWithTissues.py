@@ -135,30 +135,32 @@ class DatasetRegionsWithTissues(Dataset.Dataset):
             self.chromIndex = int(self.chromIndex)
             self.chromStartIndex = int(self.chromStartIndex)
             self.chromEndIndex = int(self.chromEndIndex)
+
             for tissueIndex in range(len(self.tissues)):
                 tissue = self.tissues[tissueIndex]
                 datasetURL,datasetLocalFile = self.getDownloadInfo(tissueIndex)
-                f = gzip.GzipFile(datasetLocalFile,"rb")
+                f = gzip.GzipFile(datasetLocalFile, "rb")
                 lines = f.readlines()
                 f.close()
-                log(["Preprocessing",self.datasetSimpleName,tissue,len(lines)])
+                log("Preprocessing " + str(len(lines)) + " " + tissue + " features")
+
                 for line in lines:
                     line = line.strip().split("\t")
+
                     try:
-                        chrom = convertChromToInt(self.genome,line[self.chromIndex])
+                        chrom = convertChromToInt(self.genome, line[self.chromIndex])
                     except:
-                        if "_random" in line[self.chromIndex]:
-                            continue
-                        elif "chrM" in line[self.chromIndex]:
-                            continue
-                        elif "hap" in line[self.chromIndex]:
+                        if line[self.chromIndex] in ["_random", "chrM", "hap"]:
                             continue
                         elif line[self.chromIndex].startswith("chrUn"):
                             continue
                         else:
                             raise
-                    if self.filterByColumn == -1 or self.filterValue == line[self.filterByColumn]:
-                        bedLine = "\t".join([line[self.chromIndex],line[self.chromStartIndex],line[self.chromEndIndex]])+"\n"
+
+                    if self.filterByColumn == -1 or (self.filterValue == line[self.filterByColumn]):
+                        bedLine = "\t".join([line[self.chromIndex],
+                                             line[self.chromStartIndex],
+                                             line[self.chromEndIndex]]) + "\n"
                         bedFiles[tissue].write(bedLine)
                         bedFiles["any"].write(bedLine)
 
@@ -170,8 +172,15 @@ class DatasetRegionsWithTissues(Dataset.Dataset):
                 fileNameOrig = self.getBedFile(tissue)+".unsorted"
                 fileNameSorted = self.getBedFile(tissue)+".sorted"
                 fileNameMerged = self.getBedFile(tissue)
-                subprocess.Popen(settings.bedToolsFolder+"sortBed -i "+fileNameOrig+" > "+fileNameSorted,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE).communicate()
-                subprocess.Popen(settings.bedToolsFolder+"mergeBed -i "+fileNameSorted+" > "+fileNameMerged,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE).communicate()
+                subprocess.Popen(settings.bedToolsFolder+"sortBed -i "+fileNameOrig+" > "+fileNameSorted,
+                                 shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+                subprocess.Popen(settings.bedToolsFolder+"mergeBed -i "+fileNameSorted+" > "+fileNameMerged,
+                                 shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+
+                # Error catching is not working here, sorted file is not being written in some circumstances
+                # (reserved/meta characters in file name)
+                # Hence the unlink fails below to remove it
+                # The unsorted file is also removed, so hard to investigate without hacking the code
                 os.unlink(fileNameOrig)
                 os.unlink(fileNameSorted)
 
@@ -317,8 +326,8 @@ class DatasetRegionsWithTissues(Dataset.Dataset):
         return settings.rawDataFolder[self.genome]+self.datasetSimpleName+"_"+tissue+".bed"
 
     def calculateCoverages(self):
-        print "Calculating coverage:"
         for tissue in self.tissues+["any"]:
+            log("Calculating coverages for:\t" + self.getBedFile(tissue))
             data =  self.getRegionsFromLocalBED(self.getBedFile(tissue))
             coverage = self.calculateCoverage(numpy.asarray(data))
             self.coverages[tissue] = coverage

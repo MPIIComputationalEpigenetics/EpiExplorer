@@ -42,16 +42,18 @@ class GenomeIntervalArray:
     def load(self,chrom):        
         chromName = self.baseName.replace("CHR",str(chrom))        
         if not self.exist(str(chrom)):
-            raise GDMException, "Error: the file "+chromName+" could not be found"
+            raise GDMException, "Error: the file " + chromName + " could not be found"
         buffer = zipfile.ZipFile(self.zipFileName).read(os.path.basename(chromName))
         tempArray = numpy.frombuffer(buffer,dtype=self.arrayType)
         self.chroms[chrom] = numpy.reshape(tempArray,(-1,self.arrayDimension))
-        
+
+
     def cleanup(self):
         self.store()
         for chrom in self.chroms.keys():
-            del self.chroms[chrom]        
-            
+            del self.chroms[chrom]
+
+
     def loadFullDataSortedbyChrom(self,d,removeInclusions):
         if len(d) == 0:
             raise Exception, "No data"
@@ -65,7 +67,8 @@ class GenomeIntervalArray:
                 startChromIndex = i
                 currentChrom = d[i][0]
         self.addChromosomeArray(currentChrom,map(lambda x:x[1:],d[startChromIndex:]),removeInclusions)
-                
+
+
     def addChromosomeArray(self,chrom,data,removeInclusions,esIndex = 1):
         #print chrom,len(data)
         global maxEnd
@@ -92,7 +95,8 @@ class GenomeIntervalArray:
         for i in xrange(1,self.chroms[chrom].shape[0]):
             if self.chroms[chrom][i-1,esIndex] >= self.chroms[chrom][i,esIndex]:
                 raise RegionsInclusionException, "Intervals "+str(self.chroms[chrom][i-1])+" and "+str(self.chroms[chrom][i])+" are fully included on chromosome "+str(chrom)+". Consider using IntervalTree for this dataset"  
-        
+
+
     def findOneDimentional(self, chrom, start, stop):
         if not self.chroms.has_key(chrom):
             raise Exception, "No data for chromosome "+str(chrom)+" this should be removed once the software is working"+str(self.chroms.keys())
@@ -156,6 +160,8 @@ class GenomeIntervalArray:
                 localData['distanceUpstream'] = settings.MAX_DISTANCE                
                 
                 return []
+
+
         if localData['currentChrom'] == chrom and localData['currentChromStart'] <= start:
             #gives the index of the first EQUAL OR SMALLER than the sought value
             startIndex = self.chroms[chrom].shape[0]            
@@ -163,13 +169,16 @@ class GenomeIntervalArray:
                 if self.chroms[chrom][i,esIndex] > start:
                     startIndex = i
                     break
-            
+
+
             #gives the index of the first LARGER than the sought value
             endIndex = self.chroms[chrom].shape[0]
             for i in xrange(localData['currentStartIndex'],self.chroms[chrom].shape[0]):
                 if self.chroms[chrom][i,ssIndex] >= stop:
                     endIndex = i
                     break
+
+
 #            endIndexCheck = self.chroms[chrom][:,ssIndex].searchsorted(stop,side="right")
 #            startIndexCheck = self.chroms[chrom][:,esIndex].searchsorted(start,side="left")
 #            if startIndexCheck != startIndex:
@@ -189,20 +198,26 @@ class GenomeIntervalArray:
             #gives the index of the first EQUAL OR LARGER than the sought value
             startIndex = self.chroms[chrom][:,esIndex].searchsorted(start,side="left")
             #print "start abs",startIndex,endIndex,(chrom, start, stop) 
-            #if value is too large os small it will give the same index and hence no values will be retrived           
+            #if value is too large os small it will give the same index and hence no values will be retrived
+
+
         try:
             localData['currentStartIndex'] = startIndex
             if localData['currentStartIndex'] > 0:
-                localData['distanceUpstream'] = start - self.chroms[chrom][localData['currentStartIndex']-1,1]                
+                # recasting this from numpy type to native int for sqlite3 compliance
+                localData['distanceUpstream'] = int(start - self.chroms[chrom][localData['currentStartIndex']-1,1])
             else:
                 localData['distanceUpstream'] = settings.MAX_DISTANCE
         except UnboundLocalError:
             startIndex = self.chroms[chrom].shape[0]
             localData['currentStartIndex'] = startIndex
             localData['distanceUpstream'] = settings.MAX_DISTANCE
+
+
         try:
             localData['currentEndIndex'] = endIndex
-            localData['distanceDownstream'] = self.chroms[chrom][localData['currentEndIndex'],0] - stop
+            # recasting this from numpy type to native int for sqlite3 compliance
+            localData['distanceDownstream'] = int(self.chroms[chrom][localData['currentEndIndex'],0] - stop)
             if localData['distanceDownstream'] < 0:
                 endIndex = self.chroms[chrom].shape[0]
                 localData['currentEndIndex'] = endIndex
@@ -214,7 +229,9 @@ class GenomeIntervalArray:
         except IndexError:
             endIndex = self.chroms[chrom].shape[0]
             localData['currentEndIndex'] = endIndex
-            localData['distanceDownstream'] = settings.MAX_DISTANCE 
+            localData['distanceDownstream'] = settings.MAX_DISTANCE
+
+
         localData['currentChrom'] = chrom
         localData['currentChromStart'] = start
         #print "end",localData['currentStartIndex'],localData['currentEndIndex']

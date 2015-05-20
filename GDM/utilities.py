@@ -1,4 +1,8 @@
+from __future__ import print_function  # Disable default print statement in place of function
+
+import os
 import os.path
+import time
 import hashlib
 import numpy
 import imp
@@ -6,15 +10,14 @@ import traceback
 import sys
 import shutil
 import re
-import time
 
 import settings
 
 
-class GDMException(Exception):
+class GDMException(Exception):    
     pass
 
-class GDMValueException(Exception):
+class GDMValueException(Exception):    
     pass
 
 class RegionsInclusionException(GDMException):
@@ -27,9 +30,9 @@ class CGSInvalidFormatException(GDMException):
 # Currently does nothing if it can't print to log file
 
 
-def log(s):
-    if isinstance(s,list):
-        s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))
+def log(s):    
+    if isinstance(s,list):                
+        s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))        
     else:
         s = time.strftime(settings.logTimeFormat)+ " " + str(s)
 
@@ -42,40 +45,40 @@ def log(s):
         settings.logSemaphore.release()
 
 def log_CFS(s):
-    if isinstance(s,list):
-        s = ["CFS"]+s
+    if isinstance(s,list):                
+        s = ["CFS"]+s        
     else:
         s = "CFS "+s
     log(s)
 
 def log_CDS(s):
-    if isinstance(s,list):
-        s = ["CDS"]+s
+    if isinstance(s,list):                
+        s = ["CDS"]+s        
     else:
         s = "CDS "+s
     log(s)
-
+        
 def log_CQS(s):
-    if isinstance(s,list):
-        s = ["CQS"]+s
+    if isinstance(s,list):                
+        s = ["CQS"]+s        
     else:
         s = "CQS "+s
     log(s)
-
+    
 def log_CSQuery(s):
-    if isinstance(s,list):
-        s = ["CSQuery"]+s
+    if isinstance(s,list):                
+        s = ["CSQuery"]+s        
     else:
         s = "CSQuery "+s
     log(s)
-
+    
 def log_CSEngine(s):
-    if isinstance(s,list):
-        s = ["CSEngine"]+s
+    if isinstance(s,list):                
+        s = ["CSEngine"]+s        
     else:
         s = "CSEngine "+s
     log(s)
-
+  
 
 def load_dataset_subclass(code_path,otherClasses):
     if False:
@@ -94,9 +97,9 @@ def load_dataset_subclass(code_path,otherClasses):
         fw.close()
     else:
         fn_with_dataset = code_path
-
+    
     return load_module(fn_with_dataset)
-
+    
 def load_module(code_path):
     try:
         try:
@@ -189,28 +192,32 @@ def listDatabaseInfo(databaseFile):
     conn = sqlite3.connect(databaseFile)
     c = conn.cursor()
     c.execute("select * from sqlite_master")
-    print "Listing data stored in ",databaseFile
+    print("Listing data stored in ",databaseFile)
     for row in c:
-        print row
+        print(row)
     c.close()
     conn.close()
-
+    
 def getIndexOfActiveModule(m):
     l = dir(m)
+
     for i in range(len(l)):
-        if l[i].startswith('d_'):
+        if l[i].startswith('d_'):            
             return i
+
         if l[i] in settings.datasetClasses:
             return i
-    extext = "No regognized dataset module in "+str(l)+"\n is specified in datasetClasses "+str(settings.datasetClasses)
-    log(extext)
-    raise Exception, extext
 
+    extext = "No recognized Dataset module in " + str(l) + "\n is specified in settings.datasetClasses " + \
+             str(settings.datasetClasses)
+    log(extext)
+    raise Exception, extext 
+        
 def gr_reduceRegionSet(setOfRegions, beginPos=0, endPos=1):
     finalSet = []
     ## the set of regions is ordered by start position
     # we remove all overlaps
-    while len(setOfRegions) > 1:
+    while len(setOfRegions) > 1:                
         if setOfRegions[0][endPos] < setOfRegions[1][beginPos]:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
@@ -218,7 +225,7 @@ def gr_reduceRegionSet(setOfRegions, beginPos=0, endPos=1):
             finalSet.append(setOfRegions[0])
             setOfRegions[:1] = []
         else:
-            new = [""] * (max(beginPos, endPos) + 1)
+            new = [""] * (max(beginPos, endPos) + 1) 
             new[beginPos] = setOfRegions[0][beginPos]
             new[endPos] = max(setOfRegions[0][endPos],setOfRegions[1][endPos])
             setOfRegions[0] = new
@@ -230,7 +237,7 @@ def gr_reduceRegionSetIntervalOld(setOfRegions):
     finalSet = []
     ## the set of regions is ordered by start poistion
     # we remove all overlaps
-    while len(setOfRegions) > 1:
+    while len(setOfRegions) > 1:                
         if setOfRegions[0].stop < setOfRegions[1].start:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
@@ -240,7 +247,7 @@ def gr_reduceRegionSetIntervalOld(setOfRegions):
         else:
             setOfRegions[0].stop = max(setOfRegions[0].stop,setOfRegions[1].stop)
             setOfRegions[1:2] = []
-    if len(setOfRegions):
+    if len(setOfRegions):        
         finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
     return finalSet
 
@@ -249,22 +256,22 @@ def gr_reduceRegionSetInterval(setOfRegions):
     if len(setOfRegions) == 0:
         return finalSet
     finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
-    setOfRegions[:1] = []
+    setOfRegions[:1] = [] 
     ## the set of regions is ordered by start poistion
     # we remove all overlaps
-    while len(setOfRegions) > 0:
+    while len(setOfRegions) > 0:                
         if finalSet[-1][1] < setOfRegions[0].start:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
             # hence the first one is not overlapping with any other
-            finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
+            finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])        
         else:
             #Extend the end of the last added region
             finalSet[-1][1] = max(finalSet[-1][1],setOfRegions[0].stop)
-        setOfRegions[:1] = []
+        setOfRegions[:1] = []    
     return finalSet
 
-def gr_Coverage(setOfRegions, minStart= None,maxEnd=None, startPos=0, endPos=1):
+def gr_Coverage(setOfRegions, minStart= None,maxEnd=None, startPos=0, endPos=1):    
     if len(setOfRegions) == 0:
         return 0
     if minStart:
@@ -285,7 +292,7 @@ def expandPatterns(basePatterns,k):
     for i in range(k-1):
         for p in prevPattern:
             for bp in basePatterns:
-               newPatterns.append(p+bp)
+               newPatterns.append(p+bp)         
         prevPattern = newPatterns
         newPatterns = []
     return prevPattern
@@ -314,8 +321,8 @@ def reverseLetter(a):
         return "A"
     else:
         return a
-
-def reverseComplement(s):
+    
+def reverseComplement(s):    
     x = map(reverseLetter,s)
     x.reverse()
     return "".join(x)
@@ -326,16 +333,16 @@ def getFastTmpCollectionFolder(datasetCollectionName):
 def getCompleteSearchDirectory(genome):
     return settings.indexDataFolder[genome]
 
-
+        
 def getCompleteSearchDocumentsWordsFile(datasetCollectionName,genome):
     path = getFastTmpCollectionFolder(datasetCollectionName)
     mkdir(path)
     return path+datasetCollectionName+".words-unsorted.ascii"
-    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"
+    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"    
 
 def getCompleteSearchDocumentsDescrioptionsFile(datasetCollectionName,genome):
     path = getFastTmpCollectionFolder(datasetCollectionName)
-    mkdir(path)
+    mkdir(path)    
     return path+datasetCollectionName+".docs-sorted"
     #return settings.indexDataFolder[genome]+datasetCollectionName+".docs-sorted"
 
@@ -350,11 +357,11 @@ def getCompleteSearchFinalDocumentsWordsFile(datasetCollectionName,genome):
     path = getCompleteSearchDirectory(genome)
     mkdir(path)
     return path+datasetCollectionName+".words-unsorted.ascii"
-    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"
+    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"    
 
 def getCompleteSearchFinalDocumentsDescrioptionsFile(datasetCollectionName,genome):
     path = getCompleteSearchDirectory(genome)
-    mkdir(path)
+    mkdir(path)    
     return path+datasetCollectionName+".docs-sorted"
     #return settings.indexDataFolder[genome]+datasetCollectionName+".docs-sorted"
 
@@ -368,7 +375,7 @@ def getCompleteSearchFinalPrefixesFile(datasetCollectionName,genome):
 
 def getCorrectedCoordinates(genome,chr,start,stop):
     if start > stop:
-        raise Exception, "Error: Start and end are switched"
+        raise Exception, "Error: Start and end are switched"    
     if start < 0:
         start = 0
     if start > settings.genomeData[genome][chr]:
@@ -377,15 +384,31 @@ def getCorrectedCoordinates(genome,chr,start,stop):
         stop = settings.genomeData[genome][chr]
     return start,stop
 
-
+# DEPRECATED. ALL STORED IN THE SETTINGS NOW
+#def getChromosomeLengths(chrs):
+#    import DatasetClasses.dnasequence
+#    ds = DatasetClasses.dnasequence.DNASequence()
+#    ds.hasGenomicRegions = "False"    
+#    ds.patterns = "1"
+#    ds.datasetRawData = "/TL/epigenetics/nobackup/epigraph/AttributeDatabase_test/upload_workdir/hg18_genome/"
+#    ds.genome = "hg18"
+#    ds.currentLoadedChromosome = None
+#    ds.currentLoadedChromosomeSeq = None
+#    ds.init()
+#    for chr in chrs:
+#        ds.loadChromosome(chr)
+#        #print chr,len(ds.currentLoadedChromosomeSeq)
+    
+    
+    
 def wordMagnitude(i,size = 2):
     if i:
         y = str(i)[:size-1]
         z = size-1-len(y)
         if z:
-            x = str(int(numpy.log10(i))) + "0"*z + y
+            x = str(int(numpy.log10(i))) + "0"*z + y            
         else:
-            x = str(int(numpy.log10(i))) + y
+            x = str(int(numpy.log10(i))) + y            
         return x
     else:
         return "0"*size
@@ -394,8 +417,11 @@ def wordFloatFixed(f,np,nq):
     #represent each float as xxxxyyyyyyy
     #where #x = np and #y = yyyyyyy
     p = int(f)
-    q = f-p
+    q = f-p                     
     return wordFixed(p,np) + wordFloat(q,nq)
+
+
+# this is lpad! Or even pythons own zfill!
 
 def wordFixed(f,n):
     r = str(f)
@@ -406,32 +432,32 @@ def wordFixed(f,n):
         return r
     else:
         raise Exception, "Cannot normalize "+str(f)+" to "+str(n)+" characters"
-
+    
 def wordFloat(f,n):
     if f == 1:
         return "9"*n
     else:
-        w = str(int(f*pow(10,n)))
-        return "0"*(n-len(w))+w
-
+        w = str(int(f*pow(10,n)))        
+        return "0"*(n-len(w))+w 
+    
 def getSafeWord(word,additional=""):
-    # if the worh contains only allowed characters then
+    # if the worh contains only allowed characters then  
     # the translate will delete the whole word and return ""
     allowedChracters = additional +  settings.allowed_chars
     if word.translate(settings.trans_table,allowedChracters):
 #        raise Exception, word
-        return filter(lambda x:x in allowedChracters,word)
+        return filter(lambda x:x in allowedChracters,word)            
     return word
 
 def getMainDatasetIndexFileName(datasetCollectionName):
-    import sys
+    import sys    
     if sys.platform == "win32":
         datasetsIndexFile = settings.baseFolder+"Datasets/win_"+datasetCollectionName+".ini"
     else:
         datasetsIndexFile = settings.baseFolder+"Datasets/unix_"+datasetCollectionName+".ini"
-    return datasetsIndexFile
+    return datasetsIndexFile 
 
-
+    
 def toTermWordScore(numberOfGenes,base):
     # The idea of this score is to make categories with base or less genes to have the maximum score
     # Thsi ensures that they will be ommited from the list
@@ -443,65 +469,65 @@ def toTermWordScore(numberOfGenes,base):
     #    50        64
     #    500        16
     #    5000        4
-    #    15,000      1
+    #    15,000      1      
     #    >16,000     0
     return int(max(min(numpy.floor(256/numpy.power(4,numpy.log10(numberOfGenes/float(base))))-1,255),0))
 
 def getWordOMIMscore(numberOfGenes):
-    return str(toTermWordScore(numberOfGenes,1))
+    return str(toTermWordScore(numberOfGenes,1))    
     #return str(int(wordMagnitude(numberOfGenes,2)))
 
 def getWordGOscore(numberOfGenes):
-    return str(toTermWordScore(numberOfGenes,5))
+    return str(toTermWordScore(numberOfGenes,5))    
     #return str(int(wordMagnitude(numberOfGenes,2)))
 
 def getCurrentFolder():
     return settings.baseFolder+"GDM/"
     #return os.path.abspath(os.path.curdir)+os.sep
-
+    
 
 import pickle
 class Coverages:
     def __init__(self):
         self.coverages = {}
-
+        
     def getFile(self, genome):
-        return settings.rawDataFolder[genome]+"coverages.txt"
-
+        return settings.rawDataFolder[genome]+"coverages.txt"            
+        
     def storeCoverageValues(self, genome, datasetSimpleName, coverageValues):
         fName = self.getFile(genome)
         f = open(fName, "w+");
         try:
             self.coverages[datasetSimpleName] = coverageValues
-
+                        
             pickle.dump(self.coverages, f)
-        except Exception, ex:
+        except Exception, ex:        
             log("Error: "+str(ex))
         finally:
             f.close();
 
-    def _loadCoverageValues(self, genome):
+    def _loadCoverageValues(self, genome):        
         if len(self.coverages) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.coverages = {}
-            else:
+            else:    
                 f = open(self.getFile(genome), "r");
                 self.coverages = pickle.load(f)
                 f.close()
-
-        return self.coverages
-
+            
+        return self.coverages        
+        
     def getCovarageValues(self, genome, datasetSimpleName):
-        self._loadCoverageValues(genome)
-        if self.coverages.has_key(datasetSimpleName):
+        self._loadCoverageValues(genome)   
+        if self.coverages.has_key(datasetSimpleName): 
             return self.coverages[datasetSimpleName]
         return None
-
+    
 c = Coverages()
 
 def storeCoverageValues(genome, datasetSimpleName, coverageValues):
-    c.storeCoverageValues(genome, datasetSimpleName, coverageValues)
-
+    c.storeCoverageValues(genome, datasetSimpleName, coverageValues)    
+    
 def getCovarageValues(genome, d):
     return c.getCovarageValues(genome, d)
 
@@ -509,45 +535,45 @@ def getCovarageValues(genome, d):
 class DownloadUrls:
     def __init__(self):
         self.downloadUrls = {}
-
+        
     def getFile(self, genome):
-        return settings.rawDataFolder[genome]+"download_urls.txt"
-
+        return settings.rawDataFolder[genome]+"download_urls.txt"            
+        
     def storeUrls(self, genome, datasetSimpleName, urls, date):
         fName = self.getFile(genome)
         f = open(fName, "w+");
-
+        
         self.downloadUrls[datasetSimpleName] = urls
         self.downloadUrls[datasetSimpleName]["__date"] = date
-
-        pickle.dump(self.downloadUrls, f)
+                        
+        pickle.dump(self.downloadUrls, f)        
         f.close();
 
-    def _loadUrls(self, genome):
+    def _loadUrls(self, genome):        
         if len(self.downloadUrls) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.downloadUrls = {}
-            else:
+            else:    
                 f = open(self.getFile(genome), "r");
                 self.downloadUrls = pickle.load(f)
                 f.close()
-
+            
         return self.downloadUrls
-
+        
     def getUrls(self, genome, datasetSimpleName):
-        self._loadUrls(genome)
-        if self.downloadUrls.has_key(datasetSimpleName):
+        self._loadUrls(genome)   
+        if self.downloadUrls.has_key(datasetSimpleName): 
             urls = self.downloadUrls[datasetSimpleName].copy()
             date = urls["__date"]
             del(urls["__date"])
             return urls, date
         return None, None
-
+    
 dUrls = DownloadUrls()
 
 def storeUrlsValues(genome, datasetSimpleName, urls, date):
-    dUrls.storeUrls(genome, datasetSimpleName, urls, date)
-
+    dUrls.storeUrls(genome, datasetSimpleName, urls, date)    
+    
 def getUrlsValues(genome, d):
     return dUrls.getUrls(genome, d)
 
@@ -584,7 +610,7 @@ def moveTmpIndexFilesToIndexFolder(datasetCollectionName,genome):
 def retryCall(call,times,timeToSleep=0):
     ex = GDMException()
     while times > 0:
-        try:
+        try:            
             return call()
         except Exception, ex:
             times -= 1
@@ -594,7 +620,7 @@ def retryCall(call,times,timeToSleep=0):
                 log("retryCall: Error "+str(call)+str(ex))
                 time.sleep(timeToSleep)
     raise GDMException, "Failed "+str(call)+" several times "+str(times)
-
+            
 
 # TODO Move CGS server specific methods to cgs_base_server.py class
 # or at least genericise them and call from base class
@@ -617,7 +643,7 @@ def write_pid_to_file(process_name, pid_file):
                     data.append(pid_line)
                     seen_server = True
                 else:
-                    data.append(line)
+                    data.append(line.rstrip())
 
             if not seen_server:
                 data.append(pid_line)
@@ -629,11 +655,10 @@ def write_pid_to_file(process_name, pid_file):
         file_obj = open(pid_file, 'w')
         file_obj.write("\n".join(data))
         file_obj.close()
-        print "out"
 
     except IOError, e:
         # Don't raise here as this is not fatal, but will prevent cgscontrol.sh from working
-        print str(e.args) + "\n\t" + str(pid_file)
+        print(e.args + "\n\t" + pid_file)
 
 
 
@@ -721,6 +746,10 @@ def line_count(file_name):
 
 
 def downloadFile(url, local_file):
+    # NJ This isfile test is likely already done in the caller (ideally with an MD5 check)
+    # todo add a force=True arg, that would change current behaviour
+    # todo fetch to tmp file and mv to final local_file, as broken/partial downloads will currently be used
+
     if os.path.isfile(local_file):
         raise Exception("Error: File already exists " + local_file)
 
@@ -775,7 +804,7 @@ def rm_files(files, raise_exception=False):
                 if raise_exception:
                     raise
                 else:
-                    warning("Failed to unlink file:\t" + file_path)
+                    warning("Failed to unlink file:\t" + file_path + "\n" + ex.strerror)
 
         elif raise_exception:
             raise Exception("Failed to remove file as path is not a file or a link or does not exist:\t" + file_path)
@@ -788,10 +817,151 @@ def rm_files(files, raise_exception=False):
     return rmd_files
 
 
-# TODO Move this to and import from system_utils.py?
+# TODO Move this to server_utils.py or readDatasetDescriptions.py or a renamed module which handles both read and write
+# Is datasetPythonClass relative path okay here?
+# Why is hasFeatures False here for user sets, when all but the tiling sets have this set to True?
 
-#def warning(*objs):
-#    print("WARNING: ", *objs, file=sys.stderr)
+# Defaults, mandatory fields and var dependancy logic should be handled in Dataset classes (adding additional base
+# classes if required).
+# Simply create the object to set the defaults or test the mandatory requirements
+# This would require moving Dataset creation code out of readDatasetDescriptions.py
+
+# Why are some of these not in dset_info, what happens to hasFeatures when read from settings file?
+# There's also a massive redundancy between creating the Dataset objects and what is cached in
+# CGSDataset.datasetInfo it seems there is some translation and copying of the dictionary, rather than just using
+# the dataset object!? Consequently some of these values are never cached in CGSDataset.datasetInfo, some of these seem
+# redundant? useNeighborhood is surely True if neighborhoodBeforeStart and neighborhoodAfterEnd are set?
+
+# All other have hasFeatures = True except hg*_PutativeenhancersErnstetal.ini?
+# is this because it is a default query set?
+# what is the difference between hasFeatures and hasGenomicRegions?
+# No, hg19_ucsc_cpg_islands hasGenomicsRegions and features
+# This is generated via a merge and intersect of some chmm files
+# It unclear where the actual merged datafile is, or where the additional settings file is
+
+
+def write_dataset_ini_file(filename, dset_info, compute_settings=None):
+    dset_info = dset_info.copy()   # Shallow copy dset_info so we don't update/destroy in caller
+
+    if compute_settings is None:
+        compute_settings = {}  # Protect against mutable default
+
+    # datasetSimpleName:   Mandatory - Specific internal name  e.g. hg18_TFBS_cmyc rather than c-myc. Seems to match ini
+    #  file name
+    # datasetOfficialName: Mandatory(non-user) - Specific display name e.g. c-myc rather than hg18_TFBS_cmyc
+    # datasetWordName:     Mandatory - Seems to be to a broad classification of the data type
+    #   e.g. bhist (Broad histone), tfbs, rrbs etc.
+
+    # genome:              Mandatory - UCSC genome version e.g. hg19. This is normally implicit from the name.
+    # hasGenomicRegions:   Mandatory - Boolean
+    #   True for all default query sets, gene, tiling, DNase1, Infinium, repeats/conservation (algorithms) & lamin B1?
+    #   False for all TFBS and histone Chip-Seq. RnBeads (inc tiling, genes, promoters, probes & cpg), RRBS, DNAsequence
+    #   chromosome_band, ChromHMM
+    # regionsFiltering:    Mandatory - but can be empty for user sets
+    #   Always combineOverlaps apart from gene like inis which also have: remove duplicates, merge gene names
+    # hasFeatures:         Mandatory - Boolean
+    #   True for all but tiling sets and hg1*_PutativeenhancersErnstetal.ini (is this a bug?)
+    # features:            Dependant on hasFeatures and data type???
+    # datasetFrom:
+    # datasetMoreInfo: Mandatory(seemingly) - Seems to be used for web display link of source data, or empty for
+    #   defaults data sets and some infinium sets
+    # datasetType: Optional - seemingly only ever set to II27 for Illumina Infinium sets
+    # hasBinning: Optional - seemingly always True. Default query sets only
+    # additionalSettingFile: Optional - Only for hg*_PutativeenhancersErnstetal.ini and user data sets
+    # dataCategories:      Optional? - Slash(/) separated list of data categories. Used in index, so order
+    #   appears to matter and should match other data sets with same categories.
+    # Use ini_vars to ensure nicely ordered output
+    # Drop this and just use an ordered dictionary? Needs python 2.7
+    # This may not support all data types yet, but definitely checked all hg19: default query sets, Histones, TFBS, RRBS
+    # Probably need to add ChromHMM for Blueprint segmentations, and look at Ensembl RegBuild too.
+    # There's a whole bunch more variables
+    # find ./ -name 'hg19*ini' -exec cat {} \; | grep '=' | grep -vE '^#' | cut -f 1 -d '=' | sort | uniq
+
+    ini_vars = ['datasetSimpleName', 'datasetWordName', 'genome', 'hasGenomicRegions', 'regionsFiltering',
+                'hasFeatures', 'features', 'useNeighborhood', 'neighborhoodBeforeStart', 'neighborhoodAfterEnd',
+                'histoneMark', 'tissue', 'tissues', 'datasetFrom', 'datasetFormat', 'datasetOriginal', 'chromIndex',
+                'chromStartIndex', 'chromEndIndex', 'signalValueIndex', 'pValueIndex', 'scoreIndex', 'scoreBase',
+                'hasHeader', 'datasetPythonClass', 'datasetOfficialName', 'dataCategories', 'datasetDescription',
+                'datasetMoreInfo', 'datasetType', 'hasBinning', 'additionalSettingsFile']
+    # Do a bit of pre-formatting
+
+    if 'dataCategories' in dset_info:
+        dset_info['dataCategories'] = "/".join(dset_info['dataCategories'])
+        # why is this / separated rather than comma?
+        # Eventually used in index by converting to a single spacelss string
+        # sometimes with datasetWordName appended
+    dset_info['datasetDescription'] = dset_info['datasetDescription'].replace("\n", " ### ")
+    out_string = ''
+
+    # Handle str or iterable values
+    for str_or_iter_var in ['tissues', 'datasetFrom', 'datasetMoreInfo']:
+        if (str_or_iter_var in dset_info) and hasattr(dset_info[str_or_iter_var], '__iter__'):
+            dset_info[str_or_iter_var] = ', '.join(dset_info[str_or_iter_var])  # assume iterable contains strings
+
+    # Add the known vars in order at the start
+    for ini_var in ini_vars:
+
+        if ini_var in dset_info:
+            out_string += ini_var + " = " + str(dset_info[ini_var]) + "\n"
+            del dset_info[ini_var]  # this will be affecting reference in caller!
+
+    # Add the unknown vars at the bottom
+    for ini_var in dset_info:
+        warning("Ini file variable is not recognised in ordered list:\t" + ini_var)  # It may still be valid
+        out_string += ini_var + " = " + str(dset_info[ini_var]) + "\n"
+
+    # These seem only to be used for 'Regions' inis, but always set to false?
+    for cs in ["mergeOverlaps", "useScore", "useStrand"]:
+        if cs in compute_settings and compute_settings[cs]:
+            out_string += cs + " = True\n"
+
+            if cs == "useScore":
+                out_string += "scoreIndex = 4\n"
+            elif cs == "useStrand":
+                out_string += "strandIndex = 5\n"
+        else:
+            # This is seemingly not mandatory for non User sets as they are not in the ini files
+            out_string += cs + " = False\n"
+
+    f = open(filename, "w")
+    f.write(out_string)
+    f.close()
+    return
+
+
+# TODO Move this to a seq_utils.py class?
+# Regex to match Brno histone nomenclature
+# See validate_histone_string for more info
+# r(awstring) prefix as we don't want the escapes to pass through the string interpreter to re.compile
+brno_regex = re.compile(r"""H([1234]|(2(A|B)(\.)?[12XZ]))  # Histone variant (Groups 1-4)
+                               ([A-Za-z]+[1-9][0-9]{0,2})? # Residue type/position optional (Group 5)
+                               ([A-Za-z]+[1-3]?)?$         # Residue Modification optional (Group 6)""", re.VERBOSE)
+
+
+def validate_histone_string(hist_string):
+    """Matches string argument against the brno histone nomenclature (doi:10.1038/nsmb0205-110).
+    This should match all valid formats e.g.
+        Histone variant:    H1, H2, H3, H4, H2A.Z etc
+        Histone residue:    H3K4, H4K20
+        Histone modification: H3ac (general), H3K27ac (specific)
+    The are some caveats which should be noted:
+        1. Residue and modification matches are case insensitive
+        2. H2A/B '.' specification is optional e.g. H2AZ and H2A.Z are both matched
+        3. The histone variant match largely only deals with the main histone family, not subfamily (except some H2A/B)
+           or the more specific sub-family members
+
+    Args:
+      hist_string (string): Histone or histone modification name
+
+    Returns:
+      MatchObject or None
+
+    Raises:
+      See re.match
+    """
+    return brno_regex.match(hist_string)
+
 
 def warning(*objs):
-    print("WARNING: ", str(objs)) #, file=sys.stderr)
+    # TODO Move this to and import from system_utils.py?
+    print("WARNING: ", *objs, file=sys.stderr)

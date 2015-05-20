@@ -5,7 +5,6 @@
   include("utils.php");
   require_once 'phpJSON/JSON.php';
   
-  
   header('Content-Type: text/html'); // plain html file	
   if (isset($_GET['datasetID'])) {
   	$datasetID = $_GET['datasetID'];
@@ -24,8 +23,8 @@
   		}else{
   			echo "Your dataset is still in the waiting queue.<br/><br/> Please check again later. <br/><i>We recommend providing your email for dataset computation as you will receive an automatic notification as soon as your dataset is processed.</i>'";
   		}
-  	}else if ($arrayResponse[0] == 3){  		
-  		echo "There was an error when processing your dataset.<br/><br/> The error message was '".$arrayResponse[1]."'<br/><br/> If the error message is unclear please contact us for more information at epiexplorer@mpi-inf.mpg.de";	
+  	}else if ($arrayResponse[0] == 3){
+  		echo "There was an error when processing your dataset.<br/><br/> The error message was '".$arrayResponse[1]."'<br/><br/> If the error message is unclear please contact us for more information at ".$contact_email;
   	}else if ($arrayResponse[0] == -1){
   		echo "No such dataset!";
   	}

@@ -30,7 +30,7 @@ class RRBSmethylation(Dataset.Dataset):
         self.chromStartIndex = int(self.chromStartIndex)
         self.chromEndIndex = int(self.chromEndIndex)
         self.scoreIndex = int(self.scoreIndex)        
-        self.scoreBase = int(self.scoreBase)/100
+        self.scoreBase = float(self.scoreBase)/100
         self.hasHeader = int(self.hasHeader)
         Dataset.Dataset.init(self,initCompute)                
         self.initialized = True
@@ -94,12 +94,14 @@ class RRBSmethylation(Dataset.Dataset):
                     try:
                         chrom = convertChromToInt(self.genome,lines[i][self.chromIndex])
                     except GDMException, ex:
-                        continue                                                                              
+                        continue
+
+                    score = 0 if lines[i][self.scoreIndex] == "0" else int(float(lines[i][self.scoreIndex])/self.scoreBase)
                     c.execute('INSERT INTO '+self.datasetSimpleName+' VALUES (?,?,?,?)',
-                            tuple([chrom,
-                                   int(lines[i][self.chromStartIndex])+1,
-                                   int(lines[i][self.chromEndIndex]),                                          
-                                   int(lines[i][self.scoreIndex])/self.scoreBase]))
+                              tuple([chrom,
+                                     int(lines[i][self.chromStartIndex])+1,
+                                     int(lines[i][self.chromEndIndex]),
+                                     score]))
             else:
                 raise GDMException, "Alternative dataset format is not supported yet"
             conn.commit()                
@@ -115,7 +117,7 @@ class RRBSmethylation(Dataset.Dataset):
         log(self.datasetSimpleName + ": the dataset was preprocessed into local DB "+self.binaryFile)
     
     def initializePropertiesComputeStructures(self):
-        log("computing interval array for "+self.datasetSimpleName)
+        log("computing interval array for " + self.datasetSimpleName)
         chromData = {}
         chromSizes = {}
        
@@ -175,7 +177,7 @@ class RRBSmethylation(Dataset.Dataset):
             #regionID INTEGER, numberCpGs INTEGER, methRatio INTEGER, methMin INTEGER, methMax INTEGER, methStd INTEGER             
             results = [[row[0], 0, 0, 0, 0, 0]]
         else:
-            
+
             results = [[row[0], 
                       overlap_count, #numberCpGs INTEGER,
                       int(overlapingRegions[:,2].mean()), #methRatio INTEGER

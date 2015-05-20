@@ -11,7 +11,7 @@ import threading
 # classes for the datasets that were accepted until now
 datasetClasses = ["DatasetRegions", "DatasetRegionsWithTissues", "DNASequence", "RRBSmethylation", "Genes",
                   "ChromatinModifications", "RepeatMasker", "Conservation", "BroadHistones",  "TilingRegions",
-                  "IIDataset", "Infinium", "ChromosomeBand", "BroadHistonesSingle", "NIHEpigenomeWig"]
+                  "IIDataset", "Infinium", "ChromosomeBand", "BroadHistonesSingle", "NIHEpigenomeWig", 'Histone']
 
 # max disatnce parameter
 MAX_DISTANCE = 1000000000

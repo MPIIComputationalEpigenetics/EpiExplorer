@@ -34,10 +34,16 @@ class Dataset:
     # this methods initiates all structures required by this module, and possibly some preprocessing of the dataset
     def init(self,initCompute=True):
         # Check if the dataset has or uses scores or strands, Currently only the genes and custom datasets do
-        if not hasattr(self, "useScore"):
-            self.useScore = False
-        if not hasattr(self, "useStrand"):
-            self.useStrand = False
+        # True/False recasting should be really be done in readDataset and leaving type checking to __init__
+        for bool_var in 'useScore', 'useStrand':
+            if not hasattr(self, bool_var) or getattr(self, bool_var) == 'False':
+                setattr(self, bool_var, False)
+            elif getattr(self, bool_var) == 'True':
+                setattr(self, bool_var, True)
+            elif type(getattr(self, bool_var)) != bool:
+                # Could be set to string 0 which we eval as True
+                raise TypeError, bool_var + " must be a boolean(True|False) not: " + getattr(self, bool_var)
+
 
         self.hasBinning = hasattr(self, "hasBinning") and (self.hasBinning == "True" or self.hasBinning == True)
 
@@ -186,8 +192,10 @@ class Dataset:
         return documentID
 
     def uploadSingleRegionPropertiesToStoreStructure(self, properties, cgsAS, dataConnections):
+
         if not cgsAS.getFeatureDatasetProperty(self.datasetSimpleName,"insertSQL") and len(properties) > 0:
             cgsAS.setFeatureDatasetProperty(self.datasetSimpleName,"insertSQL","INSERT INTO " + self.datasetSimpleName + "_data VALUES ("+"?,"*(len(properties[0])-1)+"?)")
+
         for el in properties:
             dataConnections[0][1].execute(cgsAS.getFeatureDatasetProperty(self.datasetSimpleName,"insertSQL"),tuple(el))
 
@@ -208,7 +216,6 @@ class Dataset:
         dataConnections = self.openDBConnections(cgsAS)
         # the first element of the data connections is a list with two obects
         # the database connction ot the data file and the cursor for this connection
-        #
 
         try:
             #initialized the structure in which to store all properties of this dataset w.r.t. another region
@@ -224,6 +231,7 @@ class Dataset:
                 self.uploadSingleRegionPropertiesToStoreStructure(properties,cgsAS,dataConnections)
                 if cc%self.regionsCountMod == 0:
                     log([ self.datasetSimpleName,":",cc,"out of",nRows])
+
             #print self.datasetSimpleName,cc
             dataConnections[0][0].commit()
         except:
@@ -273,6 +281,7 @@ class Dataset:
             #print self.datasetId
         return datasetID
 
+
     def openDBConnections(self,cgsAS):
         regionsData = getDatasetDataName(cgsAS.datasetCollectionName, self.genome, self.datasetSimpleName)
         connData = sqlite3.connect(regionsData)
@@ -308,6 +317,7 @@ class Dataset:
             return True
         else:
             return False
+
     def hasPreprocessedFile(self):
         self.binaryFile = self.getDatasetBinaryName()
         if not os.path.isfile(self.binaryFile):
@@ -406,16 +416,20 @@ class Dataset:
 
         return regions
 
+
     def __init_regions_dataset_for_local_db__(self,ds):
         log(self.datasetSimpleName + ": initializing regions local db ")
         self.binaryFile = self.getDatasetBinaryName()
+
         if self.hasPreprocessedFile():
             #what to do if the data was already preprocessed
-            extext = self.datasetSimpleName + ": the regions database already exists "+self.binaryFile
+            extext = self.datasetSimpleName + ": the regions database already exists " + self.binaryFile
             log(extext)
             return
             raise Exception, extext
+
         log(self.datasetSimpleName + ": preprocessing the dataset into local database")
+       
         try:
             conn = sqlite3.connect(self.binaryFile)
             c = conn.cursor()
