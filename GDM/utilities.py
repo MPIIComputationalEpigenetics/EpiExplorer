@@ -6,14 +6,15 @@ import traceback
 import sys
 import shutil
 import re
+import time
 
 import settings
 
 
-class GDMException(Exception):    
+class GDMException(Exception):
     pass
 
-class GDMValueException(Exception):    
+class GDMValueException(Exception):
     pass
 
 class RegionsInclusionException(GDMException):
@@ -26,9 +27,9 @@ class CGSInvalidFormatException(GDMException):
 # Currently does nothing if it can't print to log file
 
 
-def log(s):    
-    if isinstance(s,list):                
-        s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))        
+def log(s):
+    if isinstance(s,list):
+        s = time.strftime(settings.logTimeFormat)+ " " +" , ".join(map(str,s))
     else:
         s = time.strftime(settings.logTimeFormat)+ " " + str(s)
 
@@ -41,40 +42,40 @@ def log(s):
         settings.logSemaphore.release()
 
 def log_CFS(s):
-    if isinstance(s,list):                
-        s = ["CFS"]+s        
+    if isinstance(s,list):
+        s = ["CFS"]+s
     else:
         s = "CFS "+s
     log(s)
 
 def log_CDS(s):
-    if isinstance(s,list):                
-        s = ["CDS"]+s        
+    if isinstance(s,list):
+        s = ["CDS"]+s
     else:
         s = "CDS "+s
     log(s)
-        
+
 def log_CQS(s):
-    if isinstance(s,list):                
-        s = ["CQS"]+s        
+    if isinstance(s,list):
+        s = ["CQS"]+s
     else:
         s = "CQS "+s
     log(s)
-    
+
 def log_CSQuery(s):
-    if isinstance(s,list):                
-        s = ["CSQuery"]+s        
+    if isinstance(s,list):
+        s = ["CSQuery"]+s
     else:
         s = "CSQuery "+s
     log(s)
-    
+
 def log_CSEngine(s):
-    if isinstance(s,list):                
-        s = ["CSEngine"]+s        
+    if isinstance(s,list):
+        s = ["CSEngine"]+s
     else:
         s = "CSEngine "+s
     log(s)
-  
+
 
 def load_dataset_subclass(code_path,otherClasses):
     if False:
@@ -93,9 +94,9 @@ def load_dataset_subclass(code_path,otherClasses):
         fw.close()
     else:
         fn_with_dataset = code_path
-    
+
     return load_module(fn_with_dataset)
-    
+
 def load_module(code_path):
     try:
         try:
@@ -193,23 +194,23 @@ def listDatabaseInfo(databaseFile):
         print row
     c.close()
     conn.close()
-    
+
 def getIndexOfActiveModule(m):
     l = dir(m)
     for i in range(len(l)):
-        if l[i].startswith('d_'):            
+        if l[i].startswith('d_'):
             return i
         if l[i] in settings.datasetClasses:
             return i
     extext = "No regognized dataset module in "+str(l)+"\n is specified in datasetClasses "+str(settings.datasetClasses)
     log(extext)
-    raise Exception, extext 
-        
+    raise Exception, extext
+
 def gr_reduceRegionSet(setOfRegions, beginPos=0, endPos=1):
     finalSet = []
     ## the set of regions is ordered by start position
     # we remove all overlaps
-    while len(setOfRegions) > 1:                
+    while len(setOfRegions) > 1:
         if setOfRegions[0][endPos] < setOfRegions[1][beginPos]:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
@@ -217,7 +218,7 @@ def gr_reduceRegionSet(setOfRegions, beginPos=0, endPos=1):
             finalSet.append(setOfRegions[0])
             setOfRegions[:1] = []
         else:
-            new = [""] * (max(beginPos, endPos) + 1) 
+            new = [""] * (max(beginPos, endPos) + 1)
             new[beginPos] = setOfRegions[0][beginPos]
             new[endPos] = max(setOfRegions[0][endPos],setOfRegions[1][endPos])
             setOfRegions[0] = new
@@ -229,7 +230,7 @@ def gr_reduceRegionSetIntervalOld(setOfRegions):
     finalSet = []
     ## the set of regions is ordered by start poistion
     # we remove all overlaps
-    while len(setOfRegions) > 1:                
+    while len(setOfRegions) > 1:
         if setOfRegions[0].stop < setOfRegions[1].start:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
@@ -239,7 +240,7 @@ def gr_reduceRegionSetIntervalOld(setOfRegions):
         else:
             setOfRegions[0].stop = max(setOfRegions[0].stop,setOfRegions[1].stop)
             setOfRegions[1:2] = []
-    if len(setOfRegions):        
+    if len(setOfRegions):
         finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
     return finalSet
 
@@ -248,22 +249,22 @@ def gr_reduceRegionSetInterval(setOfRegions):
     if len(setOfRegions) == 0:
         return finalSet
     finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
-    setOfRegions[:1] = [] 
+    setOfRegions[:1] = []
     ## the set of regions is ordered by start poistion
     # we remove all overlaps
-    while len(setOfRegions) > 0:                
+    while len(setOfRegions) > 0:
         if finalSet[-1][1] < setOfRegions[0].start:
             # the end of the first is smaller by the start of the second
             # they are ordered by start so every other will also be like this
             # hence the first one is not overlapping with any other
-            finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])        
+            finalSet.append([setOfRegions[0].start,setOfRegions[0].stop])
         else:
             #Extend the end of the last added region
             finalSet[-1][1] = max(finalSet[-1][1],setOfRegions[0].stop)
-        setOfRegions[:1] = []    
+        setOfRegions[:1] = []
     return finalSet
 
-def gr_Coverage(setOfRegions, minStart= None,maxEnd=None, startPos=0, endPos=1):    
+def gr_Coverage(setOfRegions, minStart= None,maxEnd=None, startPos=0, endPos=1):
     if len(setOfRegions) == 0:
         return 0
     if minStart:
@@ -284,7 +285,7 @@ def expandPatterns(basePatterns,k):
     for i in range(k-1):
         for p in prevPattern:
             for bp in basePatterns:
-               newPatterns.append(p+bp)         
+               newPatterns.append(p+bp)
         prevPattern = newPatterns
         newPatterns = []
     return prevPattern
@@ -313,8 +314,8 @@ def reverseLetter(a):
         return "A"
     else:
         return a
-    
-def reverseComplement(s):    
+
+def reverseComplement(s):
     x = map(reverseLetter,s)
     x.reverse()
     return "".join(x)
@@ -325,16 +326,16 @@ def getFastTmpCollectionFolder(datasetCollectionName):
 def getCompleteSearchDirectory(genome):
     return settings.indexDataFolder[genome]
 
-        
+
 def getCompleteSearchDocumentsWordsFile(datasetCollectionName,genome):
     path = getFastTmpCollectionFolder(datasetCollectionName)
     mkdir(path)
     return path+datasetCollectionName+".words-unsorted.ascii"
-    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"    
+    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"
 
 def getCompleteSearchDocumentsDescrioptionsFile(datasetCollectionName,genome):
     path = getFastTmpCollectionFolder(datasetCollectionName)
-    mkdir(path)    
+    mkdir(path)
     return path+datasetCollectionName+".docs-sorted"
     #return settings.indexDataFolder[genome]+datasetCollectionName+".docs-sorted"
 
@@ -349,11 +350,11 @@ def getCompleteSearchFinalDocumentsWordsFile(datasetCollectionName,genome):
     path = getCompleteSearchDirectory(genome)
     mkdir(path)
     return path+datasetCollectionName+".words-unsorted.ascii"
-    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"    
+    #return settings.indexDataFolder[genome]+datasetCollectionName+".words-unsorted.ascii"
 
 def getCompleteSearchFinalDocumentsDescrioptionsFile(datasetCollectionName,genome):
     path = getCompleteSearchDirectory(genome)
-    mkdir(path)    
+    mkdir(path)
     return path+datasetCollectionName+".docs-sorted"
     #return settings.indexDataFolder[genome]+datasetCollectionName+".docs-sorted"
 
@@ -367,7 +368,7 @@ def getCompleteSearchFinalPrefixesFile(datasetCollectionName,genome):
 
 def getCorrectedCoordinates(genome,chr,start,stop):
     if start > stop:
-        raise Exception, "Error: Start and end are switched"    
+        raise Exception, "Error: Start and end are switched"
     if start < 0:
         start = 0
     if start > settings.genomeData[genome][chr]:
@@ -376,31 +377,15 @@ def getCorrectedCoordinates(genome,chr,start,stop):
         stop = settings.genomeData[genome][chr]
     return start,stop
 
-# DEPRECATED. ALL STORED IN THE SETTINGS NOW
-#def getChromosomeLengths(chrs):
-#    import DatasetClasses.dnasequence
-#    ds = DatasetClasses.dnasequence.DNASequence()
-#    ds.hasGenomicRegions = "False"    
-#    ds.patterns = "1"
-#    ds.datasetRawData = "/TL/epigenetics/nobackup/epigraph/AttributeDatabase_test/upload_workdir/hg18_genome/"
-#    ds.genome = "hg18"
-#    ds.currentLoadedChromosome = None
-#    ds.currentLoadedChromosomeSeq = None
-#    ds.init()
-#    for chr in chrs:
-#        ds.loadChromosome(chr)
-#        #print chr,len(ds.currentLoadedChromosomeSeq)
-    
-    
-    
+
 def wordMagnitude(i,size = 2):
     if i:
         y = str(i)[:size-1]
         z = size-1-len(y)
         if z:
-            x = str(int(numpy.log10(i))) + "0"*z + y            
+            x = str(int(numpy.log10(i))) + "0"*z + y
         else:
-            x = str(int(numpy.log10(i))) + y            
+            x = str(int(numpy.log10(i))) + y
         return x
     else:
         return "0"*size
@@ -409,9 +394,9 @@ def wordFloatFixed(f,np,nq):
     #represent each float as xxxxyyyyyyy
     #where #x = np and #y = yyyyyyy
     p = int(f)
-    q = f-p                     
+    q = f-p
     return wordFixed(p,np) + wordFloat(q,nq)
-      
+
 def wordFixed(f,n):
     r = str(f)
     lr = len(r)
@@ -421,32 +406,32 @@ def wordFixed(f,n):
         return r
     else:
         raise Exception, "Cannot normalize "+str(f)+" to "+str(n)+" characters"
-    
+
 def wordFloat(f,n):
     if f == 1:
         return "9"*n
     else:
-        w = str(int(f*pow(10,n)))        
-        return "0"*(n-len(w))+w 
-    
+        w = str(int(f*pow(10,n)))
+        return "0"*(n-len(w))+w
+
 def getSafeWord(word,additional=""):
-    # if the worh contains only allowed characters then  
+    # if the worh contains only allowed characters then
     # the translate will delete the whole word and return ""
     allowedChracters = additional +  settings.allowed_chars
     if word.translate(settings.trans_table,allowedChracters):
 #        raise Exception, word
-        return filter(lambda x:x in allowedChracters,word)            
+        return filter(lambda x:x in allowedChracters,word)
     return word
 
 def getMainDatasetIndexFileName(datasetCollectionName):
-    import sys    
+    import sys
     if sys.platform == "win32":
         datasetsIndexFile = settings.baseFolder+"Datasets/win_"+datasetCollectionName+".ini"
     else:
         datasetsIndexFile = settings.baseFolder+"Datasets/unix_"+datasetCollectionName+".ini"
-    return datasetsIndexFile 
+    return datasetsIndexFile
 
-    
+
 def toTermWordScore(numberOfGenes,base):
     # The idea of this score is to make categories with base or less genes to have the maximum score
     # Thsi ensures that they will be ommited from the list
@@ -458,65 +443,65 @@ def toTermWordScore(numberOfGenes,base):
     #    50        64
     #    500        16
     #    5000        4
-    #    15,000      1      
+    #    15,000      1
     #    >16,000     0
     return int(max(min(numpy.floor(256/numpy.power(4,numpy.log10(numberOfGenes/float(base))))-1,255),0))
 
 def getWordOMIMscore(numberOfGenes):
-    return str(toTermWordScore(numberOfGenes,1))    
+    return str(toTermWordScore(numberOfGenes,1))
     #return str(int(wordMagnitude(numberOfGenes,2)))
 
 def getWordGOscore(numberOfGenes):
-    return str(toTermWordScore(numberOfGenes,5))    
+    return str(toTermWordScore(numberOfGenes,5))
     #return str(int(wordMagnitude(numberOfGenes,2)))
 
 def getCurrentFolder():
     return settings.baseFolder+"GDM/"
     #return os.path.abspath(os.path.curdir)+os.sep
-    
+
 
 import pickle
 class Coverages:
     def __init__(self):
         self.coverages = {}
-        
+
     def getFile(self, genome):
-        return settings.rawDataFolder[genome]+"coverages.txt"            
-        
+        return settings.rawDataFolder[genome]+"coverages.txt"
+
     def storeCoverageValues(self, genome, datasetSimpleName, coverageValues):
         fName = self.getFile(genome)
         f = open(fName, "w+");
         try:
             self.coverages[datasetSimpleName] = coverageValues
-                        
+
             pickle.dump(self.coverages, f)
-        except Exception, ex:        
+        except Exception, ex:
             log("Error: "+str(ex))
         finally:
             f.close();
 
-    def _loadCoverageValues(self, genome):        
+    def _loadCoverageValues(self, genome):
         if len(self.coverages) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.coverages = {}
-            else:    
+            else:
                 f = open(self.getFile(genome), "r");
                 self.coverages = pickle.load(f)
                 f.close()
-            
-        return self.coverages        
-        
+
+        return self.coverages
+
     def getCovarageValues(self, genome, datasetSimpleName):
-        self._loadCoverageValues(genome)   
-        if self.coverages.has_key(datasetSimpleName): 
+        self._loadCoverageValues(genome)
+        if self.coverages.has_key(datasetSimpleName):
             return self.coverages[datasetSimpleName]
         return None
-    
+
 c = Coverages()
 
 def storeCoverageValues(genome, datasetSimpleName, coverageValues):
-    c.storeCoverageValues(genome, datasetSimpleName, coverageValues)    
-    
+    c.storeCoverageValues(genome, datasetSimpleName, coverageValues)
+
 def getCovarageValues(genome, d):
     return c.getCovarageValues(genome, d)
 
@@ -524,45 +509,45 @@ def getCovarageValues(genome, d):
 class DownloadUrls:
     def __init__(self):
         self.downloadUrls = {}
-        
+
     def getFile(self, genome):
-        return settings.rawDataFolder[genome]+"download_urls.txt"            
-        
+        return settings.rawDataFolder[genome]+"download_urls.txt"
+
     def storeUrls(self, genome, datasetSimpleName, urls, date):
         fName = self.getFile(genome)
         f = open(fName, "w+");
-        
+
         self.downloadUrls[datasetSimpleName] = urls
         self.downloadUrls[datasetSimpleName]["__date"] = date
-                        
-        pickle.dump(self.downloadUrls, f)        
+
+        pickle.dump(self.downloadUrls, f)
         f.close();
 
-    def _loadUrls(self, genome):        
+    def _loadUrls(self, genome):
         if len(self.downloadUrls) == 0:
             if not os.path.exists(self.getFile(genome)):
                 self.downloadUrls = {}
-            else:    
+            else:
                 f = open(self.getFile(genome), "r");
                 self.downloadUrls = pickle.load(f)
                 f.close()
-            
+
         return self.downloadUrls
-        
+
     def getUrls(self, genome, datasetSimpleName):
-        self._loadUrls(genome)   
-        if self.downloadUrls.has_key(datasetSimpleName): 
+        self._loadUrls(genome)
+        if self.downloadUrls.has_key(datasetSimpleName):
             urls = self.downloadUrls[datasetSimpleName].copy()
             date = urls["__date"]
             del(urls["__date"])
             return urls, date
         return None, None
-    
+
 dUrls = DownloadUrls()
 
 def storeUrlsValues(genome, datasetSimpleName, urls, date):
-    dUrls.storeUrls(genome, datasetSimpleName, urls, date)    
-    
+    dUrls.storeUrls(genome, datasetSimpleName, urls, date)
+
 def getUrlsValues(genome, d):
     return dUrls.getUrls(genome, d)
 
@@ -599,7 +584,7 @@ def moveTmpIndexFilesToIndexFolder(datasetCollectionName,genome):
 def retryCall(call,times,timeToSleep=0):
     ex = GDMException()
     while times > 0:
-        try:            
+        try:
             return call()
         except Exception, ex:
             times -= 1
@@ -609,7 +594,7 @@ def retryCall(call,times,timeToSleep=0):
                 log("retryCall: Error "+str(call)+str(ex))
                 time.sleep(timeToSleep)
     raise GDMException, "Failed "+str(call)+" several times "+str(times)
-            
+
 
 # TODO Move CGS server specific methods to cgs_base_server.py class
 # or at least genericise them and call from base class
@@ -644,10 +629,11 @@ def write_pid_to_file(process_name, pid_file):
         file_obj = open(pid_file, 'w')
         file_obj.write("\n".join(data))
         file_obj.close()
+        print "out"
 
     except IOError, e:
         # Don't raise here as this is not fatal, but will prevent cgscontrol.sh from working
-        print e.args + "\n\t" + pid_file
+        print str(e.args) + "\n\t" + str(pid_file)
 
 
 
@@ -804,6 +790,8 @@ def rm_files(files, raise_exception=False):
 
 # TODO Move this to and import from system_utils.py?
 
+#def warning(*objs):
+#    print("WARNING: ", *objs, file=sys.stderr)
 
 def warning(*objs):
-    print("WARNING: ", *objs, file=sys.stderr)
+    print("WARNING: ", str(objs)) #, file=sys.stderr)
