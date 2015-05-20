@@ -1,10 +1,10 @@
-#!/usr/bin/env python -O 
-# -*- coding: utf-8 -*- 
-""" 
-****************************************************************************** 
-* Simple Threading XMLRPC-Server 
-****************************************************************************** 
-""" 
+#!/usr/bin/env python -O
+# -*- coding: utf-8 -*-
+"""
+******************************************************************************
+* Simple Threading XMLRPC-Server
+******************************************************************************
+"""
 
 
 # from threading import *
@@ -31,27 +31,32 @@ sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
 class CGSServer:
-    def __init__(self):   
+    def __init__(self):
         start_msg = "__init__: Starting CGS Forwarder XMLRPC-Server at:\t" + str(socket.gethostname()) + ":" + str(settings.forwardServerPort)
         log_CFS(start_msg)
         print start_msg + "\nLogfile:\t" + settings.logFile
 
-        self.queryServer = xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
-        self.datasetServer = xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
+        #self.query_server() = xmlrpclib.Server("http://"+settings.query_server()Host+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
+        #self.dataset_server = xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
         self.blockedServers = {}
         print "__init__: end"
         log_CFS("__init__: end")
 
-    
+    def query_server(self):
+        return xmlrpclib.Server("http://"+settings.queryServerHost+":"+str(settings.queryServerPort),encoding='ISO-8859-1',allow_none=True)
+
+    def dataset_server(self):
+        return xmlrpclib.Server("http://"+settings.datasetServerHost+":"+str(settings.datasetServerPort),encoding='ISO-8859-1',allow_none=True)
+
     def blockServer(self, serverName, serverRequestType="all"):
         log_CFS("blockServer: '"+serverName+"' type '"+serverRequestType+"'")
         if serverName:
-            if not self.blockedServers.has_key(serverName):        
+            if not self.blockedServers.has_key(serverName):
                 self.blockedServers[serverName] = {}
             self.blockedServers[serverName][serverRequestType] = True
         log_CFS("blockServer: blockedServers '"+str(self.blockedServers)+"' ")
         return self.blockedServers
-    
+
     def unblockServer(self,serverName,serverRequestType="all"):
         log_CFS("unblockServer: '"+serverName+"' type '"+serverRequestType+"'")
         if self.blockedServers.has_key(serverName):
@@ -63,7 +68,7 @@ class CGSServer:
                     del self.blockedServers[serverName]
         log_CFS("unblockServer: blockedServers '"+str(self.blockedServers)+"' ")
         return self.blockedServers
-        
+
     def getStatus(self,serverName = "",serverRequestType="all"):
         #log_CFS("getStatus")
         status = ""
@@ -75,143 +80,140 @@ class CGSServer:
         else:
             socket.setdefaulttimeout(5)            #set the timeout to 10 seconds
             try:
-                queryServerStatus = self.queryServer.getStatus()
+                queryServerStatus = self.query_server().getStatus()
                 if queryServerStatus != "OK":
-                    status = "Query server: "+queryServerStatus+". "        
+                    status = "Query server: "+queryServerStatus+". "
             except socket.error,ex:
-                log_CFS("getStatus:Error query server "+str(ex))            
+                log_CFS("getStatus:Error query server "+str(ex))
                 status = "The query server is not started. "
             except Exception,ex:
-                log_CFS("getStatus:Error query server "+str(ex))            
+                log_CFS("getStatus:Error query server "+str(ex))
                 status = "There is a problem with the query server. "
-            
-            socket.setdefaulttimeout(15)    
+
+            socket.setdefaulttimeout(15)
             try:
-                datasetServerStatus = self.datasetServer.getStatus()
+                datasetServerStatus = self.dataset_server().getStatus()
                 if datasetServerStatus != "OK":
                     status += "Dataset server: "+datasetServerStatus+". "
             except socket.error,ex:
                 log_CFS("getStatus:Error dataset server "+str(ex))
                 status += "The dataset server is not started."
             except Exception,ex:
-                log_CFS("getStatus:Error dataset server "+str(ex))            
+                log_CFS("getStatus:Error dataset server "+str(ex))
                 status = "There is a problem with the query server. "
             if status == "":
                 status = "OK"
-            socket.setdefaulttimeout(None)        
+            socket.setdefaulttimeout(None)
         #log_CFS("getStatus:status is "+str(status))
         return status
-    
+
     def log_me(self,msg):
         log_CFS("log_me: "+msg)
-        return 1 
-            
+        return 1
+
     def echo(self,st):
         return "Echoed: "+st
-    
+
     def activateUserDataset(self,datasetName):
         #log_CFS("activateUserDataset with "+str(datasetName))
-        return self.queryServer.activateUserDataset(datasetName)
-    
+        return self.query_server.activateUserDataset(datasetName)
+
     def getActiveServers(self, genome, onlyDefault=False, datasetType="Default"):
-        #log_CFS("getActiveServers genome="+str(genome)+" onlyDefault="+str(onlyDefault)+" datasetType="+str(datasetType))
-        return self.queryServer.getActiveServers(genome, onlyDefault, datasetType)
-    
-    def answerQueryRaw(self, queryUrl):        
-        return self.queryServer.answerQueryRaw(queryUrl)
-    
+        print("getActiveServers genome="+str(genome)+" onlyDefault="+str(onlyDefault)+" datasetType="+str(datasetType))
+        return self.query_server().getActiveServers(genome, onlyDefault, datasetType)
+
+    def answerQueryRaw(self, queryUrl):
+        return self.query_server().answerQueryRaw(queryUrl)
+
     def answerQuery(self, query, completions,hits, selectedRegionsSet,extraSettings="",detailedLog=False):
         #log_CFS(["answerQuery: called ",query, completions,hits, selectedRegionsSet,extraSettings,detailedLog])
-        queryAnswer = self.queryServer.answerQuery(query, completions,hits, selectedRegionsSet,extraSettings,detailedLog)
-        
+        queryAnswer = self.query_server().answerQuery(query, completions,hits, selectedRegionsSet,extraSettings,detailedLog)
+
         return queryAnswer
-    
+
     def exportQueryRegions(self, regionSet, query, mail):
         #log_CFS(["exportQueryRegions called",regionSet, query, mail])
-        return self.queryServer.exportQueryRegions(regionSet, query, mail)
-    
+        return self.query_server().exportQueryRegions(regionSet, query, mail)
+
     def exportQueryRegionAndSendBack(self, regionSet, query, exportType):
         #log_CFS(["exportQueryRegionAndSendBack called",regionSet, query, exportType])
-        return self.queryServer.exportQueryRegionAndSendBack(regionSet, query, exportType)    
-    
+        return self.query_server().exportQueryRegionAndSendBack(regionSet, query, exportType)
+
     def exportGenesAndSendBack(self, regionSet, query, exportType):
         #log_CFS(["exportQueryRegionAndSendBack called",regionSet, query])
-        return self.queryServer.exportGenesAndSendBack(regionSet, query, exportType)
-    
+        return self.query_server().exportGenesAndSendBack(regionSet, query, exportType)
+
     def exportGOsAndSendBack(self, regionSet, query):
         #log_CFS(["exportQueryRegionAndSendBack called",regionSet, query])
-        return self.queryServer.exportGOsAndSendBack(regionSet, query)
-    
+        return self.query_server().exportGOsAndSendBack(regionSet, query)
+
     def exportGOTermsAndSendBack(self, regionSet, query):
         #log_CFS(["exportQueryRegionAndSendBack called",regionSet, query])
-        return self.queryServer.exportGOTermsAndSendBack(regionSet, query)
-    
+        return self.query_server().exportGOTermsAndSendBack(regionSet, query)
+
     def exportOMIMTermsAndSendBack(self, regionSet, query):
         #log_CFS(["exportQueryRegionAndSendBack called",regionSet, query])
-        return self.queryServer.exportOMIMTermsAndSendBack(regionSet, query)
-    
+        return self.query_server().exportOMIMTermsAndSendBack(regionSet, query)
+
     def sendFeedbackEmail(self,ftype,name,email,feedback):
         #log_CFS(["sendFeedbackEmail: called with ",ftype,name,email,feedback])
-        return self.queryServer.sendFeedbackEmail(ftype,name,email,feedback)
-    
+        return self.query_server().sendFeedbackEmail(ftype,name,email,feedback)
+
     def getCoverages(self, genome, datasetName):
-        return self.queryServer.getCoverages(genome, datasetName)
-                        
+        return self.query_server().getCoverages(genome, datasetName)
+
     def exportQueryData(self, regionSet, query, mail, datasetKeys):
         #log_CFS(["exportQueryData called",regionSet, query, mail,datasetKeys])
-        return self.datasetServer.exportQueryData(regionSet, query, mail, datasetKeys)
-    
-    def getDatasetInfo(self,datasetSimpleName,properties=[]):
-        #log_CFS("getDatasetInfo: dataset name "+datasetSimpleName)
-        return self.datasetServer.getDatasetInfo(datasetSimpleName,properties)
-    
-    def getGeneExtraInfo(self,genome,infoType,elements):                
-        return self.datasetServer.getGeneExtraInfo(genome,infoType,elements)
+        return self.dataset_server().exportQueryData(regionSet, query, mail, datasetKeys)
 
-#    def processUserDataset(self,datasetName, regionsFile, genome, additionalSettings, notificationEmail="", syncCall = False,datasetLink="",datasetDesc="",computeReference=False):
-#        #log_CFS(["processUserDataset: called with ",str(datasetName),regionsFile, str(genome), notificationEmail, syncCall,datasetLink,datasetDesc])
-#        return self.datasetServer.processUserDataset(datasetName, regionsFile, str(genome),additionalSettings, notificationEmail, syncCall,datasetLink,datasetDesc,computeReference)
-    
+    def getDatasetInfo(self,datasetSimpleName,properties=[]):
+        print "entrou getDatasetInfo", datasetSimpleName, properties
+        #log_CFS("getDatasetInfo: dataset name "+datasetSimpleName)
+        return self.dataset_server().getDatasetInfo(datasetSimpleName,properties)
+
+    def getGeneExtraInfo(self,genome,infoType,elements):
+        return self.dataset_server().getGeneExtraInfo(genome,infoType,elements)
+
     def processUserDatasetFromBuffer(self,datasetName, datasetBuffer, genome, additionalSettings, notificationEmail = "", syncCall = False,datasetLink="",datasetDesc="",computeSettings={}):
         #log_CFS(["processUserDatasetFromBuffer: called with ",str(datasetName),str(len(datasetBuffer)), str(genome), notificationEmail, syncCall,datasetLink,datasetDesc,computeSettings])
-        return self.datasetServer.processUserDatasetFromBuffer(datasetName, datasetBuffer, str(genome), additionalSettings, notificationEmail, syncCall,datasetLink,datasetDesc,computeSettings)        
-    
+        return self.dataset_server().processUserDatasetFromBuffer(datasetName, datasetBuffer, str(genome), additionalSettings, notificationEmail, syncCall,datasetLink,datasetDesc,computeSettings)
+
     def getGenomicRegionProperties(self, genome, region, datasetsKeys=[]):
         #log_CFS(["getGenomicRegionProperties: called with ", genome, region, datasetsKeys])
-        return self.datasetServer.getGenomicRegionProperties(self, genome, region, datasetsKeys)
-    
+        return self.dataset_server().getGenomicRegionProperties(self, genome, region, datasetsKeys)
+
     def getDatasetAnnotationSettings(self,genome,datasetName,onlyProperties):
-        return self.datasetServer.getDatasetAnnotationSettings(genome,datasetName,onlyProperties)
-    
+        return self.dataset_server().getDatasetAnnotationSettings(genome,datasetName,onlyProperties)
+
     def getVisualizationFeatures(self,genome,regionSetName):
-        return self.queryServer.getVisualizationFeatures(genome,regionSetName)
-    
+        return self.query_server().getVisualizationFeatures(genome,regionSetName)
+
     def getSelectionLink(self,selectionList):
-        return self.datasetServer.getSelectionLink(selectionList)
-    
+        return self.dataset_server().getSelectionLink(selectionList)
+
     def getLinkSelection(self,queryHash):
-        return self.datasetServer.getLinkSelection(queryHash)
-    
+        return self.dataset_server().getLinkSelection(queryHash)
+
     def getDatasetStatus(self,datasetID):
-        return self.datasetServer.getDatasetStatus(datasetID)
-    
+        return self.dataset_server().getDatasetStatus(datasetID)
+
     def getDatasetDescriptions(self, datasetSimpleName):
-        return self.datasetServer.getDatasetDescriptions(datasetSimpleName);
-    
+        return self.dataset_server().getDatasetDescriptions(datasetSimpleName);
+
     def recordUserLicence(self,userData):
-        return self.datasetServer.recordUserLicense(userData)
-    
+        return self.dataset_server().recordUserLicense(userData)
+
     def storeData(self, name, software, data_format, data):
-        return self.datasetServer.store_data(name, software, data_format, data)
-    
+        return self.dataset_server().store_data(name, software, data_format, data)
+
     def processInfiniumDataset(self, file_internal_id, software, referenceDataset, datasetName, scoresIndex, hypoIndex, hyperIndex, rankIndex, notificationEmail, moreInfoLink, description):
-        return self.datasetServer.processInfiniumDataset(file_internal_id, software, referenceDataset, datasetName, scoresIndex, hypoIndex, hyperIndex, rankIndex, notificationEmail, moreInfoLink, description)
-    
+        return self.dataset_server().processInfiniumDataset(file_internal_id, software, referenceDataset, datasetName, scoresIndex, hypoIndex, hyperIndex, rankIndex, notificationEmail, moreInfoLink, description)
+
     def getDatasetQueueStatus(self):
-        return self.datasetServer.getDatasetQueueStatus()   
-    
+        return self.dataset_server().getDatasetQueueStatus()
+
     def stopComputation(self, datasetID):
-        return self.datasetServer.stopDatasetComputation(datasetID) 
+        return self.dataset_server().stopDatasetComputation(datasetID)
 
 if __name__ == '__main__':
     start_msg = "Starting CGSServer ThreadedXMLRPCServer:\t" + str(settings.forwardServerHost) + ":" + str(settings.forwardServerPort)
